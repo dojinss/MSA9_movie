@@ -36,6 +36,7 @@ header .logo a {
 
 .container {
     background-color: #252525;
+    display:flex;
 }
 
 input {
