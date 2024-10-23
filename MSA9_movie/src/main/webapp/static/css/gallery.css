@@ -1,0 +1,18 @@
+h1 {
+    display: block;
+    text-align: center;
+    padding: 60px 0;
+}
+.grid {
+    width: 100%;
+    margin: 0 auto;
+}
+.grid-item { 
+    width: 300px; 
+    margin-bottom: 10px;
+}
+.grid-item img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
