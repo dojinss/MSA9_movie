@@ -9,11 +9,9 @@ body {
 
 }
 
-header .logo {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding-left: 50%;
+header {
+    width: var(--container-size);
+    ma
     height: 70px;
     background-color: var(--main-color);
 }

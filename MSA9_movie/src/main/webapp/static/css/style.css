@@ -26,9 +26,9 @@ body {
 /* html 최상위 요소 선택 (html 선택보다 높은 우선순위 */
 :root {
     /* 👩‍🎨 메인 컬러 */
-    --main-color : #DCE6FF;
+    --main-color : #0C0F3D;
     /* 👩‍🎨 서브 컬러 */
-    --sub-color: #89B1FF;
+    --sub-color: #AA8800;
     /* 👩‍🎨 폰트 사이즈 */
     --text-title: 32px;
     --text-normal: 16px;
@@ -39,15 +39,15 @@ body {
 
 
 /* Font */
-@import url(../font/GowunBatang-Bold.ttf);
-@import url(../font/GowunBatang-Regular.ttf);
-.gowun-batang-regular {
-    font-family: "Gowun Batang", serif;
-    font-weight: 400;
-    font-style: normal;
-}
-.gowun-batang-bold {
-    font-family: "Gowun Batang", serif;
-    font-weight: 700;
-    font-style: normal;
-}
+/* @import url(../font/GowunBatang-Bold.ttf); */
+/* @import url(../font/GowunBatang-Regular.ttf); */
+/* .gowun-batang-regular { */
+/*     font-family: "Gowun Batang", serif; */
+/*     font-weight: 400; */
+/*     font-style: normal; */
+/* } */
+/* .gowun-batang-bold { */
+/*     font-family: "Gowun Batang", serif; */
+/*     font-weight: 700; */
+/*     font-style: normal; */
+/* } */

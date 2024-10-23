@@ -5,3 +5,4 @@
 <%-- 라이브러리 --%>
 <link href="<%= root %>/static/css/reset.css" rel="stylesheet" />
 <link href="<%= root %>/static/css/style.css" rel="stylesheet" />
+<link href="<%= root %>/static/css/login.css" rel="stylesheet" />

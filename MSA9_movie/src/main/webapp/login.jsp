@@ -1,54 +1,71 @@
-<%@page import="java.net.URLDecoder"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/layout/jstl.jsp" %>
+<%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>로그인	</title>
+	<title>Netstar - 영화 커뮤니티</title>
+	<jsp:include page="/layout/meta.jsp" />
+	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>
-	<%
-		String rememberID = "";
-		String userID = "";
-		Cookie[] cookies = request.getCookies();
-		if(cookies != null){
-			for( Cookie cookie : cookies ){
-				String cookieName = cookie.getName();
-				String cookieValue = URLDecoder.decode( cookie.getValue(), "UTF-8" );
-				switch(cookieName){
-					case "userID" 		: userID = cookieValue; break;
-					case "rememberID" 	: rememberID = cookieValue; break;
-				}
-			}
-		}
+	<jsp:include page="/layout/header.jsp" />
+	<%-- [Contents] ######################################################### --%>
 		
-		pageContext.setAttribute("userID", userID);
-		pageContext.setAttribute("rememberID", rememberID);
-	%>
-	<c:if test="${param.error == 0 }">
-		<p style="color:red;">회원 정보가 일치하지 않습니다.</p>
-	</c:if>
-	<h1>로그인</h1>
-	<form action="login_pro.jsp" method="post">
-		<p>아이디 : <input type="text" name="userid" id="userid" value="${ userID }" /> </p>
-		<p>비밀번호 : <input type="password" name="password" id="password" /> </p>
-		<p>
-			<!-- 아이디저장 -->
-			<label for="remember-id">아이디 저장</label>
-			<input type="checkbox" name="remember-id" id="remember-id" ${ (rememberID == "on")?"checked":""}/>
-			
-			<!-- 자동로그인 -->
-			<label for="remember-me">자동 로그인</label>
-			<input type="checkbox" name="remember-me" id="remember-me" />
-		</p>
-		<p>
-			<input type="submit" value="로그인"/>
-		</p>
-	</form>
+	<div class="login-container">
+      <!-- 로그인 영역 -->
+      <form action="/login" method="post">
+        <!--  로그인 박스 -->
+        <div class="login-wrap">
+
+          <div class="login-text">
+            <p>로그인</p>
+          </div>
+
+          <div id="login">
+            <!-- 아이디 -->
+            <div class="login-inputbox">
+                <input type="text" name="id" placeholder="ID" autofocus required>
+            </div>
+            <!-- 비밀번호 -->
+              <div class="login-inputbox">
+                <input type="password" name="pw" placeholder="PW" required>
+              </div>
+              
+              <!-- 로그인 / 회원 가입 -->
+              <div class="login-btn">
+                  <a href="#" class="login-btn">로그인</a>
+              </div>
+              <div class="or">
+                <p>또는</p>
+              </div>
+              <div class="login-btn">
+                  <a href="#" class="login-btn2"> 회원가입</a>
+              </div>
+              
+              <!-- 아이디 저장/ 로그인  -->
+              <div class="login-remember">
+                <label for="remember-id">
+                    <input type="checkbox" name="remember-id" id="remember-id">
+                    <span class="checkmark"></span>
+                    <span>아이디 저장</span>
+                </label>
+                <label for="remember-me">
+                    <input type="checkbox" name="remember-me" id="remember-me">
+                    <span class="checkmark"></span>
+                    <span>자동 로그인</span>
+                </label>
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+	
+	<%-- [Contents] ######################################################### --%>
+	<jsp:include page="/layout/footer.jsp" />
+	<jsp:include page="/layout/script.jsp" />
 </body>
 </html>
+	
+
