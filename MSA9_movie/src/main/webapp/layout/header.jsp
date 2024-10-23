@@ -12,7 +12,7 @@
 	}
 %>
 <header>
-	<img src="<%= root %>/static/img/logo.png" width="48" >
+	<img src="<%= root %>/static/img/logo.png" />
 	<nav>
 		<ul>
 			<c:if test="${ userid == null }">

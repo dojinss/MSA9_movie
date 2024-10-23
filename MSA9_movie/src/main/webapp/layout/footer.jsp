@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/layout/common.jsp" %>
 <footer>
-	<p>Copyright ALOHA CLASS</p>
+	<p>Copyright ⓒ NETSTAR All Rights Reserved netstar.com</p>
 </footer>
