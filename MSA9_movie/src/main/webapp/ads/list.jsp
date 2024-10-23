@@ -8,6 +8,7 @@
 	<title>Netstar - 영화 커뮤니티</title>
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
+	<link href="<%= root %>/static/css/ads.css" rel="stylesheet" />
 </head>
 <body>
 	<jsp:include page="/layout/header.jsp" />
