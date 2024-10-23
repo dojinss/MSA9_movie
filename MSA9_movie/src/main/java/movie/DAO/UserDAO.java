@@ -4,23 +4,22 @@ import java.sql.ResultSet;
 
 import com.alohaclass.jdbc.dao.BaseDAOImpl;
 
-import movie.DTO.User;
+import movie.DTO.Users;
 
-public class UserDAO extends BaseDAOImpl<User>{
+public class UserDAO extends BaseDAOImpl<Users>{
 
 	@Override
-	public User map(ResultSet rs) throws Exception {
-		User user = new User();
+	public Users map(ResultSet rs) throws Exception {
+		Users user = new Users();
 		user.setUserNo(rs.getInt("user_no"));
 		user.setRuleNo(rs.getInt("rule_no"));
 		user.setUserId(rs.getString("user_id"));
 		user.setUserPwd(rs.getString("user_pwd"));
-		user.setUserEmail(rs.getString("user_email"));
-		user.setUserProfileUrl(rs.getString("user_profile_url"));
-		user.setUserEnabled(rs.getBoolean("user_enabled"));
-		user.setUserEnabled(rs.getBoolean("user_enabled"));
-		user.setUserRegDate(rs.getDate("user_reg_date"));
-		user.setUserUpdDate(rs.getDate("user_upd_date"));
+		user.setEmail(rs.getString("email"));
+		user.setProfileUrl(rs.getString("profile_url"));
+		user.setEnabled(rs.getBoolean("enabled"));
+		user.setRegDate(rs.getDate("reg_date"));
+		user.setUpdDate(rs.getDate("upd_date"));
 		return user;
 	}
 
