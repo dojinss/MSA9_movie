@@ -22,5 +22,5 @@ section {
 	헤더 [start]
 =====================*/
 header {
-	
+	display: flex;
 }
