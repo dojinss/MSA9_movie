@@ -1,38 +1,27 @@
-<%@page import="movie.DTO.Users"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/layout/jstl.jsp" %>
+<%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>메인 화면</title>
+	<title>Netstar - 영화 커뮤니티</title>
+	<jsp:include page="/layout/meta.jsp" />
+	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>
-	<%
-// 		String userid = (String) session.getAttribute("loginID");
-		Users user = (Users) session.getAttribute("loginUser");
+	<jsp:include page="/layout/header.jsp" />
+	<%-- [Contents] ######################################################### --%>
 		
-		if( user != null ){
-			pageContext.setAttribute("user", user);
-			pageContext.setAttribute("userid", user.getUserId());
-		}
-	%>
+	<div class="container">
+		
+			
+	</div>
 	
-	<h1>메인 화면</h1>
-	<ul>
-		<c:if test="${ userid == null }">
-			<li><a href="./signup.jsp">회원가입</a></li>
-			<li><a href="./login.jsp">로그인</a></li>
-		</c:if>
-		<c:if test="${ userid != null }">
-			<li>${ user.userId }님 환영합니다.</li>
-			<li><a href="./logout.jsp">로그아웃</a></li>
-		</c:if>
-		
-	</ul>
+	<%-- [Contents] ######################################################### --%>
+	<jsp:include page="/layout/footer.jsp" />
+	<jsp:include page="/layout/script.jsp" />
 </body>
 </html>
+	
+
