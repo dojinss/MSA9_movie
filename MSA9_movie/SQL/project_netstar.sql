@@ -31,6 +31,11 @@ CREATE TABLE `rules` (
 	`info`		varchar(100)	NOT NULL							COMMENT '권한이름'
 );
 
+/* 권환 정보 입력 */
+insert into movie.rules (rule_no,info) values (1,'common_user');
+insert into movie.rules (rule_no,info) values (2,'prime_user');
+insert into movie.rules (rule_no,info) values (3,'admin_user');
+
 DROP TABLE IF EXISTS `replies`;
 
 CREATE TABLE `replies` (

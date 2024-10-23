@@ -1,0 +1,141 @@
+
+body , html {
+    background-color: var(--back-color);
+}
+.container {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto !important;
+}
+.container .login-box {
+    width: 330px;
+    height: 600px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 11px;
+    background-color: #fff;
+    box-shadow: 3px 4px 5px rgba(255, 255, 255, 0.4);
+}
+
+.icon-box {
+    width: 100%;
+    height: 230px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.icon-box img {
+    height: 100px;
+    object-fit: cover;
+    box-shadow: 0 0 50px var(--sub-color);
+    border-radius: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form input {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #aaa;
+    padding: 5px;
+    margin: 5px auto;
+    width: 100%;
+    text-decoration: none;
+}
+form .input-box {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    overflow: hidden;
+}
+form .input-box .border {
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: var(--sub-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+form input:focus ~ .border {
+    transition: all 0.5s;
+    width: 100%;
+}
+
+
+form input::placeholder {
+    color: #aaa;
+}
+
+form .saveinfo {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 5px auto;
+}
+form .saveinfo .label-box  {
+    font-size: 13px;
+    color: #aaa;
+}
+form .saveinfo .label-box i {
+    font-size: 17px;
+}
+form .saveinfo .label-box input {
+    display: none;
+}
+form .saveinfo .label-box input:checked + label {
+    color: var(--sub-color);
+}
+form .saveinfo .label-box label {
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+form .btn {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    text-align: center;
+    background-color: var(--sub-color);
+    color: white;
+    border-radius: 9px;
+    cursor: pointer;
+}
+form .btn:hover {
+    filter: brightness(90%);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+form .btn:active {
+    box-shadow: none;
+}
+
+h3.copyright {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    font-size: 9px;
+    font-weight: normal;
+}

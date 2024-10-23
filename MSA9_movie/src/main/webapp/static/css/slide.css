@@ -1,0 +1,109 @@
+.slide {
+    position: relative;
+    width: var(--container-size);
+    height: 540px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slidecover {
+    position: absolute;
+    width: calc(var(--container-size) * 3);
+    animation-name: slide;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+.slide img {
+    width: var(--container-size);
+    height: 100%;
+    object-fit: cover;
+}
+.slide .item {
+    width: var(--container-size);
+    float: left;
+    position: relative;
+}
+/* 1번 슬라이드 */
+.slide .item1 p {
+    position: absolute;
+    font-size: 10em;
+    color: rgb(32, 32, 32);
+    font-weight: bold;
+    right: 40px;
+    top: 40px;
+    height: 300px;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Gowun Batang", serif;
+}
+/* 2번 슬라이드 */
+.slide .item2 .covertitle {
+    position: absolute;
+    left: 450px;
+    top: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-family: "Gowun Batang", serif;
+    font-weight: 700;
+    font-size: 2em;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+}
+
+/* 3번 슬라이드 */
+.slide .item3 .covertitle {
+    position: absolute;
+    font-weight: bold;
+    height: 400px;
+    width: 400px;
+    left: 140px;
+    top: 70px;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+.slide .item3 .covertitle span { 
+    color: white;
+    width: 360px;
+    display: flex;
+    justify-content: space-between;
+}
+.slide .item3 .covertitle span.hr {
+    display: block;
+    height: 3px;
+    width: 360px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.slide .item3 .covertitle span p{
+    font-size: 4em;
+}
+.slide .item3 .covertitle hr {
+    display: block;
+    height: 4px;
+    background-color: #fff;
+}
+
+.slide::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+@keyframes slide {
+    33.333% {left: 0;}
+    66.666% {left: calc(-var(--container-size)px * 1);}
+    100% {left: calc(-var(--container-size)px * 2);}
+}
