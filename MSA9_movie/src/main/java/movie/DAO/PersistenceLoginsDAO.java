@@ -1,13 +1,34 @@
 package movie.DAO;
 
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+import com.alohaclass.jdbc.dao.BaseDAOImpl;
+
+import movie.DTO.Keywords;
 import movie.DTO.PersistenceLogins;
 
-public class PersistenceLoginsDAO extends JDBConnection{
+public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
+	
+	@Override
+	public PersistenceLogins map(ResultSet arg0) throws Exception {
+		return null;
+	}
+
+	@Override
+	public String pk() {
+		return "token_no";
+	}
+
+	@Override
+	public String table() {
+		return "tokens";
+	}
+	
+	
 	
 	/**
 	 * 토큰 생성
@@ -195,6 +216,8 @@ public class PersistenceLoginsDAO extends JDBConnection{
 		}
 		return result;
 	}
+
+
 	
 }
 
