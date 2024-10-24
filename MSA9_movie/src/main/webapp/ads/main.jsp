@@ -31,6 +31,7 @@
 					</li>
 				</ul>
 			</div>
+			
 			<div class="content-box">
 				<div class="ads-card">
 					<div>
