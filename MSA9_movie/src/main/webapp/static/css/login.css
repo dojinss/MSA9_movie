@@ -8,33 +8,6 @@
 body {
 }
 
-header{
-	width: 100%;
-	height: 70px;
-    background-color: var(--main-color);
-}
-
-header .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: var(--container-size);
-    max-width: 100%;
-    margin: 0 auto;
-    height: 70px;
-}
-
-header nav ul {
-	display: flex;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: 16px;
-}
-
-header a {
-    color: white;
-}
-
 
 
 .login-img {
@@ -179,20 +152,16 @@ a {
     box-shadow: none;
  }
 
-/* 카피라이트 */
-footer {
-    width: var(--container-size);
-    max-width: 100%;
-}
 
-footer .logo-img {
+
+/* footer .logo-img {
     position: relative;
 }
 
 footer .copy p {
     text-align: center;
     color: #ccc;
-}
+} */
 
 
 
