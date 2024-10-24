@@ -13,6 +13,7 @@
 	<jsp:include page="/layout/header.jsp" />
 	<%-- [Contents] ######################################################### --%>
 		
+<<<<<<< HEAD
 	<div class="login-container">
       <!-- 로그인 영역 -->
       <form action="/login" method="post">
@@ -61,6 +62,11 @@
         </div>
       </form>
     </div>
+=======
+	<div class="container">
+			
+	</div>
+>>>>>>> branch 'main' of https://github.com/LimeYun/MSA9_movie.git
 	
 	<%-- [Contents] ######################################################### --%>
 	<jsp:include page="/layout/footer.jsp" />

@@ -1,6 +1,7 @@
 package movie.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import movie.DAO.MovieDAO;
@@ -57,6 +58,11 @@ public class MovieServiceImpl implements MovieService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	@Override
+	public List<Movies> select() {
+		List<Movies> movieList = movieDAO.select();
+		return movieList;
 	}
 	
 }
