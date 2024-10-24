@@ -1,5 +1,7 @@
 package movie.Service;
 
+import java.util.List;
+
 import movie.DTO.Movies;
 
 public interface MovieService {
@@ -12,4 +14,6 @@ public interface MovieService {
 	public int update(Movies movie);
 	// 영화정보 삭제
 	public int delete(int movieNo);
+	// 영화정보 전체 조회
+	public List<Movies> select();
 }
