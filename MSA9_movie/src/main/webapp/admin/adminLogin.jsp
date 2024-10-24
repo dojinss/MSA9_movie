@@ -12,9 +12,6 @@
 	<link rel="stylesheet" href="css/adminLogin.css">
 </head>
 <body>
-	<%
-		String error = request.getParameter("error");
-	%>
 	<div class="container">
 		<div class="title">
 			<h1>Admin Page</h1>
@@ -26,6 +23,11 @@
 				<input type="text" name="id" placeholder="Admin id"/>
 				<h3>Password</h3>
 				<input type="password" name="password" placeholder="Password" />
+			</div>
+			<div class="error">
+				<c:if test="${param.error == 400 }">
+				<p style="text-align: center; color: red;">아이디 또는 비밀번호가 잘못되었습니다.</p>
+			</c:if>
 			</div>
 			<div class="submit">
 				<input type="submit" value="Sign in"/>

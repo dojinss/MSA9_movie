@@ -31,16 +31,30 @@
 	<div class="container">
 		<div class="menu">
 			<h1>관리자 페이지</h1>
+			<hr style="margin-bottom: 30px;">
+			<h2>관리자<a href="adminLogin.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i></a></h2>
 			<hr>
-			<h2><%= user.getUserId() %> <i class="fa fa-sign-out" aria-hidden="true"></i></h2>
-			<hr>
-			<h3>팝업 관리</h3>
-			<h3>영화 게시글</h3>
-			<h3>회원 관리</h3>
-			<h3>회원 게시글</h3>
-			<h3>광고 설정</h3>
-			<h3>광고주 관리</h3>
-			<h3>광고글 관리</h3>
+			<div class="item">
+				<h3><a href="">팝업 관리</a></h3>
+			</div>
+			<div class="item">
+				<h3><a href="">영화 게시글</a></h3>
+			</div>
+			<div class="item">
+				<h3><a href="">회원 관리</a></h3>
+			</div>
+			<div class="item">
+				<h3><a href="">회원 게시글</a></h3>
+			</div>
+			<div class="item">
+				<h3><a href="">광고 설정</a></h3>
+			</div>
+			<div class="item">
+				<h3><a href="">광고주 관리</a></h3>
+			</div>
+			<div class="item">
+				<h3><a href="">광고글 관리</a></h3>
+			</div>
 		</div>
 		<div class="main">
 			<div class="mainhead">
@@ -71,7 +85,7 @@
 												pattern="yyyy-MM-dd" /></td>
 										<td><fmt:formatDate value="${movie.updDate}"
 												pattern="yyyy-MM-dd" /></td>
-										<td><a href="">소개목록</a></td>
+										<td><a href="adminMovieInsert.jsp?no=${movie.movieNo}">소개목록</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -27,7 +27,7 @@
 	// 로그인 실패
 	if( loginUser == null ) {
 		// 에러코드를 들고 다시 로그인 페이지로
-		response.sendRedirect("adminLogin.jsp?error=0");
+		response.sendRedirect("adminLogin.jsp?error=400");
 		return;
 	}
 	else{
@@ -35,6 +35,6 @@
 		session.setAttribute("loginID", loginUser.getUserId());
 		session.setAttribute("loginUser", loginUser);
 		// 메인 화면으로 리다이렉트
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("adminMovieList.jsp");
 	}
 %>
