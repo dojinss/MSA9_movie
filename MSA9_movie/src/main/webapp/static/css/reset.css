@@ -2,7 +2,9 @@
 /* 'Noto Sans Korean' 글꼴 적용 */
 @import url('https://fonts.googleapis.com/css2?family=Dokdo&family=Gamja+Flower&family=Noto+Sans+KR:wght@100..900&display=swap');
 /*reset*/
-/* * {margin: 0; padding: 0; box-sizing: border-box; }
+* {margin: 0; padding: 0; box-sizing: border-box; }
+
+body {background-color: var(--bg-color);}
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, tbody, tfoot, thead, tr, th, td{margin:0;padding:0;}
 h1, h2, h3, h4, h5, h6 {font-weight: 700; font-size: inherit;}
@@ -12,6 +14,10 @@ a {text-decoration: inherit; color: inherit;}
 li {list-style: none;}
 
 img {vertical-align: middle;}
+
+input:focus {outline:none;}
+
+label { user-select:none; }
 
 a img {border: none;}
 
@@ -39,9 +45,11 @@ body {
     /* 메인컬러  */
     --main-color : #0c0f3d;
     /* 서브컬러 */
-    --sub-color : #aa8800;
+    --sub-color : #DAAE00;
     /* 노란색 : #AA8800; */
-
+    
+    /* 배경색 */ 
+	--bg-color : #000;
     /* 폰트 사이즈 */
     --text-title: 32px;
     --text-normal: 16px;
