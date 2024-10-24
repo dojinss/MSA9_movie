@@ -19,7 +19,7 @@
 					  .enabled(true)
 					  .build()
 					  ;
-	
+
 	// 회원 가입 요청
 	UserService us = new UserServiceImpl();
 	int result = us.signup(user);

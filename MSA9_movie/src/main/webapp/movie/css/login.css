@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+
+}
+
+header {
+    width: var(--container-size);
+    ma
+    height: 70px;
+    background-color: var(--main-color);
+}
+
+header .logo a {
+    padding: 50%;
+}
+
+
+.login-img {
+    filter: brightness(0.2);
+   
+}
+
+
+.login-text p{
+    color: #f0e9e9;
+    text-align: center;
+    padding-top: 20%;
+    font-size: 30px;
+}
+
+.container {
+    background-color: #252525;
+    display:flex;
+}
+
+input {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #aaa;
+    font-size: 17px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.login-wrap {
+    width: 400px;
+    height: 700px;
+    background-color: #252525;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.4); 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#login {
+    padding-top: 30%;
+ }
+
+
+
+#login .login-inputbox {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    margin-bottom: 15px;
+    border: 0.1px solid #eee9e9c7;
+    padding: 10px;
+    
+}
+
+
+#login .login-inputbox input::placeholder{
+    color: #aaa;
+}
+
+#login .login-remember {
+    text-align: center;
+    padding: 30px;
+    font-size: 15px;
+    color: #aaa;
+}
+
+#login .login-remember label {
+    padding: 10px;
+}
+
+
+ #login .login-remember label { user-select: none;}
+#login .login-remember label input:checked ~ .checkmark {
+   background-color: rgb(90, 102, 139);
+}
+
+#login .login-remember label input:checked ~ .span {
+   color: royalblue;
+}
+
+
+#login .login-btn {
+    height: 50px; margin: 10px 0;
+}
+#login .login-btn .login-btn {
+   display: block;
+   background-color: var(--sub-color);
+   height: 45px;
+   color: white;
+   font-size: 15px;
+   line-height: 45px;
+   border-radius: 5px;
+   text-align: center;
+}
+
+#login .or p{
+    text-align: center;
+    color: #ccc;
+    height: 35px;
+}
+
+
+#login .login-btn .login-btn2 {
+    display: block;
+    background-color: #413f3f;
+    height: 45px;
+    color: white;
+    font-size: 15px;
+    line-height: 45px;
+    border-radius: 5px;
+    text-align: center;
+ }
+
+
+#login .login-btn .login-btn:hover{
+   filter: brightness(90%);
+   box-shadow:  2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+#login .login-btn .login-btn2:hover{
+    filter: brightness(90%);
+    box-shadow:  2px 2px 2px rgba(0, 0, 0, 0.212);
+ }
+
+
+
+#login .login-btn .login-btn:active {
+   box-shadow: none;
+}
+#login .login-btn .login-btn2:active {
+    box-shadow: none;
+ }
+
+/* 카피라이트 */
+footer {
+    width: 100%;
+    display: flex;
+    align-items: center; 
+}
+
+footer .logo-img {
+    position: relative;
+}
+
+footer .copy p {
+    text-align: center;
+    color: #ccc;
+}
+
+
+
+
