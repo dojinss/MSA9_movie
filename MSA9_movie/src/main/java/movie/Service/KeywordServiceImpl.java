@@ -1,7 +1,6 @@
 package movie.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import movie.DAO.KeywordDAO;
@@ -10,18 +9,6 @@ import movie.DTO.Keywords;
 public class KeywordServiceImpl implements KeywordService {
 
 	KeywordDAO keywordDAO = new KeywordDAO();
-	
-	@Override
-	public List<Keywords> list(int page, int count, int size, String keyword, String type) {
-		
-        List<Keywords> keywordList = null;
-//        try {
-//        	keywordList = keywordDAO.listBy(data);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		return keywordList;
-	}
 	
 	@Override
 	public int insert(Keywords keyword) {
@@ -42,6 +29,7 @@ public class KeywordServiceImpl implements KeywordService {
         }};
         Keywords keyword = null;
         try {
+        	keywordDAO.select(1);
         	keyword = keywordDAO.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,6 +58,5 @@ public class KeywordServiceImpl implements KeywordService {
 		}
 		return result;
 	}
-	
 	
 }
