@@ -1,4 +1,4 @@
-@charset "UTF-8";* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,35 +6,19 @@
 }
 
 body {
+
 }
 
-header{
-	width: 100%;
-	height: 70px;
+header {
+    width: var(--container-size);
+    ma
+    height: 70px;
     background-color: var(--main-color);
 }
 
-header .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: var(--container-size);
-    max-width: 100%;
-    margin: 0 auto;
-    height: 70px;
+header .logo a {
+    padding: 50%;
 }
-
-header nav ul {
-	display: flex;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: 16px;
-}
-
-header a {
-    color: white;
-}
-
 
 
 .login-img {
@@ -50,11 +34,9 @@ header a {
     font-size: 30px;
 }
 
-.login-container {
-    width: 100%;
-    height: 100vh;
-    background: url(../img/로그인이미지.jpg);
-    background-size: contain;
+.container {
+    background-color: #252525;
+    display:flex;
 }
 
 input {
@@ -81,7 +63,6 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
 }
 
 #login {
@@ -91,7 +72,7 @@ a {
 
 
 #login .login-inputbox {
-    display: flex;
+    position: relative;
     margin: auto;
     width: 90%;
     margin-bottom: 15px;
@@ -181,8 +162,9 @@ a {
 
 /* 카피라이트 */
 footer {
-    width: var(--container-size);
-    max-width: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center; 
 }
 
 footer .logo-img {
@@ -193,3 +175,7 @@ footer .copy p {
     text-align: center;
     color: #ccc;
 }
+
+
+
+

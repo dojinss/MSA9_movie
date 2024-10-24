@@ -1,4 +1,6 @@
+<%-- jstl 파일 include --%>
 <%@ include file="/layout/jstl.jsp" %>
+<%-- 기본 설정 파일 include --%>
 <%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,40 +8,31 @@
 <html>
 <head>
 	<title>Netstar - 영화 커뮤니티</title>
+	<%-- 사이트 설정 파일 include --%>
 	<jsp:include page="/layout/meta.jsp" />
+	<%-- css 파일 include --%>
 	<jsp:include page="/layout/link.jsp" />
-	<link href="<%= root %>/static/css/ads.css" rel="stylesheet" />
+	<%-- 페이지 전용 css 파일 --%>
+	<link href="<%= root %>/static/css/<%-- css 이름 입력 --%>.css" rel="stylesheet" />
 </head>
 <body>
+	<%-- 헤더 파일 include --%>
 	<jsp:include page="/layout/header.jsp" />
 	<%-- [Contents] ######################################################### --%>
 		
-	<div class="background">
-		<div class="container">
-			<div class="sidemenu-box">
-				<ul class="sidemenu">
-					<li>
-						<a href="<%= root %>/ads/main.jsp">광고메인</a>
-					</li>
-					<li>
-						<a href="<%= root %>/ads/insert.jsp">광고가입하기</a>
-					</li>
-					<li>
-						<a href="<%= root %>/ads/join.jsp">광고등록하기</a>
-					</li>
-					<li class="active">
-						<a href="<%= root %>/ads/list.jsp">등록된 광고보기</a>
-					</li>
-				</ul>
-			</div>
-			<div class="content-box">
+	<div class="container">
+		<%-- 
+		
+				내용 입력 
+				(주석 제거후 사용)				
 				
-			</div>
-		</div>
+		--%>
 	</div>
 	
 	<%-- [Contents] ######################################################### --%>
+	<%-- 푸터 파일 include --%>
 	<jsp:include page="/layout/footer.jsp" />
+	<%-- script 파일 include --%>
 	<jsp:include page="/layout/script.jsp" />
 </body>
 </html>
