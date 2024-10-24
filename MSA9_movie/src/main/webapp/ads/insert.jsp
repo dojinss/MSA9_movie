@@ -14,34 +14,8 @@
 	<jsp:include page="/layout/header.jsp" />
 	<%-- [Contents] ######################################################### --%>
 		
-	<div class="background">
-		<div class="container">
-			<div class="sidemenu-box">
-				<ul class="sidemenu">
-					<li>
-						<a href="<%= root %>/ads/main.jsp">광고메인</a>
-					</li>
-					<li>
-						<a href="<%= root %>/ads/insert.jsp">광고가입하기</a>
-					</li>
-					<li class="active">
-						<a href="<%= root %>/ads/join.jsp">광고등록하기</a>
-					</li>
-					<li>
-						<a href="<%= root %>/ads/list.jsp">등록된 광고보기</a>
-					</li>
-				</ul>
-			</div>
-			<div class="content-box">
-				<div class="form-box">
-					<form action="insert_pro.jsp" method="post">
-						<label for="number" >광고내용</label>
-						<textarea name="ads-content" id="ads-content"></textarea>						
-						<button type="submit">작성하기</button>
-					</form>
-				</div>
-			</div>
-		</div>
+	<div class="container">
+		
 	</div>
 	
 	<%-- [Contents] ######################################################### --%>

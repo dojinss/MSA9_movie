@@ -4,7 +4,6 @@ import movie.DTO.Files;
 
 public interface FileService {
 	
-	
 	// 파일정보 DB 작성
 	public int insert(Files file);
 	
