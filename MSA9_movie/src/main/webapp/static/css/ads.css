@@ -1,0 +1,92 @@
+/*---------------------------
+		광고 페이지 레이아웃
+-----------------------------*/
+
+.background {
+	background-color: #353535;
+	width:100%;
+	min-height:900px;
+	position: relative;
+}
+.container {
+	display:flex;
+	justify-content:space-between;
+	position:relative;
+	background-color: #fff;
+}
+
+/*
+	사이드메뉴
+*/
+.sidemenu-box {
+	width : 250px;
+	height : 300px;
+	
+	padding : 30px;
+	
+}
+.sidemenu {
+	display : flex;
+	flex-direction: column;
+	gap : 35px;
+}
+
+.sidemenu li {
+	width:200px;
+	height:35px;
+	line-height:35px;
+}
+.sidemenu li a {
+	font-size:26px;
+}
+.sidemenu li.active {
+	border-right: 10px solid #007AFF;
+}
+.sidemenu li.active a {
+	font-weight: bold;
+}
+/*
+	컨텐츠 박스
+*/
+.container .content-box {
+	width:950px;
+	min-height:954px;
+	display: flex;
+}
+
+
+/*------------------
+	main.jsp
+-------------------*/
+.container .content-box {
+	flex-direction: row;
+	justify-content: center;
+	gap : 45px;
+}
+.ads-card {
+	width : 350px;
+	height : 550px;
+	border-radius: 15px;
+	border: 1px solid #5B5B5B;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	gap:30px;
+	padding:20px;
+}
+.ads-card .ads-comment {
+	width : 300px;
+	height : 315px;
+}
+.ads-card .ads-comment .title {font-size:30px;font-weight:bold;}
+.ads-card .ads-comment .hash {font-size:20px;color:#636363;}
+.ads-card .ads-comment .list {
+	font-size:20px;
+	font-weight:bold;
+	list-style:disc;
+}
+
+.ads-card .price-box {}
+.ads-card .price-box .price{}
+
+.ads-card .button {}
