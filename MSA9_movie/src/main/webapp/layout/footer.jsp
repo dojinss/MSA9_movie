@@ -2,5 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/layout/common.jsp" %>
 <footer>
-	<p>Copyright ⓒ NETSTAR All Rights Reserved netstar.com</p>
+	<div class="container">
+		<p>Copyright ⓒ NETSTAR All Rights Reserved netstar.com</p>	
+	</div>
 </footer>

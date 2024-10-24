@@ -12,18 +12,18 @@ header{
 	width: 100%;
 	height: 70px;
     background-color: var(--main-color);
-}
-
-header .container {
+    padding: 0 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: var(--container-size);
+}
+
+
+/*     width: var(--container-size);
     max-width: 100%;
     margin: 0 auto;
     height: 70px;
-}
-
+ */
 header nav ul {
 	display: flex;
     align-items: center;
@@ -181,15 +181,19 @@ a {
 
 /* 카피라이트 */
 footer {
-    width: var(--container-size);
-    max-width: 100%;
+    width: 100%;
+	height: 150px;
+    background-color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 footer .logo-img {
     position: relative;
 }
 
-footer .copy p {
+footer p {
     text-align: center;
-    color: #ccc;
+    color: white;
 }
