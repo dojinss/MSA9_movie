@@ -19,7 +19,7 @@
 	<div class="user-category">
   		<input id="tab-1" type="radio" name="tab" class="edit-in tab-radio" checked>
   		<label for="tab-1" class="tab">회원 정보 수정</label>
-  		<input id="tab-2" type="radio" name="tab" class="user-out tab-radio" OnClick="window.location.href='action.php?value=2';">
+  		<input id="tab-2" type="radio" name="tab" class="user-out tab-radio" OnClick="location.href='leave.jsp';">
   		<label for="tab-2" class="tab">회원 탈퇴</label>
 		</div>
 
@@ -61,6 +61,10 @@
           <label for="userbirth" class="label">생년월일</label>
           <input id="userbirth" type="date" class="input" data-type="">
         </div>
+        <div class="group">
+          <label for="mail" class="label">이메일</label>
+          <input id="mail" type="email" class="input">
+        </div>
 
         <div class="group">
           <label for="profile" class="label">프로필 이미지</label>
@@ -99,7 +103,34 @@
                 document.getElementById('preview').src = "";
             }
         });
-
+		
+		/* 마우스 올렸을때 이벤트 */
+		 $('button').on('mouseover', function() {
+	       $(this).css('color', 'white')
+	       $(this).css('background-color', '#0c0f3d87')
+			})
+		 .on('mouseout', function() {    
+	        $(this).css('color', 'white')
+	        $(this).css('background-color', 'var(--main-color)')
+	    })
+		 $('.edit-btn').on('mouseover', function() {
+	       $(this).css('color', 'white')
+	       $(this).css('background-color', '#cba50fad')
+			})
+		 .on('mouseout', function() {    
+	        $(this).css('color', 'white')
+	        $(this).css('background-color', 'var(--sub-color)')
+	    })
+		
+		/* 중복 확인 알림 */
+		
+		
+		/* 비밀번호 확인 알림 */
+		
+		
+		/* 수정 완 알림 */
+		
+		
 	</script>
 </body>
 </html>
