@@ -19,6 +19,6 @@
     /* 👩‍🎨 버튼 컬러 */
     --insert-color: #6D9AFC; 
     --update-color: #F8BF23;
-    --deleteb-color: #A6A3A3;
-    --deletea-color: #FA7575;
+    --delete-color: #FA7575;
+    --file-color: #D9D9D9;
 }
