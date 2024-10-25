@@ -4,7 +4,6 @@
 <%@page import="java.util.List"%>
 <%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp" %>
-<%@ include file="/layout/common.jsp" %>
 <%@ include file="/admin/layout/login.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
