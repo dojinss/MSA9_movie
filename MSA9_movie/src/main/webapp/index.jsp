@@ -107,7 +107,7 @@
 				pageContext.setAttribute("director", director);
 				pageContext.setAttribute("mainActor", mainActor);
 				%>
-				<section class="movie" style="background:url(<%= URLDecoder.decode(movie.getImageUrl(),"UTF-8")%>);">
+				<section class="movie" style="background-image:url(<%= root + movie.getImageUrl() %>);">
 					<div class="left-box">
 						<div class="title-box">
 							<p class="title"><%=movie.getTitle() %></p>

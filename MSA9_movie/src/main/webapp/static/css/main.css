@@ -1,5 +1,27 @@
 @charset "UTF-8";
 
+/* 구글 아이콘 */
+.chat {
+	font-variation-settings:
+	'FILL' 0,
+	'wght' 300,
+	'GRAD' 0,
+	'opsz' 24
+}
+.dashboard {
+	font-variation-settings:
+	'FILL' 1,
+	'wght' 300,
+	'GRAD' 0,
+	'opsz' 24
+}
+.icon-box .btn .material-symbols-outlined {
+	color: white;
+	font-size: 80px; /* 아이콘 크기 */
+	user-select:none;
+}
+/* 구글 아이콘 [END] */
+
 /*===========================
 	로그인 전 로그인 화면
 ===========================*/
@@ -115,8 +137,13 @@ section.movie {
 	min-height: 970px;
 	position: relative;
 	display: grid;
-	grid-template-columns: 400px 1fr;
+	grid-template-columns: 45% 55%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-blend-mode: multiply;
+	
 }
+
 /* 왼쪽 타이틀 & 버튼 영역 */
 section.movie .left-box {
 	display: flex;
@@ -124,20 +151,28 @@ section.movie .left-box {
 	padding:400px 0 150px 100px;
 	gap:100px;
 }
-section.movie .left-box .title-box {}
+section.movie .left-box .title-box {
+	width:100%;
+	height: 110px;
+	overflow: hidden;
+}
 section.movie .left-box .title-box .title {
 	font-size: 100px;
+	line-height: 100px;
+	height:100px;
 	font-weight :bold;
 	color: white;
+	text-shadow: 0 0 1px rgba(1,1,1,0.5);
 }
 
 .icon-box {
 	display:flex;
 	align-items:center;
-	justify-content: start;
+	justify-content: center;
 	gap:30px;
-	width:300px;
-	height:80px;
+	width:270px;
+	height:100px;
+	background: rgba(0,0,0,0.4);
 }
 .icon-box .btn{
 	width:80px;
@@ -147,36 +182,53 @@ section.movie .left-box .title-box .title {
 	justify-content: center;
 	cursor: pointer;
 }
-/*=====================
-	구글 아이콘 [icons]
-=====================*/
-.chat {
-	font-variation-settings:
-	'FILL' 0,
-	'wght' 300,
-	'GRAD' 0,
-	'opsz' 24
-}
-.dashboard {
-	font-variation-settings:
-	'FILL' 1,
-	'wght' 300,
-	'GRAD' 0,
-	'opsz' 24
-}
-.icon-box .btn .material-symbols-outlined {
-	color: white;
-	font-size: 80px; /* 아이콘 크기 */
-}
 
-.icon-box .btn:hover > span {
+.icon-box .info-view-btn:hover > span {
 	font-size: 90px;
 }
-.icon-box .info-view-btn{}
-.icon-box .post-view-btn{}
+.icon-box .post-view-btn:hover > span {
+	font-size: 100px;
+}
 
 /* 오른쪽 영화 정보 영역 */
-section.movie .right-box {}
+.right-box {
+	display:flex;
+	align-items : center;
+	justify-content: center;
+}
+.right-box .info-box {
+	background: rgba(0,0,0,0.3);
+	width: 800px;
+	height: 900px;
+	border-radius: 15px;
+	padding: 30px;
+	display:flex;
+	flex-direction: column;
+}
+
+.info-box .item-box {
+	display:flex;
+	flex-direction: column;
+	gap:30px;
+	border-bottom:1px solid rgba(255,255,255,0.7);
+	padding:30px 0;
+}
+.info-box .item-box:nth-of-type(1){
+	min-height:300px;
+	max-height:500px;
+}
+.info-box .item-box:nth-of-type(3){
+	border-bottom:none;
+}
+.item-box .title {
+	font-size:25px;
+	font-weight: bold;
+	color: white; 
+}
+.item-box .content {
+	font-size:23px;
+	color: white; 
+}
 
 
 
