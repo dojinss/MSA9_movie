@@ -22,7 +22,6 @@
           <div class="login-text">
             <p>로그인</p>
           </div>
-          
 
           <div id="login">
             <!-- 아이디 -->

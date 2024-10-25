@@ -12,17 +12,16 @@
 	}
 %>
 <header>
-		<img src="<%= root %>/static/img/logo.png" />
-		<div></div>
+		<a href="./index.jsp"><img src="<%= root %>/static/img/logo.png"/></a>
 		<nav>
 			<ul>
 				<c:if test="${ userid == null }">
-					<li><a href="<%= root %>/login.jsp">로그인</a></li>
-					<li><a href="<%= root %>/signup.jsp">회원가입</a></li>
+					<a href="./signup.jsp">회원가입</a>
+					<a href="./login.jsp">로그인</a>
 				</c:if>
 				<c:if test="${ userid != null }">
-					<li><span class="text-bold">${ user.userId }</span><span>님 환영합니다.</span></li>
-					<li><a href="<%= root %>/logout.jsp">로그아웃</a></li>
+					${ user.userId }님 환영합니다.
+					<a href="./logout.jsp">로그아웃</a>
 				</c:if>
 			</ul>
 		</nav>

@@ -13,12 +13,12 @@
 <!-- 웹 페이지 URL -->
 <meta property="og:url" content="<%= root %>">
 <!-- 웹 페이지 제목 -->
-<meta name="title" content="Netstar - 영화 인스타그램">
-<meta property="og:title" content="Netstar - 영화 인스타그램">
+<meta name="title" content="project💻 - ALOHA CLASS🌴">
+<meta property="og:title" content="project💻 - ALOHA CLASS🌴">
 <!-- 웹 페이지 타입 (웹사이트, 기사, 제품 등) -->
 <meta property="og:type" content="website">
 <!-- 검색어 -->
-<meta name="keywords" content="Netstar, 영화커뮤니티, 영화속음식,영화속음악,영화속장소">
+<meta name="keywords" content="쇼핑몰 프로젝트, 자바 웹개발, ALOHA CLASS, 알로하 클래스">
 <meta name="robots" content="index, follow">
 <!-- 사이트 맵 -->
 <link rel="sitemap" href="<%= root %>/static/sitemap.xml">

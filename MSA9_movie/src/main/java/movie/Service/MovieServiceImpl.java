@@ -1,12 +1,8 @@
 package movie.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.alohaclass.jdbc.dto.Page;
-import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.MovieDAO;
 import movie.DTO.Movies;
@@ -67,75 +63,6 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movies> select() {
 		List<Movies> movieList = movieDAO.select();
 		return movieList;
-	}
-	@Override
-	public PageInfo<Movies> page(PageInfo<Movies> pageInfo, int searchCode) {
-		List<String> searchOptions = new ArrayList<String>();
-		switch (searchCode) {
-			case 1:	
-				searchOptions.add("title");
-				searchOptions.add("cast");
-				searchOptions.add("cate");
-				break;
-			case 2:	
-				searchOptions.add("title");
-				break;
-			case 3:	
-				searchOptions.add("cate");
-				break;
-			case 4:	
-				searchOptions.add("cast");
-				break;
-		}
-		pageInfo.setSearchOptions(searchOptions);
-		PageInfo<Movies> selectedPageInfo = null;
-		try {
-			selectedPageInfo = movieDAO.page(pageInfo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return selectedPageInfo;
-	}
-	@Override
-	public PageInfo<Movies> page() {
-		PageInfo<Movies> selectedPageInfo = null;
-		try {
-			selectedPageInfo = movieDAO.page();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return selectedPageInfo;
-	}
-	@Override
-	public PageInfo<Movies> page(Page page) {
-		PageInfo<Movies> selectedPageInfo = null;
-		try {
-			selectedPageInfo = movieDAO.page(page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return selectedPageInfo;
-	}
-	@Override
-	public PageInfo<Movies> page(Page page, String keyword, List<String> searchOptions) {
-		PageInfo<Movies> selectedPageInfo = null;
-		try {
-			selectedPageInfo = movieDAO.page(page, keyword, searchOptions);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return selectedPageInfo;
-	}
-	@Override
-	public PageInfo<Movies> page(Page page, String keyword, List<String> searchOptions,
-			Map<String, String> filterOptions) {
-		PageInfo<Movies> selectedPageInfo = null;
-		try {
-			selectedPageInfo = movieDAO.page(page, keyword, searchOptions,filterOptions);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return selectedPageInfo;
 	}
 	
 }
