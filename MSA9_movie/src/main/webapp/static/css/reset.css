@@ -44,6 +44,11 @@ body {
 :root {
     /* 메인컬러  */
     --main-color : #0c0f3d;
+    --main-color-op4 : rgba(12, 15, 61 , 0.4);
+    --main-color-op5 : rgba(12, 15, 61 , 0.5);
+    --main-color-op6 : rgba(12, 15, 61 , 0.6);
+    --main-color-op7 : rgba(12, 15, 61 , 0.7);
+    --main-color-op8 : rgba(12, 15, 61 , 0.8);
     /* 서브컬러 */
     --sub-color : #DAAE00;
     /* 노란색 : #AA8800; */

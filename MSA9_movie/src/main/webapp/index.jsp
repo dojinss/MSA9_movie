@@ -107,7 +107,7 @@
 				pageContext.setAttribute("director", director);
 				pageContext.setAttribute("mainActor", mainActor);
 				%>
-				<section class="movie" style="background:url(<%= URLDecoder.decode(movie.getImageUrl(),"UTF-8")%>);">
+				<section class="movie" style="background-image:url(<%= root + movie.getImageUrl() %>);">
 					<div class="left-box">
 						<div class="title-box">
 							<p class="title"><%=movie.getTitle() %></p>
@@ -148,10 +148,19 @@
 			<%
 			} 
 		%>
+		<div id="modal-wrap">
+			<div class="modal-container">
+				<button id="close-modal">닫기</button>
+				<div class="container-box">
+				
+				</div>			
+			</div>
+		</div>
 	</c:if>
 	<%-- [Contents] ######################################################### --%>
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
+	<script src="<%= root %>/static/js/main.js"></script>
 </body>
 </html>
 	
