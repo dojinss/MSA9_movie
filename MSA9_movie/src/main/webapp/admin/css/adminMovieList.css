@@ -68,7 +68,12 @@
 }
 
 .movie-list tbody tr {
+	background-color: white;
 	border-bottom: 1px solid #ddd;
+}
+
+.movie-list tbody tr:hover {
+	filter: brightness(90%);
 }
 
 .keyword-info {

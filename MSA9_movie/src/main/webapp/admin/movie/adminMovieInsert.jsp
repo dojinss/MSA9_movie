@@ -3,7 +3,6 @@
 <%@page import="movie.DTO.Movies"%>
 <%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp"%>
-<%@ include file="/layout/common.jsp"%>
 <%@ include file="/admin/layout/login.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -29,7 +28,7 @@
 						<div class="content">
 							<div class="content-head">
 								<p>제목</p>
-								<input class="normal-input" type="text" name="title" />
+								<input class="normal-input" type="text" name="title" maxlength="30"/>
 							</div>
 							<div class="content-body">
 								<div class="bodyform">
@@ -38,22 +37,22 @@
 								</div>
 								<div class="bodyform">
 									<p>장르</p>
-									<input class="normal-input" type="text" name="cate">
+									<input class="normal-input" type="text" name="cate" maxlength="30">
 								</div>
 								<div class="bodyform">
 									<p>출연</p>
-									<input class="normal-input" type="text" name="cast">
+									<input class="normal-input" type="text" name="cast" maxlength="30">
 								</div>
 								<div class="bodyform">
 									<p>줄거리</p>
-									<textarea class="large-input" name="content"></textarea>
+									<textarea class="large-input" name="content" maxlength="255"></textarea>
 								</div>
 							</div>
 							<div class="content-foot">
 								<p>이미지</p>
 								<input type="text" id="imagename" readonly> 
-								<label for="file">
-									<div class="btn-upload">첨부</div>
+								<label class="btn-upload" for="file">
+									첨부
 								</label> 
 								<input class="file" type="file" name="imgae" id="file">
 							</div>
