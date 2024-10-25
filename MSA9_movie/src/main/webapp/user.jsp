@@ -16,7 +16,7 @@
 	<jsp:include page="/layout/header.jsp" />
 	<%-- [Contents] ######################################################### --%>
 		
-<div class="user-login">
+<form class="user-login" onsubmit="return checkId()">
   <div class="login-box">
   <label for="tab" id="tab">회원 가입</label>
   
@@ -24,30 +24,33 @@
     <div class="login-info">
 
       <div class="sign">
-        <div class="group">
+        <div class="group" >
           <label for="userid" class="label">아이디</label>
-          <input id="userid" type="text" class="input" >
+          <input id="userid"  type="text" class="input" name="id" >
           <button id="userid-check" onclick="idcheck()">중복확인</button>
            <!-- 유효성 검사 후 잘,잘못되었을때 경고문 -->           
-           <span id="wrongId" class="successId-messeage">사용할 수 있는 아이디 입니다.</span>
-           <span id="wrongId" class="wrongId-messeage">사용할 수 없는 아이디 입니다.</span>
+           <span id="wrongId" class="wrongId-message"></span>
         </div>
         <div class="group">
           <label for="userpwd" class="label">비밀번호</label>
-          <input id="userpwd" type="password" class="input" data-type="password">
+          <input id="userpwd" type="password" class="input" >
+          <span id="pwdError"></span>
+          
         </div>
         <div class="group">
           <label for="userpwd2" class="label">비밀번호 확인</label>
-          <input id="userpwd2" type="password" class="input" data-type="password">
+          <input id="userpwd2" type="password" class="input" >
           <button id="userpwd2-check" onclick="pwdcheck()">확인</button>
           <!-- 유효성 검사 후 잘못되었을때 경고문 -->
-           <span id="wrongPw" class="wrongPw-messeage">비밀 번호가 일치하지 않습니다.</span>
+           <span id="pwdError2" ></span>
+           <span id="wrongPw" class="wrongPw-message"></span>
         </div>
 
       <div class="user-edit">
         <div class="group">
           <label for="name" class="label">이름</label>
-          <input id="name" type="text" class="input" >
+          <input id="name" type="text" class="input" id="username" >
+          <span id="nameError"></span>
         </div>
 
         <div class="group">
@@ -57,7 +60,8 @@
         
         <div class="group">
           <label for="mail" class="label">이메일</label>
-          <input id="mail" type="email" class="input">
+          <input id="mail" type="email" class="input" name="email">
+          <span id="emailError"></span>
         </div>
 
         <div class="group">
@@ -74,7 +78,7 @@
         </div>
       </div> 
     </div>
-  </div>
+  </form>
     
 
 	
@@ -82,8 +86,8 @@
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
 	<%-- JS 링크 파일 --%>
-	<script type="text/javascript">
-	
+	<script src="static/js/script.js"></script>
+	<script>
 	/* 마우스 올렸을때 이벤트 */
 	 $('button').on('mouseover', function() {
        $(this).css('color', 'white')

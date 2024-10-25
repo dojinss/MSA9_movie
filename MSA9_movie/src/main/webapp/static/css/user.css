@@ -9,6 +9,17 @@ button:active {
   margin-top: 3px;
 }
 
+/* 경고문 */
+.sign #wrongId ,
+.sign #pwdError,
+.sign #pwdError2 ,
+.sign #nameError,
+.sign #emailError{
+  color: red;
+  font-size: small;
+}
+
+
 body{
   margin:0;
   color:#6a6f8c;
@@ -77,12 +88,12 @@ body{
 /* 그리드 하고싶은데 */
 .sign #userid-check{
   position: absolute;
-  top: 25px;
+  top: 22px;
 }
 
 .sign #userpwd2-check{
   position: absolute;
-  top: 25px;
+  top: 20px;
   right: 10px;
 }
 
@@ -95,15 +106,6 @@ body{
     background-color: #f0f0f0;
 }
 
-/* 경고문 */
-.sign #wrongId {
-  color: red;
-  font-size: small;
-}
-.sign #wrongPw {
-  color: red;
-  font-size: small;
-}
 
 
 .login-info .group{
@@ -239,13 +241,13 @@ body{
 /* 그리드 하고싶은데 */
 .sign-edit #userid-check{
   position: absolute;
-  top: 23px;
+  top: 21px;
   right: 10px;
 }
 
 .sign-edit #userpwd2-check{
   position: absolute;
-  top: 23px;
+  top: 20px;
   right: 10px;
 }
 
@@ -258,15 +260,6 @@ body{
     background-color: #f0f0f0;
 }
 
-/* 경고문 */
-.sign-edit #wrongId {
-  color: red;
-  font-size: small;
-}
-.sign-edit #wrongPw {
-  color: red;
-  font-size: small;
-}
 
 
 .user-edit .group{
@@ -383,14 +376,6 @@ body{
 #leave-btn .leave-btn {
 	 cursor: pointer;
 }
-
-
-/* 그리드 */
-.sign-edit #userid-check{
-  position: absolute;
-  top: 25px;
-}
-
 
 
 .sign-edit #preview-box{
