@@ -1,0 +1,449 @@
+@charset "UTF-8";
+
+*{box-sizing:border-box; }
+a{color:inherit;text-decoration:none}
+
+body{
+  margin:0;
+  color:#6a6f8c;
+  background:#c8c8c8;
+  /* 폰트 수정 */
+  font:600 16px/18px 'Open Sans',sans-serif; 
+}
+
+.user-login{
+  width:500px;
+  margin:auto;
+  padding:30px;
+  max-width:100%;
+  min-height:700px;
+  position:relative;
+  /* background:url(jpg) no-repeat center; */
+  
+  
+}
+.login-box{
+  width:100%;
+  height:100%;
+  padding:70px 70px 50px 70px;
+  background:var(--main-color);
+  border-radius: 10px
+}
+
+
+.login-box #tab{
+  font-size:30px;
+  padding-bottom:5px;
+  margin:10px 15px 30px 55px;
+  display:inline-block;
+ 
+}
+.login-box #tab{
+  color:#fff;
+  border-color:var(--main-color);
+}
+.login-info{
+  min-height:345px;
+  position:relative;
+  perspective:1000px;
+  transform-style:preserve-3d;
+}
+.sign {
+  position: relative;
+}
+
+.sign button {
+  width: 80px;
+  height: 25px;
+  right: 5px;
+  margin: auto 0 ;
+  border-radius: 10px;
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+}
+
+/* 그리드 하고싶은데 안됨 */
+.sign #userid-check{
+  position: absolute;
+  top: 25px;
+}
+
+.sign #userpwd2-check{
+  position: absolute;
+  top: 25px;
+  right: 10px;
+}
+
+.sign #preview-box input {
+  
+}
+
+.sign #preview-box{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+}
+
+/* 경고문 */
+.sign #wrongId {
+  color: red;
+  font-size: small;
+}
+.sign #wrongPw {
+  color: red;
+  font-size: small;
+}
+
+
+.login-info .group{
+  position: relative;
+  margin-bottom:15px;
+}
+.login-info .group .label,
+.login-info .group .input,
+.login-info .group .button{
+  width:100%;
+  color:#fff;
+  display: grid; 
+}
+.login-info .group .input,
+.login-info .group .button{
+  border:none;
+  padding:10px 10px;
+  border-radius:25px;
+  background:rgba(255,255,255,.1);
+}
+.login-info .group input[data-type="password"]{
+  -webkit-text-security:circle;
+}
+.login-info .group .label{
+  color:#aaa;
+  font-size:12px;
+}
+.login-info .group .button{
+  background:var(--sub-color);
+  cursor: pointer;
+}
+
+/* 중앙맞추고싶음 */
+.login-info #edit{
+	width:210px;
+	margin:10px auto;
+}
+
+.login-info .edit-btn {
+	padding: 10px 80px;
+	margin: -4px;
+	background: var(--sub-color);
+	color:white;
+	border-radius: 10px;
+}
+
+
+
+
+/*-------------------------------------infoUpdate-----------------------------------------  */
+ .user-category .tab{
+    font-size:22px;
+    margin-right:15px;
+    padding-bottom:5px;
+    margin:20px 40px 10px 0;
+    display:inline-block;
+    
+  }
+  .user-category .edit-in:checked  +  .tab ,
+  .user-category .user-out:checked  +  .tab {
+    color:#fff;
+    border-color:black;
+  }
+  .tab-radio {
+    display:none;
+  }
+
+.user-info{
+  width:500px;
+  margin:auto;
+  padding:30px;
+  max-width:100%;
+  min-height:700px;
+  position:relative;
+  /* background:url(jpg) no-repeat center; */
+  
+}
+.info-update{
+  width:100%;
+  height:100%;
+  padding:70px 70px 50px 70px;
+  background:var(--main-color);
+  border-radius: 10px
+}
+
+
+.info-update #tab{
+  font-size:30px;
+  padding-bottom:5px;
+  margin:10px 15px 30px 55px;
+  display:inline-block;
+ 
+}
+.info-update #tab{
+  color:#fff;
+  border-color:var(--main-color);
+}
+.user-edit{
+  min-height:345px;
+  position:relative;
+  perspective:1000px;
+  transform-style:preserve-3d;
+}
+.sign-edit {
+  position: relative;
+}
+
+.sign-edit button {
+  width: 80px;
+  height: 25px;
+  right: 5px;
+  margin: auto 0 ;
+  border-radius: 10px;
+  background-color: var(--main-color);
+  color: white;
+  
+}
+
+#edit .edit-btn {
+	 cursor: pointer;
+}
+
+
+/* 그리드 하고싶은데 안됨 */
+.sign-edit #userid-check{
+  position: absolute;
+  top: 23px;
+  right: 10px;
+}
+
+.sign-edit #userpwd2-check{
+  position: absolute;
+  top: 23px;
+  right: 10px;
+}
+
+.sign-edit #preview-box input {
+  
+}
+
+.sign-edit #preview-box{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+}
+
+/* 경고문 */
+.sign-edit #wrongId {
+  color: red;
+  font-size: small;
+}
+.sign-edit #wrongPw {
+  color: red;
+  font-size: small;
+}
+
+
+.user-edit .group{
+	position: relative;
+  	margin-bottom:15px;
+}
+.user-edit .group .label,
+.user-edit .group .input,
+.user-edit .group .button{
+  width:100%;
+  color:#fff;
+  display: grid; 
+}
+.user-edit .group .input,
+.user-edit .group .button{
+  border:none;
+  padding:10px 10px;
+  border-radius:25px;
+  background:rgba(255,255,255,.1);
+}
+.user-edit .group input[data-type="password"]{
+  -webkit-text-security:circle;
+}
+.user-edit .group .label{
+  color:#aaa;
+  font-size:12px;
+}
+.user-edit .group .button{
+  background:var(--sub-color);
+  cursor: pointer;
+}
+
+/* 중앙맞추고싶음 */
+.user-edit #edit{
+	width:210px;
+	margin:10px auto;
+}
+
+.user-edit .edit-btn {
+	padding: 10px 80px;
+	margin: -4px;
+	background: var(--sub-color);
+	color:white;
+	border-radius: 10px;
+}
+
+
+
+
+/* ---------------------------유저 탈퇴---------------------------------------- */
+
+.user-leave{
+   width:500px;
+  margin:auto;
+  padding:30px;
+  max-width:100%;
+  min-height:700px;
+  position:relative;
+  /* background:url(jpg) no-repeat center; */
+  
+}
+.info-leave{
+  width:100%;
+  height:100%;
+  padding:70px 70px 50px 70px;
+  background:var(--main-color);
+  border-radius: 10px
+}
+
+
+.info-leave #leave{
+  font-size:22px;
+  margin-right:15px;
+  padding-bottom:5px;
+  margin:0 15px 10px 0;
+  display:inline-block;
+}
+
+.info-leave #leave {
+  color:#fff;
+  font-size:30px;
+  padding-bottom:35px;
+  margin:10px 15px 30px 95px;
+  display:grid;
+}
+
+
+
+.info{
+  min-height:345px;
+  position:relative;
+  perspective:1000px;
+  transform-style:preserve-3d;
+}
+.sign-edit {
+  position: relative;
+}
+
+.sign-edit button {
+  width: 80px;
+  height: 30px;
+  right: 5px;
+  margin: auto 0 ;
+  border-radius: 10px;
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+}
+
+.tab-radio {
+    display:none;
+  }
+
+#leave-btn .leave-btn {
+	 cursor: pointer;
+}
+
+
+/* 그리드 */
+.sign-edit #userid-check{
+  position: absolute;
+  top: 25px;
+}
+
+
+
+.sign-edit #preview-box{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+}
+
+/* 경고문 */
+.sign-edit #wrongId {
+  color: red;
+  font-size: small;
+}
+.sign-edit #wrongPw {
+  color: red;
+  font-size: small;
+}
+
+
+.info .group{
+  margin-bottom:15px;
+}
+.info .group .label,
+.info .group .input,
+.info .group .button{
+  width:100%;
+  color:#fff;
+  display:block;
+}
+
+.info .group .input,
+.info .group .button{
+  border:none;
+  padding:15px 20px;
+  border-radius:25px;
+  background:rgba(255,255,255,.1);
+}
+.info .group input[data-type="password"]{
+  -webkit-text-security:circle;
+}
+.info .group .label{
+  color:#aaa;
+  font-size:12px;
+}
+.info .group .button{
+  background:var(--sub-color);
+  cursor: pointer;
+}
+
+/* 가운데 정렬 하고싶음 */
+.info-leave #leave-btn {
+	width:210px;
+	margin:15px auto;
+}
+
+
+
+.user-leave .leave-btn {
+	justify-content:center;
+	padding: 10px;
+	background: var(--sub-color);
+	color:white;
+	border-radius: 10px;
+}
+
+
+
+
