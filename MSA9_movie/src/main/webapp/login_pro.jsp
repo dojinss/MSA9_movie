@@ -6,10 +6,8 @@
 <%@page import="movie.Service.UserServiceImpl"%>
 <%@page import="movie.Service.UserService"%>
 <%@page import="movie.DTO.Users"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/layout/jstl.jsp" %>
+<%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -31,7 +29,7 @@
 	// 로그인 실패
 	if( loginUser == null ) {
 		// 에러코드를 들고 다시 로그인 페이지로
-		response.sendRedirect("login.jsp?error=0");
+		response.sendRedirect( root + "index.jsp?error=0");
 		return;
 	}
 	
@@ -86,7 +84,7 @@
 		session.setAttribute("loginID", loginUser.getUserId());
 		session.setAttribute("loginUser", loginUser);
 		// 메인 화면으로 리다이렉트
-		response.sendRedirect("index.jsp");
+		response.sendRedirect( root + "/");
 	}
 	
 %>
