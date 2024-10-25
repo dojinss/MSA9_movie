@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="movie.DTO.Movies"%>
 <%@page import="com.alohaclass.jdbc.dto.PageInfo"%>
@@ -98,8 +99,53 @@
 	        PageInfo<Movies> pageInfo = movieService.page(pageSet, keyword, searchOptions, filterOptions);
 			List<Movies> movieList = new ArrayList<Movies>();
 			movieList = pageInfo.getList();
-			for( Movies movie : movieList ){
-				out.println("<span style=\" color:white \"" + ">" + movie.getTitle() + "</span><br>");
+			for( Movies movie : movieList ){ 
+				// 출연진
+				String[] cast = movie.getCast().split("/");
+				String director = cast[0];
+				String mainActor = cast[1];
+				pageContext.setAttribute("director", director);
+				pageContext.setAttribute("mainActor", mainActor);
+				%>
+				<section class="movie" style="background:url(<%= URLDecoder.decode(movie.getImageUrl(),"UTF-8")%>);">
+					<div class="left-box">
+						<div class="title-box">
+							<p class="title"><%=movie.getTitle() %></p>
+						</div>
+						<div class="icon-box">
+							<div class="info-view-btn btn" data="<%=movie.getMovieNo()%>">
+								<span class="material-symbols-outlined chat">chat</span>
+							</div>
+							<div class="post-view-btn btn" data="<%=movie.getMovieNo()%>">
+								<span class="material-symbols-outlined dashboard">dashboard</span>
+							</div>
+						</div>
+					</div>
+					<div class="right-box">
+						<div class="info-box">
+							<div class="item-box">
+								<p class="title">줄거리</p>
+								<p class="content"><%=movie.getContent() %></p>
+							</div>
+							<div class="item-box">
+								<p class="title">장르</p>
+								<p class="content"><%=movie.getCate()%></p>
+							</div>
+							<div class="item-box">
+								<p class="title">출연진</p>
+								<c:choose>
+									<c:when test="${ director != null }">
+										<p class="content">감독 : ${ director }</p>
+									</c:when>								
+									<c:when test="${ mainActor != null }">
+										<p class="content">주연 :${ actor }</p>
+									</c:when>								
+								</c:choose>
+							</div>
+						</div>
+					</div>					
+				</section>
+			<%
 			} 
 		%>
 	</c:if>

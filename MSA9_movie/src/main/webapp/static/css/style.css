@@ -13,18 +13,15 @@ footer {
 	position: relative;
 }
 
-section {
-	margin: 100px auto;
-	min-height: 300px;
-}
 
 .text-title { font-size: var(--text-title); }
 .text-normal { font-size: var(--text-normal); }
 .logo { display:block; }
 .text-bold { font-weight: bold;}
 
+
 /*=====================
-	헤더 [start]
+	헤더 [header]
 =====================*/
  header { 
 	display: flex;
