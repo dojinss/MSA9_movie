@@ -3,5 +3,6 @@
 <%@ include file="/layout/common.jsp" %>
 <%-- 라이브러리 --%>
 <%-- jQuery --%>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="<%= root %>/static/js/jquery-3.7.1.min.js"></script>
+<%-- 공통 script --%>
 <script src="<%= root %>/static/js/script.js"></script>

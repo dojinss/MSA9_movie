@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/layout/common.jsp" %>
 <footer>
-	<div class="container">
-		<p>Copyright ⓒ NETSTAR All Rights Reserved netstar.com</p>	
-	</div>
+	<img class="logo" src="<%= root %>/static/img/footerlogo.png"/>
+	<p>Copyright ⓒ NETSTAR All Rights Reserved netstar.com</p>
 </footer>
