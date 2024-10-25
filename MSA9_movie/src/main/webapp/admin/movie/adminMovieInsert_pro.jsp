@@ -13,6 +13,7 @@
 <%@page import="java.util.List"%>
 <%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
 <%@page import="movie.DTO.Movies"%>
+<%@ include file="/layout/common.jsp" %>
 <%@ include file="/admin/layout/login.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -84,10 +85,6 @@
 			  .imageUrl(imageUrl)
 			  .build()
 			  ;
-	int result = movieService.insert(movie);
-	if(result==1){
-		response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
-	}else{
-		response.sendRedirect(root+"/admin/movie/adminMovieInsert.jsp");
-	}
+	movieService.insert(movie);
+	response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
 %>

@@ -3,6 +3,7 @@
 <%@page import="movie.DTO.Movies"%>
 <%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp"%>
+<%@ include file="/layout/common.jsp"%>
 <%@ include file="/admin/layout/login.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -14,16 +15,12 @@
 <title>영화 추가 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminMovieUpdate.css">
-<jsp:include page="/admin/layout/script.jsp"/>
 <%
 	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 	MovieService movieService = new MovieServiceImpl();
 	Movies movie = movieService.select(movieNo);
-	int index = movie.getImageUrl().indexOf("_");
-	String imageName = movie.getImageUrl().substring(index+1);
 %>
 <c:set var="movie" value="<%=movie%>" />
-<c:set var="imageName" value="<%=imageName%>" />
 </head>
 <body>
 	<div class="container">
@@ -34,12 +31,11 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
-					<form action="adminMovieUpdate_pro.jsp" method="post" enctype="multipart/form-data">
+					<form action="adminMovieInsert_pro.jsp" method="post" enctype="multipart/form-data">
 						<div class="content">
 							<div class="content-head">
-								<input type="hidden" name="movieNo" value="${movie.movieNo}">
 								<p>제목</p>
-								<input class="normal-input" type="text" name="title" value="${movie.title}" maxlength="30"/>
+								<input class="normal-input" type="text" name="title" value="${movie.title}" />
 							</div>
 							<div class="content-body">
 								<div class="bodyform">
@@ -55,32 +51,45 @@
 								</div>
 								<div class="bodyform">
 									<p>장르</p>
-									<input class="normal-input" type="text" name="cate" value="${movie.cate}" maxlength="30">
+									<input class="normal-input" type="text" name="cate" value="${movie.cate}">
 								</div>
 								<div class="bodyform">
 									<p>출연</p>
-									<input class="normal-input" type="text" name="cast" value="${movie.cast}" maxlength="30">
+									<input class="normal-input" type="text" name="cast" value="${movie.cast}">
 								</div>
 								<div class="bodyform">
 									<p>줄거리</p>
-									<textarea class="large-input" name="content" maxlength="250">${movie.content}</textarea>
+									<textarea class="large-input" name="content">${movie.content}</textarea>
 								</div>
 							</div>
 							<div class="content-foot">
 								<p>이미지</p>
-								<input type="text" id="imagename" value="${imageName}" readonly> 
-								<label class="btn-upload" for="file">
-									첨부
+								<input type="text" id="imagename" value="${movie.imageUrl}" readonly> 
+								<label for="file">
+									<div class="btn-upload">첨부</div>
 								</label> 
-								<input class="file" type="file" name="imgae" id="file" onchange="fileChange()">
+								<input class="file" type="file" name="imgae" id="file">
 							</div>
 						</div>
 						<input class="updatebtn" type="submit" value="수정">
+						<input class="deletebtn" type="submit" value="삭제">
 					</form>
-					<button class="deletebtn" id="delconfirm" data="<%=movie.getMovieNo()%>">삭제</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		window.onload=function(){
+			target=document.getElementById('file'); // file 아이디 선언
+			target.addEventListener('change',function(){ // change 함수
+		
+				if(target.value.length){ // 파일 첨부인 상태일경우 파일명 출력
+					document.getElementById("imagename").value = target.files[0].name;
+				}else{ //버튼 클릭후 취소(파일 첨부 없을 경우)할때 파일명값 안보이게
+					document.getElementById("imagename").value = "";
+				}
+			});
+		}
+	</script>
 </body>
 </html>
