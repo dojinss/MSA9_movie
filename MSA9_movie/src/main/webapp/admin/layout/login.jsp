@@ -2,9 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	// Context Path (루트 경로)
+	String root = request.getContextPath();
+	// 로그인 아이디 (세션)
+	String moviePath = "C:/upload";
 	Users user = (Users) session.getAttribute("loginUser");
 	
 	if( user == null ){
-		response.sendRedirect("adminLogin.jsp");
+		response.sendRedirect(root+"/admin/adminLogin.jsp");
 	}
 %>

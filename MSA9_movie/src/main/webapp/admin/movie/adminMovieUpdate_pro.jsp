@@ -18,12 +18,6 @@
     pageEncoding="UTF-8"%>
 <%
 	MovieService movieService = new MovieServiceImpl();
-	String title = "";
-	boolean notice = false;
-	String cate = "";
-	String cast = "";
-	String content = "";
-	String imageUrl = "";
 
 	String path = moviePath;
 
@@ -32,7 +26,7 @@
 	upload.setSizeMax(10*1000*1000*1000); 		// 100MB - 파일 최대 크기
 	upload.setSizeThreshold( 4 * 1024 );	// 4MB	- 메모리상의 최대 크기
 	upload.setRepositoryPath(path);			// 임시 저장 경로
-	
+	Movies movie = null;
 	List<FileItem> items = upload.parseRequest(request);
 	Iterator params = items.iterator();
 	while( params.hasNext() ) {
@@ -43,22 +37,27 @@
 			String name = item.getFieldName();
 			String value = item.getString("utf-8");
 			switch(name){
+			case "movieNo":
+				movie = movieService.select(Integer.parseInt(value));
+				File file = new File(movie.getImageUrl());
+				file.delete();
+				break;
 			case "title":
-				title=value;
+				movie.setTitle(value);
 				break;
 			case "notice":
 				if(value.equals("1")){
-					notice=true;
+					movie.setNotice(true);
 				}
 				break;
 			case "cate":
-				cate=value;
+				movie.setCate(value);
 				break;
 			case "cast":
-				cast=value;
+				movie.setCast(value);
 				break;
 			case "content":
-				content=value;
+				movie.setContent(value);
 				break;
 			}
 		}
@@ -72,22 +71,17 @@
 			File file = new File(path+ "/" + fileName);
 			item.write(file);
 			
-			imageUrl = file.getPath();
+			movie.setImageUrl(file.getPath());
 		}
 	}
-	Movies movie = Movies.builder()
-			  .title(title)
-			  .notice(notice)
-			  .cate(cate)
-			  .cast(cast)
-			  .content(content)
-			  .imageUrl(imageUrl)
-			  .build()
-			  ;
-	int result = movieService.insert(movie);
-	if(result==1){
+	System.out.println("제목은  : "+movie.getTitle());
+	System.out.println("번호  : "+movie.getMovieNo());
+	System.out.println("이미지는  : "+movie.getImageUrl());
+	int result = movieService.update(movie);
+	System.out.println("result  : " + result);	
+	if(result > 0){
 		response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
 	}else{
-		response.sendRedirect(root+"/admin/movie/adminMovieInsert.jsp");
+		response.sendRedirect(root+"/admin/movie/adminMovieUpdate.jsp?movieNo="+movie.getMovieNo());
 	}
 %>
