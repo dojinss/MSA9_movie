@@ -148,10 +148,19 @@
 			<%
 			} 
 		%>
+		<div id="modal-wrap">
+			<div class="modal-container">
+				<button id="close-modal">닫기</button>
+				<div class="container-box">
+				
+				</div>			
+			</div>
+		</div>
 	</c:if>
 	<%-- [Contents] ######################################################### --%>
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
+	<script src="<%= root %>/static/js/main.js"></script>
 </body>
 </html>
 	

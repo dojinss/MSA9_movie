@@ -197,13 +197,18 @@ section.movie .left-box .title-box .title {
 	justify-content: center;
 }
 .right-box .info-box {
-	background: rgba(0,0,0,0.3);
+	
+	background: rgba(0,0,0,0.7);
 	width: 800px;
 	height: 900px;
 	border-radius: 15px;
 	padding: 30px;
-	display:flex;
+	display:none;
 	flex-direction: column;
+	transition:all 0.3s;
+}
+.right-box .info-box.active {
+	display:flex;
 }
 
 .info-box .item-box {
@@ -232,7 +237,44 @@ section.movie .left-box .title-box .title {
 
 
 
+/* Modal 디자인 */
+#modal-wrap {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width:100vw;
+	height:100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0,0,0,0.4);
+	backdrop-filter: blur(20px);
+	display:none;
+}
+.modal-container {
+	margin:0 auto;
+	width: var(--container-size);
+	background: var(--main-color-op7);
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: relative;
+	top:100%;
+}
+#close-modal {
+	position: absolute;
+	right:40px;
+	top: 40px;
+	width: 150px;
+	height: 40px;
+	background-color: #363636;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+}
+.container-box {
 
+}
 
 
 
