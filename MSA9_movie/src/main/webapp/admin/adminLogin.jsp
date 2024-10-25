@@ -9,6 +9,11 @@
 	<title>관리자 로그인 화면</title>
 	<link rel="stylesheet" href="<%= root %>/admin/css/adminLogin.css?after">
 </head>
+<%
+	if(loginId==null){
+		session.invalidate();
+	}
+%>
 <body>
 	<div class="container">
 		<div class="title">

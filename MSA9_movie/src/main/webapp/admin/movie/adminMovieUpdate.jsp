@@ -11,10 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>영화 추가 화면</title>
+<title>영화 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminMovieUpdate.css">
-<jsp:include page="/admin/layout/script.jsp"/>
+<jsp:include page="/admin/layout/movie.jsp"/>
 <%
 	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 	MovieService movieService = new MovieServiceImpl();
@@ -77,7 +77,7 @@
 						</div>
 						<input class="updatebtn" type="submit" value="수정">
 					</form>
-					<button class="deletebtn" id="delconfirm" data="<%=movie.getMovieNo()%>">삭제</button>
+					<button class="deletebtn" id="delconfirm" data="<%=movie.getMovieNo()%>" path="adminMovieDelete_pro.jsp?movieNo=">삭제</button>
 				</div>
 			</div>
 		</div>

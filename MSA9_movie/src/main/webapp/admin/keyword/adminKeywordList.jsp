@@ -1,3 +1,6 @@
+<%@page import="movie.DTO.Keywords"%>
+<%@page import="movie.Service.KeywordServiceImpl"%>
+<%@page import="movie.Service.KeywordService"%>
 <%@page import="movie.Service.MovieServiceImpl"%>
 <%@page import="movie.Service.MovieService"%>
 <%@page import="movie.DTO.Movies"%>
@@ -12,21 +15,21 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>영화 목록 화면</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>소개글 목록 화면</title>
 	<jsp:include page="/admin/layout/link.jsp"/>
 	<link rel="stylesheet" href="<%= root %>/admin/css/adminMovieList.css">
 </head>
 <body>
 	<%
-		MovieService movieService = new MovieServiceImpl();
-		List<Movies> movieList = movieService.select();
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		KeywordService keywordService = new KeywordServiceImpl();
+		List<Keywords> keywordList = keywordService.list(movieNo);
 	%>
 	<div class="container">
 		<jsp:include page="/admin/layout/sidebar.jsp" />
 		<div class="main">
 			<div class="mainhead">
-				<h1>영화 목록</h1>
+				<h1>소개 목록</h1>
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
@@ -35,27 +38,24 @@
 							<colgroup>
 								<col style="width: 10%;">
 								<col style="width: 70%;">
-								<col style="width: 10%;">
-								<col style="width: 10%;">
+								<col style="width: 20%;">
 							</colgroup>
 							<thead>
 								<tr>
 									<th>번호</th>
 									<th>제목</th>
 									<th>등록일자</th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:set var="movieList" value="<%=movieList%>" />
-								<c:forEach var="movie" items="${movieList}">
+								<c:set var="keywordList" value="<%=keywordList%>" />
+								<c:forEach var="keyword" items="${keywordList}">
 									<c:set var="no" value="${no+1}" />
 									<tr>
 										<td>${no}</td>
-										<td><a href="adminMovieUpdate.jsp?movieNo=${movie.movieNo}"><c:out value="${movie.title}" /></a></td>
-										<td><fmt:formatDate value="${movie.regDate}"
+										<td><a href="<%=root%>/admin/keyword/adminKeywordUpdate.jsp?keywordNo=${keyword.keywordNo}&movieNo=${keyword.movieNo}"><c:out value="${keyword.title}" /></a></td>
+										<td><fmt:formatDate value="${keyword.regDate}"
 												pattern="yyyy-MM-dd" /></td>
-										<td><a class="keyword-info" href="<%=root%>/admin/keyword/adminKeywordList.jsp?movieNo=${movie.movieNo}">소개목록</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -70,7 +70,7 @@
 							<a href="" class="page-link">다음 ></a>
 						</div>
 					</div>
-					<a href="adminMovieInsert.jsp" class="insertbtn">추가</a>
+					<a href="<%=root%>/admin/keyword/adminKeywordInsert.jsp?movieNo=<%=movieNo%>" class="insertbtn">추가</a>
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,6 @@
+<%@page import="movie.DTO.Keywords"%>
+<%@page import="movie.Service.KeywordServiceImpl"%>
+<%@page import="movie.Service.KeywordService"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.UUID"%>
@@ -19,7 +22,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MovieService movieService = new MovieServiceImpl();
+	KeywordService keywordService = new KeywordServiceImpl();
 
 	String path = moviePath;
 
@@ -28,7 +31,7 @@
 	upload.setSizeMax(10*1000*1000*1000); 		// 100MB - 파일 최대 크기
 	upload.setSizeThreshold( 4 * 1024 );	// 4MB	- 메모리상의 최대 크기
 	upload.setRepositoryPath(path);			// 임시 저장 경로
-	Movies movie = null;
+	Keywords keyword = null;
 	List<FileItem> items = upload.parseRequest(request);
 	Iterator params = items.iterator();
 	while( params.hasNext() ) {
@@ -39,25 +42,17 @@
 			String name = item.getFieldName();
 			String value = item.getString("utf-8");
 			switch(name){
-			case "movieNo":
-				movie = movieService.select(Integer.parseInt(value));
+			case "keywordNo":
+				keyword = keywordService.select(Integer.parseInt(value));
 				break;
 			case "title":
-				movie.setTitle(value);
+				keyword.setTitle(value);
 				break;
-			case "notice":
-				if(value.equals("1")){
-					movie.setNotice(true);
-				}
-				break;
-			case "cate":
-				movie.setCate(value);
-				break;
-			case "cast":
-				movie.setCast(value);
+			case "type":
+				keyword.setType(value);
 				break;
 			case "content":
-				movie.setContent(value);
+				keyword.setContent(value);
 				break;
 			}
 		}
@@ -70,28 +65,19 @@
 				long fileSize = item.getSize();
 				
 				File file = new File(path+ "/" + fileName);
-				File oldfile = new File(movie.getImageUrl());
+				File oldfile = new File(keyword.getImageUrl());
 				oldfile.delete();
 				item.write(file);
-				movie.setImageUrl(file.getPath());
+				keyword.setImageUrl(file.getPath());
 			}
 		}
 	}
-	movie.setUpdDate(Date.valueOf(LocalDate.now()));
-	System.out.println("번호 : " + movie.getMovieNo());
-	System.out.println("제목 : " + movie.getTitle());
-	System.out.println("공지 : " + movie.isNotice());
-	System.out.println("장르 : " + movie.getCate());
-	System.out.println("출연 : " + movie.getCast());
-	System.out.println("내용 : " + movie.getContent());
-	System.out.println("이미지 : " + movie.getImageUrl());
-	System.out.println("등록날짜 : " + movie.getRegDate());
-	System.out.println("수정날짜 : " + movie.getUpdDate());
+	keyword.setUpdDate(Date.valueOf(LocalDate.now()));
 	
-	int result = movieService.update(movie);
+	int result = keywordService.update(keyword);
 	if(result > 0){
-		response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
+		response.sendRedirect(root+"/admin/keyword/adminKeywordList.jsp");
 	}else{
-		response.sendRedirect(root+"/admin/movie/adminMovieUpdate.jsp?movieNo="+movie.getMovieNo());
+		response.sendRedirect(root+"/admin/keyword/adminKeywordUpdate.jsp?keywordNo="+keyword.getMovieNo());
 	}
 %>
