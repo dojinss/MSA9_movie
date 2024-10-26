@@ -29,7 +29,7 @@
 	// 로그인 실패
 	if( loginUser == null ) {
 		// 에러코드를 들고 다시 로그인 페이지로
-		response.sendRedirect( root + "index.jsp?error=0");
+		response.sendRedirect( root + "/index.jsp?error=0");
 		return;
 	}
 	

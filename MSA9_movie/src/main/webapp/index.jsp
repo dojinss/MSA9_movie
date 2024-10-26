@@ -86,12 +86,12 @@
 			Page pageSet = new Page();
 			
 			// 5장씩 보여주기
-			pageSet.setPage(5);
+			pageSet.setSize(5);
 			
 			// 공지사항부터 검색
 			Map<String, String> filterOptions = new HashMap<String, String>() {{
 	            put("notice", "desc");
-	            put("rand()", "");	            
+	            put("rand()", "");
 	        }};
 	        
 	        String keyword = "";
@@ -109,16 +109,21 @@
 				%>
 				<section class="movie" style="background-image:url(<%= root + movie.getImageUrl() %>);">
 					<div class="left-box">
+						<div class="nav-box">
 						<div class="title-box">
 							<p class="title"><%=movie.getTitle() %></p>
 						</div>
 						<div class="icon-box">
-							<div class="info-view-btn btn" data="<%=movie.getMovieNo()%>">
+							<div class="keyword-view-btn btn" data="<%=movie.getMovieNo()%>">
 								<span class="material-symbols-outlined chat">chat</span>
 							</div>
 							<div class="post-view-btn btn" data="<%=movie.getMovieNo()%>">
 								<span class="material-symbols-outlined dashboard">dashboard</span>
 							</div>
+							<div class="info-view-btn btn" data="<%=movie.getMovieNo()%>">
+								<span class="material-symbols-outlined info">info</span>
+							</div>
+						</div>
 						</div>
 					</div>
 					<div class="right-box">
