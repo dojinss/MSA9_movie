@@ -1,5 +1,4 @@
-<%@page import="java.sql.Date"%>
-<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Enumeration"%>
@@ -26,69 +25,71 @@
 	DiskFileUpload upload = new DiskFileUpload();
 	
 	upload.setSizeMax(10*1000*1000*1000); 		// 100MB - 파일 최대 크기
-	upload.setSizeThreshold( 4 * 1024 );	// 4MB	- 메모리상의 최대 크기
-	upload.setRepositoryPath(path);			// 임시 저장 경로
-	Movies movie = null;
+	upload.setSizeThreshold( 4 * 1024 );		// 4MB	- 메모리상의 최대 크기
+	upload.setRepositoryPath(path);				// 임시 저장 경로
+	Movies movie = new Movies();
 	List<FileItem> items = upload.parseRequest(request);
 	Iterator params = items.iterator();
+	String imgUrl = "";
+	String title = "";
+	String cate = "";
+	String cast = "";
+	String content = "";
+	int movieNo = 0;
+	boolean notice = false;
 	while( params.hasNext() ) {
 		FileItem item = (FileItem) params.next();
-		
 		// 일반 데이터
 		if( item.isFormField() ) {
 			String name = item.getFieldName();
 			String value = item.getString("utf-8");
+			out.println(name + " : " + value + "<br>");
 			switch(name){
 			case "movieNo":
-				movie = movieService.select(Integer.parseInt(value));
+				movieNo = Integer.parseInt(value);
 				break;
 			case "title":
-				movie.setTitle(value);
+				title = value;
 				break;
 			case "notice":
-				if(value.equals("1")){
-					movie.setNotice(true);
-				}
+				if(value.equals("1"))
+					notice = true;
 				break;
 			case "cate":
-				movie.setCate(value);
+				cate = value;
 				break;
 			case "cast":
-				movie.setCast(value);
+				cast = value;
 				break;
 			case "content":
-				movie.setContent(value);
+				content = value;
 				break;
 			}
 		}
 		// 파일 데이터
 		else {
 			if(item.getName().length()>0){
-				String fileName = UUID.randomUUID() + "_" + item.getName();
+				String fileName = item.getName();
 				String contentType = item.getContentType();
-				fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+				fileName = UUID.randomUUID() + "_" + fileName.substring(fileName.lastIndexOf("\\") + 1);
 				long fileSize = item.getSize();
-				
 				File file = new File(path+ "/" + fileName);
-				File oldfile = new File(movie.getImageUrl());
-				oldfile.delete();
 				item.write(file);
 				movie.setImageUrl(file.getPath());
 			}
 		}
+		
 	}
-	movie.setUpdDate(Date.valueOf(LocalDate.now()));
-	System.out.println("번호 : " + movie.getMovieNo());
-	System.out.println("제목 : " + movie.getTitle());
-	System.out.println("공지 : " + movie.isNotice());
-	System.out.println("장르 : " + movie.getCate());
-	System.out.println("출연 : " + movie.getCast());
-	System.out.println("내용 : " + movie.getContent());
-	System.out.println("이미지 : " + movie.getImageUrl());
-	System.out.println("등록날짜 : " + movie.getRegDate());
-	System.out.println("수정날짜 : " + movie.getUpdDate());
-	
+	movie.setMovieNo(movieNo);
+	movie.setNotice(notice);
+	movie.setTitle(title);
+	movie.setCate(cate);
+	movie.setCast(cast);
+	movie.setContent(content);
+	movie.setUpdDate( new Date() );
+	out.println(movie);
 	int result = movieService.update(movie);
+	out.println(result);
 	if(result > 0){
 		response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
 	}else{
