@@ -1,6 +1,7 @@
 package movie.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import movie.DAO.KeywordDAO;
@@ -57,6 +58,23 @@ public class KeywordServiceImpl implements KeywordService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	@Override
+	public List<Keywords> list(int movieNo) {
+		List<Keywords> keywordList = keywordDAO.list(movieNo);
+		return keywordList;
+	}
+	@Override
+	public int allDelete(int movieNo) {
+		Map<Object, Object> map = new HashMap<Object, Object>() {{
+            put("movie_no", movieNo);
+        }};
+        try {
+			keywordDAO.deleteBy(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 }

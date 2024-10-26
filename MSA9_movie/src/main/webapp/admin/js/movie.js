@@ -8,10 +8,11 @@ $(document).ready(function() {
 	});
 	// 영화목록 페이지
 	$('#delconfirm').click(function() {
-		const movieNo = $(this).attr("data");
+		const no = $(this).attr("data");
+		const path = $(this).attr("path");
 		const confirmation = confirm("정말 삭제하시겠습니까?");
 		if (confirmation) {
-			window.location.href = 'adminMovieDelete_pro.jsp?movieNo=' + movieNo;
+			window.location.href = path + no;
 		}
 	});
 });
