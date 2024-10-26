@@ -64,6 +64,9 @@
 			case "content":
 				content = value;
 				break;
+			case "imageUrl":
+				imgUrl = value;
+				break;
 			}
 		}
 		// 파일 데이터
@@ -78,7 +81,12 @@
 				movie.setImageUrl(file.getPath());
 			}
 		}
-		
+	}
+	if(movie.getImageUrl()==null){
+		movie.setImageUrl(imgUrl);
+	}else{
+		File file = new File(imgUrl);
+		file.delete();
 	}
 	movie.setMovieNo(movieNo);
 	movie.setNotice(notice);

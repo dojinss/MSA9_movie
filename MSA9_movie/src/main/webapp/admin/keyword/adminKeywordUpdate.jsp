@@ -17,16 +17,17 @@
 <title>소개글 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <jsp:include page="/admin/layout/movie.jsp"/>
-<link rel="stylesheet" href="<%= root %>/admin/css/adminKeywordUpdate.css">
+<link rel="stylesheet" href="<%= root %>/admin/css/adminKeywordForm.css">
 
 </head>
 <%
-	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 	int keywordNo = Integer.parseInt(request.getParameter("keywordNo"));
 	KeywordService keywordService = new KeywordServiceImpl();
 	Keywords keyword = keywordService.select(keywordNo);
 	int index = keyword.getImageUrl().indexOf("_");
 	String imageName = keyword.getImageUrl().substring(index+1);
+	System.out.println("제목은 : " + keyword.getTitle());
+	System.out.println("종류는 : " + keyword.getType());
 %>
 <c:set var="keyword" value="<%=keyword%>" />
 <c:set var="imageName" value="<%=imageName%>" />
@@ -42,6 +43,8 @@
 					<form action="adminKeywordUpdate_pro.jsp" method="post"
 						enctype="multipart/form-data">
 						<div class="content">
+							<input type="hidden" name="keywordNo" value="<%=keywordNo%>">
+							<input type="hidden" name="movieNo" value="<%=keyword.getMovieNo()%>">
 							<div class="content-head">
 								<p>제목</p>
 								<input class="normal-input" type="text" name="title" value="${keyword.title}" maxlength="30" />
@@ -62,9 +65,10 @@
 							</div>
 							<div class="content-foot">
 								<p>이미지</p>
+								<input type="hidden" name="imgUrl" value="${keyword.imageUrl}">								
 								<input type="text" id="imagename" value="${imageName}" readonly> 
-								<label class="btn-upload" for="file"> 첨부 </label> <input class="file"
-									type="file" name="imgae" id="file">
+								<label class="btn-upload" for="file"> 첨부 </label> 
+								<input class="file" type="file" name="imgae" id="file">
 							</div>
 						</div>
 						<input class="updatebtn" type="submit" value="수정">

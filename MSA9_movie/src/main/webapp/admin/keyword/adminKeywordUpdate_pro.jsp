@@ -1,7 +1,7 @@
+<%@page import="java.util.Date"%>
 <%@page import="movie.DTO.Keywords"%>
 <%@page import="movie.Service.KeywordServiceImpl"%>
 <%@page import="movie.Service.KeywordService"%>
-<%@page import="java.sql.Date"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.io.File"%>
@@ -31,7 +31,13 @@
 	upload.setSizeMax(10*1000*1000*1000); 		// 100MB - 파일 최대 크기
 	upload.setSizeThreshold( 4 * 1024 );	// 4MB	- 메모리상의 최대 크기
 	upload.setRepositoryPath(path);			// 임시 저장 경로
-	Keywords keyword = null;
+	Keywords keyword = new Keywords();
+	int movieNo=0;
+	int keywordNo=0;
+	String title ="";
+	String type="";
+	String content="";
+	String imgUrl="";
 	List<FileItem> items = upload.parseRequest(request);
 	Iterator params = items.iterator();
 	while( params.hasNext() ) {
@@ -43,16 +49,22 @@
 			String value = item.getString("utf-8");
 			switch(name){
 			case "keywordNo":
-				keyword = keywordService.select(Integer.parseInt(value));
+				keywordNo = Integer.parseInt(value);
+				break;
+			case "movieNo":
+				movieNo = Integer.parseInt(value);
 				break;
 			case "title":
-				keyword.setTitle(value);
+				title = value;
 				break;
 			case "type":
-				keyword.setType(value);
+				type = value;
 				break;
 			case "content":
-				keyword.setContent(value);
+				content = value;
+				break;
+			case "imgUrl":
+				imgUrl = value;
 				break;
 			}
 		}
@@ -63,21 +75,31 @@
 				String contentType = item.getContentType();
 				fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
 				long fileSize = item.getSize();
-				
 				File file = new File(path+ "/" + fileName);
-				File oldfile = new File(keyword.getImageUrl());
-				oldfile.delete();
 				item.write(file);
 				keyword.setImageUrl(file.getPath());
 			}
 		}
 	}
-	keyword.setUpdDate(Date.valueOf(LocalDate.now()));
+	
+	if(keyword.getImageUrl()==null){
+		keyword.setImageUrl(imgUrl);
+	}else{
+		File file = new File(imgUrl);
+		file.delete();
+	}
+	
+	keyword.setKeywordNo(keywordNo);
+	keyword.setMovieNo(movieNo);
+	keyword.setTitle(title);
+	keyword.setType(type);
+	keyword.setContent(content);
+	keyword.setUpdDate(new Date());
 	
 	int result = keywordService.update(keyword);
 	if(result > 0){
-		response.sendRedirect(root+"/admin/keyword/adminKeywordList.jsp");
+		response.sendRedirect(root+"/admin/keyword/adminKeywordList.jsp?movieNo="+keyword.getMovieNo());
 	}else{
-		response.sendRedirect(root+"/admin/keyword/adminKeywordUpdate.jsp?keywordNo="+keyword.getMovieNo());
+		response.sendRedirect(root+"/admin/keyword/adminKeywordUpdate.jsp?keywordNo="+keyword.getKeywordNo());
 	}
 %>

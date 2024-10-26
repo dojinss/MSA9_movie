@@ -17,7 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>소개글 목록 화면</title>
 	<jsp:include page="/admin/layout/link.jsp"/>
-	<link rel="stylesheet" href="<%= root %>/admin/css/adminMovieList.css">
+	<link rel="stylesheet" href="<%= root %>/admin/css/adminList.css?after">
 </head>
 <body>
 	<%
@@ -34,7 +34,7 @@
 			<div class="mainbody">
 				<div class="contentbox">
 					<div class="content">
-						<table class="movie-list">
+						<table class="list">
 							<colgroup>
 								<col style="width: 10%;">
 								<col style="width: 70%;">
@@ -53,7 +53,7 @@
 									<c:set var="no" value="${no+1}" />
 									<tr>
 										<td>${no}</td>
-										<td><a href="<%=root%>/admin/keyword/adminKeywordUpdate.jsp?keywordNo=${keyword.keywordNo}&movieNo=${keyword.movieNo}"><c:out value="${keyword.title}" /></a></td>
+										<td style="text-align: left;"><a href="<%=root%>/admin/keyword/adminKeywordUpdate.jsp?keywordNo=${keyword.keywordNo}"><c:out value="${keyword.title}" /></a></td>
 										<td><fmt:formatDate value="${keyword.regDate}"
 												pattern="yyyy-MM-dd" /></td>
 									</tr>
@@ -61,13 +61,6 @@
 							</tbody>
 						</table>
 						<div class="pagenation">
-							<a href="" class="page-link">＜ 이전</a> 
-							<a href="" class="page-link selected">1</a> 
-							<a href="" class="page-link">2</a>
-							<a href="" class="page-link">3</a> 
-							<a href="" class="page-link">4</a>
-							<a href="" class="page-link">5</a> 
-							<a href="" class="page-link">다음 ></a>
 						</div>
 					</div>
 					<a href="<%=root%>/admin/keyword/adminKeywordInsert.jsp?movieNo=<%=movieNo%>" class="insertbtn">추가</a>

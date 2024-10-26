@@ -18,6 +18,7 @@ public class KeywordDAO extends BaseDAOImpl<Keywords>{
 		keyword.setKeywordNo(rs.getInt("keyword_no"));
 		keyword.setMovieNo(rs.getInt("movie_no"));
 		keyword.setTitle(rs.getString("title"));
+		keyword.setType(rs.getString("type"));
 		keyword.setContent(rs.getString("content"));
 		keyword.setImageUrl(rs.getString("image_url"));
 		keyword.setRegDate(rs.getDate("reg_date"));

@@ -140,6 +140,35 @@
 	display: none;
 }
 
+.deletebtn {
+	position: relative;
+	width: 120px;
+	height: 50px;
+	background-color: var(--delete-color);
+	float: right;
+	color: white;
+	top: 50px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 10px;
+	border-width: 0;
+}
+
+.updatebtn {
+	position: relative;
+	width: 120px;
+	height: 50px;
+	background-color: var(--update-color);
+	float: right;
+	color: white;
+	top: 50px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 10px;
+	border-width: 0;
+	margin-left: 10px;
+}
+
 .insertbtn {
 	position: relative;
 	width: 120px;
@@ -155,6 +184,13 @@
 }
 
 .insertbtn:hover {
+	filter: brightness(90%);
+}
+
+.deletebtn:hover {
+	filter: brightness(90%);
+}
+.updatebtn:hover {
 	filter: brightness(90%);
 }
 .select{
