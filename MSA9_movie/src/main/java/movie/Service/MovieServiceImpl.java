@@ -34,7 +34,6 @@ public class MovieServiceImpl implements MovieService {
         }};
         Movies movie = null;
         try {
-        	movieDAO.select(1);
 			movie = movieDAO.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();

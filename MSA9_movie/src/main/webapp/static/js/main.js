@@ -14,7 +14,17 @@ $(function(){
 	/**
 	 * modal
 	 */
+	
+	// 게시판 목록 열기
 	$(".post-view-btn").click(function(){
+		$("#modal-wrap").fadeIn()
+		$(".modal-container").animate({top:"0px"},function(){
+			console.log("modal Show!")
+		});
+	});
+	
+	// 키워드 목록 열기
+	$(".keyword-view-btn").click(function(){
 		$("#modal-wrap").fadeIn()
 		$(".modal-container").animate({top:"0px"},function(){
 			console.log("modal Show!")
@@ -24,7 +34,7 @@ $(function(){
 	// modal close
 	$("#close-modal").click(function(){
 		console.log("modal Close...")
-		$("#modal-wrap").hide();
+		$("#modal-wrap").fadeOut();
 		$(".modal-container").animate({top:"100%"})
 	})
 });
