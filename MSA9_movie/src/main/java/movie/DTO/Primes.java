@@ -16,6 +16,7 @@ public class Primes {
 	private int primeNo;
 	private int adInfoNo;
 	private int userNo;
+	private String name;
 	private String imageUrl;
 	private String number;
 	private String addr;

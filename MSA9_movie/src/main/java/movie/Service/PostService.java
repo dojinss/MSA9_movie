@@ -1,5 +1,12 @@
 package movie.Service;
 
+import java.util.List;
+import java.util.Map;
+
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
+import movie.DTO.Posts;
 import movie.DTO.Posts;
 
 public interface PostService {
@@ -17,4 +24,10 @@ public interface PostService {
 	public int deleteByUserNo(int userNo);
 	// 아이디 체크
 	public boolean idCheck(int postNo, int userNo);
+	
+	public PageInfo<Posts> page(PageInfo<Posts> pageInfo, int searchCode); 
+	public PageInfo<Posts> page(); 
+	public PageInfo<Posts> page(Page page); 
+	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions); 
+	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions, Map<String, String> filterOptions);
 }

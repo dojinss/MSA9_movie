@@ -1,5 +1,11 @@
 package movie.Service;
 
+import java.util.List;
+import java.util.Map;
+
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DTO.Replies;
 
 public interface ReplyService {
@@ -19,4 +25,10 @@ public interface ReplyService {
 	public int deleteByReplyNo(int replyNo);
 	// 아이디 체크
 	public boolean idCheck(int replyNo, int userNo);
+	
+	public PageInfo<Replies> page(PageInfo<Replies> pageInfo, int searchCode); 
+	public PageInfo<Replies> page(); 
+	public PageInfo<Replies> page(Page page); 
+	public PageInfo<Replies> page(Page page, String keyword, List<String> searchOptions); 
+	public PageInfo<Replies> page(Page page, String keyword, List<String> searchOptions, Map<String, String> filterOptions);
 }

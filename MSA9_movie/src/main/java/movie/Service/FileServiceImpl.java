@@ -1,9 +1,15 @@
 package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DAO.FileDAO;
+import movie.DTO.Files;
 import movie.DTO.Files;
 
 public class FileServiceImpl implements FileService {
@@ -72,5 +78,69 @@ public class FileServiceImpl implements FileService {
 		}
 		return result;
 	}
-	
+	@Override
+	public PageInfo<Files> page(PageInfo<Files> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("title");
+				searchOptions.add("type");
+				break;
+			case 2:	
+				searchOptions.add("title");
+				break;
+			case 3:	
+				searchOptions.add("type");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
+		PageInfo<Files> selectedPageInfo = null;
+		try {
+			selectedPageInfo = fileDAO.page(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Files> page() {
+		PageInfo<Files> selectedPageInfo = null;
+		try {
+			selectedPageInfo = fileDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Files> page(Page page) {
+		PageInfo<Files> selectedPageInfo = null;
+		try {
+			selectedPageInfo = fileDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Files> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Files> selectedPageInfo = null;
+		try {
+			selectedPageInfo = fileDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Files> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Files> selectedPageInfo = null;
+		try {
+			selectedPageInfo = fileDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
 }

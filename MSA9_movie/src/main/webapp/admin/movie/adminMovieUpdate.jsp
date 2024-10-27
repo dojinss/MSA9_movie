@@ -20,7 +20,7 @@
 	MovieService movieService = new MovieServiceImpl();
 	Movies movie = movieService.select(movieNo);
 	int index = movie.getImageUrl().indexOf("_");
-	String imageName = movie.getImageUrl().substring(index+1);
+	String imageName = movie.getImageUrl().substring(index+1); 
 %>
 <c:set var="movie" value="<%=movie%>" />
 <c:set var="imageName" value="<%=imageName%>" />

@@ -1,9 +1,15 @@
 package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DAO.UserDAO;
+import movie.DTO.Users;
 import movie.DTO.Users;
 import movie.utils.PasswordUtils;
 
@@ -90,6 +96,70 @@ public class UserServiceImpl implements UserService {
 		return selectedUser;
 	}
 
-	
+	@Override
+	public PageInfo<Users> page(PageInfo<Users> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("email");
+				searchOptions.add("userId");
+				break;
+			case 2:	
+				searchOptions.add("userId");
+				break;
+			case 3:	
+				searchOptions.add("eamil");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
+		PageInfo<Users> selectedPageInfo = null;
+		try {
+			selectedPageInfo = userDAO.page(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Users> page() {
+		PageInfo<Users> selectedPageInfo = null;
+		try {
+			selectedPageInfo = userDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Users> page(Page page) {
+		PageInfo<Users> selectedPageInfo = null;
+		try {
+			selectedPageInfo = userDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Users> selectedPageInfo = null;
+		try {
+			selectedPageInfo = userDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Users> selectedPageInfo = null;
+		try {
+			selectedPageInfo = userDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
 
 }

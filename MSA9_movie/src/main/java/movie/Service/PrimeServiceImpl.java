@@ -1,10 +1,16 @@
 package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.PrimeDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Primes;
 import movie.DTO.Primes;
 import movie.DTO.Users;
 
@@ -90,5 +96,74 @@ public class PrimeServiceImpl implements PrimeService {
 		}
 		return result;
 	}
-	
+	@Override
+	public PageInfo<Primes> page(PageInfo<Primes> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		//TODO : 서치 옵션 테이블 컬럼명 수정
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("title");
+				searchOptions.add("cast");
+				searchOptions.add("cate");
+				break;
+			case 2:	
+				searchOptions.add("title");
+				break;
+			case 3:	
+				searchOptions.add("cate");
+				break;
+			case 4:	
+				searchOptions.add("cast");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
+		PageInfo<Primes> selectedPageInfo = null;
+		try {
+			selectedPageInfo = primeDAO.page(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Primes> page() {
+		PageInfo<Primes> selectedPageInfo = null;
+		try {
+			selectedPageInfo = primeDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Primes> page(Page page) {
+		PageInfo<Primes> selectedPageInfo = null;
+		try {
+			selectedPageInfo = primeDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Primes> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Primes> selectedPageInfo = null;
+		try {
+			selectedPageInfo = primeDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Primes> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Primes> selectedPageInfo = null;
+		try {
+			selectedPageInfo = primeDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
 }
