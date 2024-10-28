@@ -3,6 +3,9 @@ package movie.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DAO.AdDAO;
 import movie.DTO.Ads;
 
@@ -57,6 +60,16 @@ public class AdServiceImpl implements AdService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	@Override
+	public PageInfo<Ads> page(Page page) {
+		PageInfo<Ads> selectedPageInfo = null;
+		try {
+			selectedPageInfo = adDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
 	}
 	
 }

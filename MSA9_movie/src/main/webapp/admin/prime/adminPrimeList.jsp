@@ -1,8 +1,10 @@
-<%@page import="com.alohaclass.jdbc.dto.Page"%>
+<%@page import="movie.DTO.Primes"%>
+<%@page import="movie.Service.PrimeServiceImpl"%>
+<%@page import="movie.Service.PrimeService"%>
 <%@page import="com.alohaclass.jdbc.dto.PageInfo"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
-<%@page import="movie.DTO.Movies"%>
+<%@page import="com.alohaclass.jdbc.dto.Page"%>
+<%@page import="movie.Service.UserServiceImpl"%>
+<%@page import="movie.Service.UserService"%>
 <%@page import="java.util.List"%>
 <%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp" %>
@@ -14,7 +16,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>영화 목록 화면</title>
+	<title>광고주 목록 화면</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<jsp:include page="/admin/layout/link.jsp"/>
 	<link rel="stylesheet" href="<%= root %>/admin/css/adminList.css?after">
@@ -26,11 +28,11 @@
 	    int pageNo = 1;
 	    if( pageStr != null )
 	        pageNo = Integer.parseInt( pageStr );
-	    MovieService movieService = new MovieServiceImpl();
+		PrimeService primeService = new PrimeServiceImpl();
 	    Page newPage = new Page();
 	    newPage.setPage(pageNo);
-	    PageInfo<Movies> pageInfo = movieService.page(newPage);
-	    List<Movies> movieList = pageInfo.getList();
+	    PageInfo<Primes> pageInfo = primeService.page(newPage);
+	    List<Primes> primeList = pageInfo.getList();
 	    int no = (pageNo-1)*10+1;
 	%>
 	<c:set var="pageInfo" value="<%= pageInfo %>" />
@@ -38,7 +40,7 @@
 		<jsp:include page="/admin/layout/sidebar.jsp" />
 		<div class="main">
 			<div class="mainhead">
-				<h1>영화 목록</h1>
+				<h1>광고주 목록</h1>
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
@@ -46,27 +48,27 @@
 						<table class="list">
 							<colgroup>
 								<col style="width: 10%;">
-								<col style="width: 70%;">
-								<col style="width: 10%;">
+								<col style="width: 50%;">
+								<col style="width: 30%;">
 								<col style="width: 10%;">
 							</colgroup>
 							<thead>
 								<tr>
 									<th>번호</th>
-									<th>제목</th>
+									<th>사업자이름</th>
+									<th>사업자등록번호</th>
 									<th>등록일자</th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:set var="movieList" value="<%=movieList%>" />
-								<c:forEach var="movie" items="${movieList}">
+								<c:set var="primeList" value="<%=primeList%>" />
+								<c:forEach var="prime" items="${primeList}">
 									<tr>
 										<td><%=no++%></td>
-										<td style="text-align: left;" ><a href="adminMovieUpdate.jsp?movieNo=${movie.movieNo}"><c:out value="${movie.title}" /></a></td>
-										<td><fmt:formatDate value="${movie.regDate}"
+										<td><a href="adminPrimeUpdate.jsp?primeNo=${prime.primeNo}"><c:out value="${prime.name}"/></a></td>
+										<td><c:out value="${prime.number}"/></td>
+										<td><fmt:formatDate value="${prime.regDate}"
 												pattern="yyyy-MM-dd" /></td>
-										<td><a class="keyword-info" href="<%=root%>/admin/keyword/adminKeywordList.jsp?movieNo=${movie.movieNo}">소개목록</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -80,7 +82,6 @@
 				            <a href="?page=${pageInfo.page.next}">이후&gt;</a>
 				        </div>
 					</div>
-					<a href="adminMovieInsert.jsp" class="insertbtn">추가</a>
 				</div>
 			</div>
 		</div>

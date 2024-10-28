@@ -1,7 +1,11 @@
 package movie.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.PrimeDAO;
 import movie.DAO.UserDAO;
@@ -89,6 +93,17 @@ public class PrimeServiceImpl implements PrimeService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public PageInfo<Primes> page(Page page) {
+		PageInfo<Primes> primeList = null;
+		try {
+			primeList = primeDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return primeList;
 	}
 	
 }

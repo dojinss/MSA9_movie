@@ -27,7 +27,7 @@
 	String content = "";
 	String imageUrl = "";
 
-	String path = moviePath;
+	String path = uploadPath;
 
 	DiskFileUpload upload = new DiskFileUpload();
 	

@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>영화 추가 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
-<link rel="stylesheet" href="<%= root %>/admin/css/adminMovieInsert.css">
+<link rel="stylesheet" href="<%= root %>/admin/css/adminMovieForm.css">
 </head>
 <body>
 	<div class="container">

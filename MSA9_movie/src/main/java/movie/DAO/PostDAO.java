@@ -15,7 +15,7 @@ public class PostDAO extends BaseDAOImpl<Posts>{
 		post.setUserNo(rs.getInt("user_no"));
 		post.setKeywordNo(rs.getInt("keyword_no"));
 		post.setContent(rs.getString("content"));
-		post.setLike(rs.getInt("like"));
+		post.setLikes(rs.getInt("likes"));
 		post.setRegDate(rs.getDate("reg_date"));
 		post.setUpdDate(rs.getDate("upd_date"));
 		return post;

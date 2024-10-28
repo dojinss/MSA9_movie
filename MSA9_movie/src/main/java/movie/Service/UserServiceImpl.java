@@ -3,7 +3,11 @@ package movie.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DAO.UserDAO;
+import movie.DTO.Movies;
 import movie.DTO.Users;
 import movie.utils.PasswordUtils;
 
@@ -90,6 +94,26 @@ public class UserServiceImpl implements UserService {
 		return selectedUser;
 	}
 
-	
+	@Override
+	public PageInfo<Users> page(Page page) {
+		PageInfo<Users> selectedPageInfo = null;
+		try {
+			selectedPageInfo = userDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+
+	@Override
+	public int update(Users user) {
+		int result = 0;
+		try {
+			result = userDAO.update(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }

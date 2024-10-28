@@ -13,13 +13,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>영화 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
-<link rel="stylesheet" href="<%= root %>/admin/css/adminMovieUpdate.css">
+<link rel="stylesheet" href="<%= root %>/admin/css/adminMovieForm.css">
 <jsp:include page="/admin/layout/movie.jsp"/>
 <%
 	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 	MovieService movieService = new MovieServiceImpl();
 	Movies movie = movieService.select(movieNo);
-	int index = movie.getImageUrl().indexOf("_");
+	int index = movie.getImageUrl().indexOf("_",10);
 	String imageName = movie.getImageUrl().substring(index+1);
 %>
 <c:set var="movie" value="<%=movie%>" />
@@ -68,6 +68,7 @@
 							</div>
 							<div class="content-foot">
 								<p>이미지</p>
+								<input type="hidden" name="imageUrl" value="${movie.imageUrl}">
 								<input type="text" id="imagename" value="${imageName}" readonly> 
 								<label class="btn-upload" for="file">
 									첨부

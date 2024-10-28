@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>소개글 추가 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
-<link rel="stylesheet" href="<%= root %>/admin/css/adminKeywordInsert.css">
+<link rel="stylesheet" href="<%= root %>/admin/css/adminKeywordForm.css">
 </head>
 <%
 	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
@@ -38,9 +38,9 @@
 								<div class="bodyform">
 									<p>종류</p>
 									<select class="select" id="type" name="type">
-										<option value="음식">음식</option>
-										<option value="배경">배경</option>
-										<option value="음악">음악</option>
+										<option value="food">음식</option>
+										<option value="place">배경</option>
+										<option value="music">음악</option>
 									</select>
 								</div>
 								<div class="bodyform">
