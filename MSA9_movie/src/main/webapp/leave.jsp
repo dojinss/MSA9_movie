@@ -1,4 +1,4 @@
-<%@ include file="/layout/jstl.jsp" %>
+	<%@ include file="/layout/jstl.jsp" %>
 <%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -33,22 +33,27 @@
 	      <div class="info">
         <div class="group">
           <label for="userid" class="label">아이디</label>
-          <input id="userid"  type="text" class="input" name="id" >
-          <span id="wrongId" class="wrongId-message"></span>
+          <input id="userid"  type="text" class="input" name="id" autofocus >
+          <!-- 입력창 오류 경고문 -->      
+           <div id="wrongId"></div>
         </div>
+        
         <div class="group">
           <label for="userpwd" class="label">비밀번호</label>
           <input id="userpwd" type="password" class="input">
-          <span id="pwdError"></span>
+          <div id="pwdError"></div>
         </div>
+        
         <div class="group">
-          <label for="userbirth" class="label">생년월일</label>
-          <input id="userbirth" type="date" class="input">
+          <label for="name" class="label">이름</label>
+          <input id="name" type="text" class="input" >
+          <div id="nameError"></div>
         </div>
+        
         <div class="group">
           <label for="mail"  class="label">이메일</label>
-          <input id="mail" type="email" class="input" name="email">
-          <span id="emailError"></span>
+          <input id="mail" type="email" class="input" name="email" placeholder="'@' 포함하여 입력해 주세요">
+          <div id="emailError"></div>
         </div>
       </div>
               
@@ -64,7 +69,7 @@
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
 	<%-- JS 링크 파일 --%>
-	<script src="static/js/script.js"></script>
+	<script src="static/js/user.js"></script>
 	<script>
 	
 	/* 마우스 올렸을때 이벤트 */
@@ -77,7 +82,7 @@
 	        $(this).css('background-color', 'var(--sub-color)')
 	    })
 	
-	/* 탈퇴 확인 스크립트 알림 */
+	
 		
 	</script>
 </body>
