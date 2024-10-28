@@ -24,8 +24,8 @@ public class FileServiceImpl implements FileService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(result > 0) 	System.out.println("팝업 작성 성공.");
-		else			System.out.println("팝업 작성 실패.");
+		if(result > 0) 	System.out.println("파일 등록 성공.");
+		else			System.out.println("파일 등록 실패.");
 		return result;
 	}
 	@Override

@@ -156,7 +156,7 @@
 		<div id="modal-wrap">
 			<div class="modal-container">
 				<button id="close-modal">닫기</button>
-				<div class="container-box" id="modal-contents">
+				<div id="modal-contents">
 				
 				</div>			
 			</div>

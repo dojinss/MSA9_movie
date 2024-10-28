@@ -33,6 +33,18 @@ public class PostServiceImpl implements PostService {
 		return result;
 	}
 	@Override
+	public int insertKey(Posts post) {
+		int result = 0;
+		try {
+			result = postDAO.insert(post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result > 0) 	System.out.println("게시글 작성 성공.");
+		else			System.out.println("게시글 작성 실패.");
+		return postDAO.lastPK();
+	}
+	@Override
 	public Posts selectByUserNo(int userNo) {
 		Map<Object, Object> map = new HashMap<Object, Object>() {{
             put("user_no", userNo);
@@ -171,5 +183,15 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 		return selectedPageInfo;
+	}
+	@Override
+	public List<Posts> infiniteList(int nowPage, int size, int movieNo) {
+		List<Posts> postList = null;
+		try {
+			postList = postDAO.infiniteList(nowPage, size, movieNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return postList;
 	}
 }

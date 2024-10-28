@@ -16,6 +16,7 @@ public class Ads {
 
 	private int adNo;
 	private int primeNo;
+	private int keywordNo;
 	private String content;
 	private Date regDate;
 	private Date updDate;

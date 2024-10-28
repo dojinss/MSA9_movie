@@ -2,7 +2,8 @@
 
 CREATE TABLE `posts` (
 	`post_no`		int	NOT NULL 	primary key auto_increment				COMMENT '게시글 번호',
-	`keyword_no`	int	NOT NULL											COMMENT '키워드 번호',
+	`keyword_no`	int	NULL												COMMENT '키워드 번호',
+	`movie_no`		int	NULL												COMMENT '영화 번호',
 	`user_no`		int	NOT NULL											COMMENT '회원번호',
 	`content`		varchar(200)	NOT NULL								COMMENT '내용',
 	`like`			int	NOT NULL	DEFAULT 0								COMMENT '좋아요',
