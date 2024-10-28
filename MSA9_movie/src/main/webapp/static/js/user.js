@@ -1,4 +1,31 @@
 
+
+$("#userid-check").click(function(){
+	let userid = $("#userid").val()
+	console.log("아이디 중복 클릭!")
+	$.ajax({
+		url:"user_pro.jsp", 
+		date : {
+			"userid" : userid
+		},
+		type : 'get',
+		dataType : "text",
+		success : function(result){
+			if($.trim(result)== "1"){
+				// 성공 : 아이디 없음	
+				console.log("성공!!!!")
+				       $("#idSuccess").text("아이디 없음");
+				   } else {
+				console.log("실패 ㅠㅠ")
+				       $("#idFalse").text("아이디 있음");
+				 }
+		}
+	})
+  })
+  //엑티브 (변수명) 
+
+
+
 // 요소 선택
 const password = document.querySelector("#userpwd"); 
 const passwordRetype = document.querySelector("#userpwd2");
@@ -21,6 +48,8 @@ function checkId() {
   let pwd2 = document.getElementById("userpwd2").value;
   let name = document.getElementById("name").value;
   let email = document.getElementById("mail").value;
+  
+  
 
   // 아이디 유효성 검사
   if (!regExpId.test(id)) {
@@ -84,5 +113,21 @@ function isMatch(password1, password2) {
   return password1 === password2;
 }
 
+//
+//<b><%=id %>: </b>
+//<%
+//if(b){   //true일 경우 (중복된 아이디가 있을 경우)
+//%>   
+//   이미 사용 중인 id 입니다.<br>
+//   <a href="#" onclick="opener.document.regForm.id.focus(); window.close();">닫기</a>
+//   <%-- opener.document & 두개 한꺼번에 호출 실행 가능 --%>
+//<%
+//}else{
+//%>
+//   사용 가능한 id 입니다.<br>
+//   <a href="#" onclick="opener.document.regForm.passwd.focus(); window.close();">닫기</a>
+//<%
+//}
+//%>
 
 
