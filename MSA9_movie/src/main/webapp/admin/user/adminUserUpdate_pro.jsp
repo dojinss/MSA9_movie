@@ -6,14 +6,18 @@
     pageEncoding="UTF-8"%>
 <%
 	int userNo = Integer.parseInt(request.getParameter("userNo"));
-	Boolean enabled = false;
-	if(request.getParameter("enabled").equals("1"))
-		enabled = true;
+	Boolean enabled = true;
+	if(request.getParameter("enabled")==null)
+		enabled = false;
 	int ruleNo = Integer.parseInt(request.getParameter("ruleNo"));
+	String userId = request.getParameter("userId");
+	String email = request.getParameter("email");
 	UserService userService = new UserServiceImpl();
 	Users user = userService.select(userNo);
 	user.setEnabled(enabled);
 	user.setRuleNo(ruleNo);
+	user.setEmail(email);
+	user.setUserId(userId);
 	
 	int result = userService.update(user);
 	

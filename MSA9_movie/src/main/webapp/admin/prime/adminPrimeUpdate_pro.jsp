@@ -1,4 +1,7 @@
-<%@page import="java.util.Date"%>
+<%@page import="java.sql.Date"%>
+<%@page import="movie.DTO.Primes"%>
+<%@page import="movie.Service.PrimeServiceImpl"%>
+<%@page import="movie.Service.PrimeService"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Enumeration"%>
@@ -7,18 +10,15 @@
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStream"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.List"%>
 <%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
-<%@page import="movie.DTO.Movies"%>
 <%@ include file="/admin/layout/login.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MovieService movieService = new MovieServiceImpl();
+	PrimeService primeService = new PrimeServiceImpl();
 
 	String path = uploadPath;
 
@@ -27,15 +27,17 @@
 	upload.setSizeMax(10*1000*1000*1000); 		// 100MB - 파일 최대 크기
 	upload.setSizeThreshold( 4 * 1024 );		// 4MB	- 메모리상의 최대 크기
 	upload.setRepositoryPath(path);				// 임시 저장 경로
-	Movies movie = new Movies();
+	Primes prime = new Primes();
 	List<FileItem> items = upload.parseRequest(request);
 	Iterator params = items.iterator();
-	String imgUrl = "";
-	String title = "";
-	String cate = "";
-	String cast = "";
-	String content = "";
-	int movieNo = 0;
+	String primeName = "";
+	String oldImageUrl = "";
+	String newImageUrl = "";
+	String number = "";
+	Date startTime = null;
+	Date endTime = null;
+	String addr = "";
+	int primeNo = 0;
 	boolean notice = false;
 	while( params.hasNext() ) {
 		FileItem item = (FileItem) params.next();
@@ -45,27 +47,27 @@
 			String value = item.getString("utf-8");
 			out.println(name + " : " + value + "<br>");
 			switch(name){
-			case "movieNo":
-				movieNo = Integer.parseInt(value);
+			case "primeNo":
+				primeNo = Integer.parseInt(value);
+				prime = primeService.selectByPrimeNo(primeNo);
 				break;
-			case "title":
-				title = value;
-				break;
-			case "notice":
-				if(value.equals("1"))
-					notice = true;
-				break;
-			case "cate":
-				cate = value;
-				break;
-			case "cast":
-				cast = value;
-				break;
-			case "content":
-				content = value;
+			case "name":
+				primeName = value;
 				break;
 			case "imageUrl":
-				imgUrl = value;
+				oldImageUrl = value;
+				break;
+			case "number":
+				number = value;
+				break;
+			case "addr":
+				addr = value;
+				break;
+			case "startTime":
+				startTime = Date.valueOf(value);
+				break;
+			case "endTime":
+				endTime = Date.valueOf(value);
 				break;
 			}
 		}
@@ -76,31 +78,30 @@
 				String contentType = item.getContentType();
 				fileName = UUID.randomUUID() + "_" + fileName.substring(fileName.lastIndexOf("\\") + 1);
 				long fileSize = item.getSize();
-				File file = new File(path+ "/" + fileName);
-				item.write(file);
-				movie.setImageUrl(file.getPath());
+				File newfile = new File(path+ "/" + fileName);
+				item.write(newfile);
+				newImageUrl = newfile.getPath();
 			}
 		}
 	}
-	if(movie.getImageUrl()==null){
-		movie.setImageUrl(imgUrl);
+	prime.setName(primeName);
+	prime.setNumber(number);
+	prime.setAddr(addr);
+	prime.setStartTime(startTime);
+	prime.setEndTime(endTime);
+	
+	if(newImageUrl.equals("")){
+		prime.setImageUrl(oldImageUrl);
 	}else{
-		File file = new File(imgUrl);
-		file.delete();
+		File oldfile = new File(oldImageUrl);
+		oldfile.delete();
+		prime.setImageUrl(newImageUrl);
 	}
-	movie.setMovieNo(movieNo);
-	movie.setNotice(notice);
-	movie.setTitle(title);
-	movie.setCate(cate);
-	movie.setCast(cast);
-	movie.setContent(content);
-	movie.setUpdDate( new Date() );
-	out.println(movie);
-	int result = movieService.update(movie);
+	int result = primeService.update(prime);
 	out.println(result);
 	if(result > 0){
-		response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
+		response.sendRedirect(root+"/admin/prime/adminPrimeList.jsp");
 	}else{
-		response.sendRedirect(root+"/admin/movie/adminMovieUpdate.jsp?movieNo="+movie.getMovieNo());
+		response.sendRedirect(root+"/admin/prime/adminPrimeUpdate.jsp?primeNo="+prime.getPrimeNo());
 	}
 %>

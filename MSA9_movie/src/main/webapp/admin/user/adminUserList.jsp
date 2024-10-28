@@ -2,9 +2,6 @@
 <%@page import="com.alohaclass.jdbc.dto.Page"%>
 <%@page import="movie.Service.UserServiceImpl"%>
 <%@page import="movie.Service.UserService"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
-<%@page import="movie.DTO.Movies"%>
 <%@page import="java.util.List"%>
 <%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp" %>
@@ -33,6 +30,7 @@
 	    newPage.setPage(pageNo);
 	    PageInfo<Users> pageInfo = userService.page(newPage);
 	    List<Users> userList = pageInfo.getList();
+	    int no = (pageNo-1)*10+1;
 	%>
 	<c:set var="pageInfo" value="<%= pageInfo %>" />
 	<div class="container">
@@ -62,9 +60,8 @@
 							<tbody>
 								<c:set var="userList" value="<%=userList%>" />
 								<c:forEach var="user" items="${userList}">
-									<c:set var="no" value="${no+1}" />
 									<tr>
-										<td>${no}</td>
+										<td><%=no++%></td>
 										<td><a href="adminUserUpdate.jsp?userNo=${user.userNo}"><c:out value="${user.userId}"/></a></td>
 										<td><c:out value="${user.email}"/></td>
 										<td><fmt:formatDate value="${user.regDate}"
@@ -75,11 +72,11 @@
 						</table>
 				        <!-- 페이지네이션 -->
 				        <div class="pagenation">
-				            <a href="?page=${pageInfo.page.prev}">&laquo;</a>
+				            <a href="?page=${pageInfo.page.prev}">&lt;이전</a>
 				            <c:forEach var="page" begin="${pageInfo.page.start}" end="${pageInfo.page.end}">
 				                <a href="?page=${page}" class="page-link">${page}</a>
 				            </c:forEach>
-				            <a href="?page=${pageInfo.page.next}">&raquo;</a>
+				            <a href="?page=${pageInfo.page.next}">이후&gt;</a>
 				        </div>
 					</div>
 				</div>

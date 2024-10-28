@@ -38,9 +38,9 @@
 								<div class="bodyform">
 									<p>종류</p>
 									<select class="select" id="type" name="type">
-										<option value="음식">음식</option>
-										<option value="배경">배경</option>
-										<option value="음악">음악</option>
+										<option value="food">음식</option>
+										<option value="place">배경</option>
+										<option value="music">음악</option>
 									</select>
 								</div>
 								<div class="bodyform">

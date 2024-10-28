@@ -1,9 +1,6 @@
 <%@page import="movie.DTO.Keywords"%>
 <%@page import="movie.Service.KeywordServiceImpl"%>
 <%@page import="movie.Service.KeywordService"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
-<%@page import="movie.DTO.Movies"%>
 <%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp"%>
 <%@ include file="/admin/layout/login.jsp"%>
@@ -24,10 +21,8 @@
 	int keywordNo = Integer.parseInt(request.getParameter("keywordNo"));
 	KeywordService keywordService = new KeywordServiceImpl();
 	Keywords keyword = keywordService.select(keywordNo);
-	int index = keyword.getImageUrl().indexOf("_");
+	int index = keyword.getImageUrl().indexOf("_",10);
 	String imageName = keyword.getImageUrl().substring(index+1);
-	System.out.println("제목은 : " + keyword.getTitle());
-	System.out.println("종류는 : " + keyword.getType());
 %>
 <c:set var="keyword" value="<%=keyword%>" />
 <c:set var="imageName" value="<%=imageName%>" />
@@ -53,9 +48,9 @@
 								<div class="bodyform">
 									<p>종류</p>
 									<select class="select" id="type" name="type">
-										<option value="음식" <%= "음식".equals(keyword.getType()) ? "selected" : "" %>>음식</option>
-										<option value="배경" <%= "배경".equals(keyword.getType()) ? "selected" : "" %>>배경</option>
-										<option value="음악" <%= "음악".equals(keyword.getType()) ? "selected" : "" %>>음악</option>
+										<option value="food" <%= "food".equals(keyword.getType()) ? "selected" : "" %>>음식</option>
+										<option value="place" <%= "place".equals(keyword.getType()) ? "selected" : "" %>>배경</option>
+										<option value="music" <%= "music".equals(keyword.getType()) ? "selected" : "" %>>음악</option>
 									</select>
 								</div>
 								<div class="bodyform">

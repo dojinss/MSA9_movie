@@ -1,6 +1,10 @@
 package movie.Service;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DTO.Posts;
+import movie.DTO.Users;
 
 public interface PostService {
 	
@@ -17,4 +21,5 @@ public interface PostService {
 	public int deleteByUserNo(int userNo);
 	// 아이디 체크
 	public boolean idCheck(int postNo, int userNo);
+	public PageInfo<Posts> page(Page page); 
 }

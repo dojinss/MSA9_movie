@@ -1,11 +1,5 @@
 <%@page import="movie.Service.UserServiceImpl"%>
 <%@page import="movie.Service.UserService"%>
-<%@page import="movie.DTO.Keywords"%>
-<%@page import="movie.Service.KeywordServiceImpl"%>
-<%@page import="movie.Service.KeywordService"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
-<%@page import="movie.DTO.Movies"%>
 <%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp"%>
 <%@ include file="/admin/layout/login.jsp"%>
@@ -16,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>소개글 수정 화면</title>
+<title>회원 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminUserForm.css?after">
 
@@ -32,7 +26,7 @@
 		<jsp:include page="/admin/layout/sidebar.jsp" />
 		<div class="main">
 			<div class="mainhead">
-				<h1>소개글 수정</h1>
+				<h1>회원 수정</h1>
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
@@ -40,9 +34,14 @@
 						<div class="content">
 							<input type="hidden" name="userNo" value="${user.userNo}">
 							<div class="content-head">
-								<p>${user.userId}</p>
+								<p>아이디</p>
+								<input class="normal-input" type="text" name="userId" value="${user.userId}" maxlength="20"/>
 							</div>
 							<div class="content-body">
+								<div class="bodyform">
+									<p>이메일</p>
+									<input class="normal-input" type="text" name="email" value="${user.email}" maxlength="30"/>
+								</div>
 								<div class="bodyform">
 									<p>휴면</p>
 									<c:choose>

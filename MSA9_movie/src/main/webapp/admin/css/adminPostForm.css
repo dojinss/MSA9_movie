@@ -1,10 +1,8 @@
-@charset "UTF-8";
 .container {
 	display: flex;
 	width: 100%;
 	height: 953px;
 }
-
 
 .main {
 	display: flex;
@@ -51,12 +49,14 @@
 	height: 100px;
 	background-color: var(--sub-color);
 	padding: 15px;
+	text-align: center;
 	border-bottom: 1px solid #ddd;
-	align-items: center;
 }
+
 .content-head p{
 		margin-left: 125px;
 }
+
 .content-body{
 	width: 1200px;
 	background-color: white;
@@ -71,9 +71,11 @@
 }
 
 .content-foot{
+	display: flex;
 	width: 1200px;
 	height: 100px;
 	background-color: var(--sub-color);
+	align-items: center;
 }
 
 .content p{
@@ -89,9 +91,9 @@
 .normal-input{
 	font-size: var(--text-normal);
 	padding: 20px;
-	width: 300px;
+	width: 800px;
 	height: 50px;
-	margin-left: 30px;
+	margin-left: 60px;
 }
 
 .large-input{
@@ -99,7 +101,21 @@
 	padding: 20px;
 	width: 800px;
 	height: 200px;
+	margin-left: 60px;
+}
+
+.content-foot input{
+	font-size: var(--text-normal);
 	margin-left: 30px;
+	width: 700px;
+	height: 50px;
+	padding: 20px;
+}
+
+
+.content-foot p{
+	font-size: var(--text-title);
+	margin-left: 140px;
 }
 
 .btn-upload{
@@ -122,6 +138,20 @@
 	display: none;
 }
 
+.deletebtn {
+	position: relative;
+	width: 120px;
+	height: 50px;
+	background-color: var(--delete-color);
+	float: right;
+	color: white;
+	top: 50px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 10px;
+	border-width: 0;
+}
+
 .updatebtn {
 	position: relative;
 	width: 120px;
@@ -129,21 +159,35 @@
 	background-color: var(--update-color);
 	float: right;
 	color: white;
+	top: 50px;
 	cursor: pointer;
 	text-align: center;
 	border-radius: 10px;
 	border-width: 0;
-	margin-top: 20px;
-	margin-right: 20px;
+	margin-left: 10px;
 }
 
-.updatebtn:hover {
+.insertbtn {
+	position: relative;
+	width: 120px;
+	height: 50px;
+	background-color: var(--insert-color);
+	float: right;
+	color: white;
+	top: 50px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 10px;
+	border-width: 0;
+}
+
+.insertbtn:hover {
 	filter: brightness(90%);
 }
-.select{
-	font-size: 20px;
-	text-align: center;
-	width: 150px;
-	height: 50px;
-	margin-left: 60px;
+
+.deletebtn:hover {
+	filter: brightness(90%);
+}
+.updatebtn:hover {
+	filter: brightness(90%);
 }

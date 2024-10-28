@@ -82,8 +82,9 @@
 	text-align: center;
 	border-radius: 10px;
 }
-
 .list td:nth-child(2) a:hover{text-decoration: underline;}
+.list td:nth-child(2){max-width: 140px;}
+.list td:nth-child(2) a{max-width: 140px;}
 
 .list td a:hover{
 	filter: brightness(90%);
@@ -101,9 +102,12 @@
 
 .page-link {
 	margin: 0 40px;
-	text-decoration: none;
 	box-sizing: border-box;
 	text-align: center;
+}
+
+.pagenation a:hover{
+	text-decoration: underline;
 }
 
 .insertbtn {

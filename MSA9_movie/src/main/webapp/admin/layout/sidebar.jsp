@@ -13,11 +13,6 @@
 	<hr>
 	<div class="item">
 		<h3>
-			<a href="">팝업 관리</a>
-		</h3>
-	</div>
-	<div class="item">
-		<h3>
 			<a href="<%= root %>/admin/movie/adminMovieList.jsp">영화 게시글</a>
 		</h3>
 	</div>
@@ -28,22 +23,17 @@
 	</div>
 	<div class="item">
 		<h3>
-			<a href="">회원 게시글</a>
+			<a href="<%= root %>/admin/post/adminPostList.jsp">회원 게시글</a>
 		</h3>
 	</div>
 	<div class="item">
 		<h3>
-			<a href="">광고 설정</a>
+			<a href="<%= root %>/admin/prime/adminPrimeList.jsp">광고주 관리</a>
 		</h3>
 	</div>
 	<div class="item">
 		<h3>
-			<a href="">광고주 관리</a>
-		</h3>
-	</div>
-	<div class="item">
-		<h3>
-			<a href="">광고글 관리</a>
+			<a href="<%= root %>/admin/ads/adminAdList.jsp">광고글 관리</a>
 		</h3>
 	</div>
 </div>

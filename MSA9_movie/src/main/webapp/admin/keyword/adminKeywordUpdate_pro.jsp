@@ -11,20 +11,17 @@
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStream"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.List"%>
 <%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
-<%@page import="movie.DTO.Movies"%>
 <%@ include file="/admin/layout/login.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	KeywordService keywordService = new KeywordServiceImpl();
 
-	String path = moviePath;
+	String path = uploadPath;
 
 	DiskFileUpload upload = new DiskFileUpload();
 	

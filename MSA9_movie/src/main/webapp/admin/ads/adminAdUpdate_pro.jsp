@@ -1,4 +1,7 @@
-<%@page import="java.util.Date"%>
+<%@page import="movie.DTO.Ads"%>
+<%@page import="movie.Service.AdServiceImpl"%>
+<%@page import="movie.Service.AdService"%>
+<%@page import="java.sql.Date"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Enumeration"%>
@@ -7,18 +10,15 @@
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStream"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.List"%>
 <%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
-<%@page import="movie.DTO.Movies"%>
 <%@ include file="/admin/layout/login.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MovieService movieService = new MovieServiceImpl();
+	AdService adService = new AdServiceImpl();
 
 	String path = uploadPath;
 
@@ -27,15 +27,12 @@
 	upload.setSizeMax(10*1000*1000*1000); 		// 100MB - 파일 최대 크기
 	upload.setSizeThreshold( 4 * 1024 );		// 4MB	- 메모리상의 최대 크기
 	upload.setRepositoryPath(path);				// 임시 저장 경로
-	Movies movie = new Movies();
+	Ads ad = new Ads();
 	List<FileItem> items = upload.parseRequest(request);
 	Iterator params = items.iterator();
-	String imgUrl = "";
-	String title = "";
-	String cate = "";
-	String cast = "";
-	String content = "";
-	int movieNo = 0;
+	String oldImageUrl = "";
+	String newImageUrl = "";
+	int adNo = 0;
 	boolean notice = false;
 	while( params.hasNext() ) {
 		FileItem item = (FileItem) params.next();
@@ -45,27 +42,12 @@
 			String value = item.getString("utf-8");
 			out.println(name + " : " + value + "<br>");
 			switch(name){
-			case "movieNo":
-				movieNo = Integer.parseInt(value);
-				break;
-			case "title":
-				title = value;
-				break;
-			case "notice":
-				if(value.equals("1"))
-					notice = true;
-				break;
-			case "cate":
-				cate = value;
-				break;
-			case "cast":
-				cast = value;
+			case "adNo":
+				adNo = Integer.parseInt(value);
+				ad = adService.select(adNo);
 				break;
 			case "content":
-				content = value;
-				break;
-			case "imageUrl":
-				imgUrl = value;
+				oldImageUrl = value;
 				break;
 			}
 		}
@@ -76,31 +58,25 @@
 				String contentType = item.getContentType();
 				fileName = UUID.randomUUID() + "_" + fileName.substring(fileName.lastIndexOf("\\") + 1);
 				long fileSize = item.getSize();
-				File file = new File(path+ "/" + fileName);
-				item.write(file);
-				movie.setImageUrl(file.getPath());
+				File newfile = new File(path+ "/" + fileName);
+				item.write(newfile);
+				newImageUrl = newfile.getPath();
 			}
 		}
 	}
-	if(movie.getImageUrl()==null){
-		movie.setImageUrl(imgUrl);
+	
+	if(newImageUrl.equals("")){
+		ad.setContent(oldImageUrl);
 	}else{
-		File file = new File(imgUrl);
-		file.delete();
+		File oldfile = new File(oldImageUrl);
+		oldfile.delete();
+		ad.setContent(newImageUrl);
 	}
-	movie.setMovieNo(movieNo);
-	movie.setNotice(notice);
-	movie.setTitle(title);
-	movie.setCate(cate);
-	movie.setCast(cast);
-	movie.setContent(content);
-	movie.setUpdDate( new Date() );
-	out.println(movie);
-	int result = movieService.update(movie);
+	int result = adService.update(ad);
 	out.println(result);
 	if(result > 0){
-		response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
+		response.sendRedirect(root+"/admin/ads/adminAdList.jsp");
 	}else{
-		response.sendRedirect(root+"/admin/movie/adminMovieUpdate.jsp?movieNo="+movie.getMovieNo());
+		response.sendRedirect(root+"/admin/ads/adminAdUpdate.jsp?adNo="+ad.getAdNo());
 	}
 %>

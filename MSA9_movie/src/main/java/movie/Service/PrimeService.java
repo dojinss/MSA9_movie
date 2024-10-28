@@ -1,5 +1,9 @@
 package movie.Service;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
+import movie.DTO.Posts;
 import movie.DTO.Primes;
 
 public interface PrimeService {
@@ -14,5 +18,5 @@ public interface PrimeService {
 	public int update(Primes prime);
 	// 광고주 삭제
 	public int delete(int primeNo);
-	
+	public PageInfo<Primes> page(Page page); 
 }
