@@ -38,6 +38,7 @@
           <button type="button" id="userid-check">중복확인</button>
           <!-- 유효성 검사 후 잘,잘못되었을때 경고문 -->      
            <div id="wrongId"></div>
+          
         </div>
         
         <div class="group">

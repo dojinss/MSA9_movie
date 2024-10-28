@@ -30,6 +30,9 @@
           <button type="button" id="userid-check">중복확인</button>
            <!-- 입력창 오류 경고문 -->      
            <div id="wrongId"></div>
+           <div id="idSuccess"></div>
+           <div id="idFalse"></div>
+           
         </div>
 
         <div class="group">
@@ -87,7 +90,7 @@
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
 	<%-- JS 링크 파일 --%>
-	<script src="static/js/user.js"></script>
+	<script src="<%=root %>/static/js/user.js"></script>
 	<script>
 	/* 마우스 올렸을때 이벤트 */
 	 $('button').on('mouseover', function() {

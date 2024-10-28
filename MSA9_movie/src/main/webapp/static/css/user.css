@@ -15,11 +15,15 @@ button:active {
 .sign #pwdError,
 .sign #pwdError2,
 .sign #nameError,
-.sign #emailError{
+.sign #emailError,
+.sign #idFalse{
   color: red;
   font-size: small;
 }
-
+.sign #idSuccess{
+	color: green;
+	font-size: small;
+}
 
 .sign-edit #wrongId ,
 .sign-edit #pwdError,
