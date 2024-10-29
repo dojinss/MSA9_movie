@@ -1,28 +1,32 @@
 
 
-$("#userid-check").click(function(){
-	let userid = $("#userid").val()
+$("#userid-check").click(function() {
+    let userid = $("#userid").val();
 	console.log("아이디 중복 클릭!")
-	$.ajax({
-		url:"user_pro.jsp", 
-		date : {
-			"userid" : userid
-		},
-		type : 'get',
-		dataType : "text",
-		success : function(result){
-			if($.trim(result)== "1"){
-				// 성공 : 아이디 없음	
-				console.log("성공!!!!")
-				       $("#idSuccess").text("아이디 없음");
-				   } else {
+    $.ajax({
+        url: "user_pro.jsp?action=checkId", // action 파라미터 추가
+        data: {
+            "userid": userid
+        },
+        type: 'get',
+        dataType: "text",
+        success: function(result) {
+            if ($.trim(result) == "1") {
+				//일치한 아이디 없음(성공)
+				console.log("성공!!!")
+                $("#idSuccess").text("아이디 사용 가능");
+                $("#idFalse").text(""); // 초기화
+            } else {
 				console.log("실패 ㅠㅠ")
-				       $("#idFalse").text("아이디 있음");
-				 }
-		}
-	})
-  })
-  //엑티브 (변수명) 
+                $("#idFalse").text("이미 사용 중인 아이디입니다.");
+                $("#idSuccess").text(""); // 초기화
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX 요청 오류: " + error);
+        }
+    });
+});
 
 
 
@@ -129,5 +133,3 @@ function isMatch(password1, password2) {
 //<%
 //}
 //%>
-
-

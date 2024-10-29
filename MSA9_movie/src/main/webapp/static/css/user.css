@@ -25,11 +25,17 @@ button:active {
 	font-size: small;
 }
 
+.sign-edit #idSuccess{
+	color: green;
+	font-size: small;	
+}
+
 .sign-edit #wrongId ,
 .sign-edit #pwdError,
 .sign-edit #pwdError2,
 .sign-edit #nameError,
-.sign-edit #emailError{
+.sign-edit #emailError,
+.sign-edit #idFalse{
   color: red;
   font-size: small;
 }
@@ -47,6 +53,8 @@ button:active {
 .hide{
 	display: none;
 }
+
+
 
 
 body{
