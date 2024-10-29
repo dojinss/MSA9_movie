@@ -28,7 +28,7 @@
       <div class="sign">
         <div class="group" >
           <label for="userid" class="label">아이디</label>
-          <input id="userid"  type="text" class="input" name="id" autofocus >
+          <input id="userid"  type="text" class="input" name="id" autofocus>
           <button type="button" id="userid-check">중복확인</button>
            <!-- 입력창 오류 경고문 -->      
            <div id="wrongId"></div>
@@ -39,14 +39,14 @@
 
         <div class="group">
           <label for="userpwd" class="label">비밀번호</label>
-          <input id="userpwd" type="password" class="input" >
-          <div id="pwdError"></div>       
+          <input id="userpwd" type="password" class="input" name="userpwd">
+          <div id="pwdError"></div>        
         </div>
         
         <div class="group">
           <!-- HTML 수정 -->
 			<label for="userpwd2" class="label">비밀번호 확인</label>
-			<input id="userpwd2" type="password" class="input">
+			<input id="userpwd2" type="password" class="input" >
 			<!-- 오류 메세지 -->
 			<div id="pwdError2"></div>
 			<div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
@@ -54,18 +54,6 @@
         </div>
 
       <div class="user-edit">
-        <div class="group">
-          <label for="name" class="label">이름</label>
-          <input id="name" type="text" class="input" >
-          <!-- 오류 메세지 -->
-	      <div id="nameError"></div>
-        </div>
-
-        <div class="group">
-          <label for="userbirth" class="label">생년월일</label>
-          <input id="userbirth" type="date" class="input" data-type="">
-        </div>
-        
         <div class="group">
           <label for="mail" class="label">이메일</label>
           <input id="mail" type="email" class="input" name="email"  placeholder="'@' 포함하여 입력해 주세요">
@@ -76,10 +64,13 @@
         <div class="group">
           <label for="profile" class="label">프로필 이미지</label>
         </div>
-        <div id="preview-box">
-        	<img id="preview" src="" width="100" height="100" />
+        <div class="preview">
+	        <div id="preview-box">
+	        	<p class="comment">프로필 이미지를 업로드 해주세요.</p>
+	        	<img id="preview" src="" width="100" height="100" />
+	        </div>
+	        <input id="profile" type="file" class="input" name="profile">
         </div>
-        <input id="profile" type="file" class="input" >
       </div>
       </div>
         <div id="edit">
@@ -96,17 +87,21 @@
 	<script src="<%=root %>/static/js/user.js"></script>
 	<script>
 	document.getElementById('profile').addEventListener('change', function(event) {
-		            const input = event.target;
-		            if (input.files && input.files[0]) {
-		                const reader = new FileReader();
-		                reader.onload = function(e) {
-		                    document.getElementById('preview').src = e.target.result;
-		                };
-		                reader.readAsDataURL(input.files[0]);
-		            } else {
-		                document.getElementById('preview').src = "";
-		            }
-		        });
+			const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+				$("#preview").show();
+				$("#profile").find(".comment").hide()
+            } else {
+				$("#profile").find(".comment").show()
+				$("#preview").hide();
+                document.getElementById('preview').src = "";
+            }
+        });
 	
 	/* 마우스 올렸을때 이벤트 */
 	 $('button').on('mouseover', function() {

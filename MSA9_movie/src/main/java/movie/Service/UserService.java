@@ -19,8 +19,9 @@ public interface UserService {
 	// 회원 정보 수정
 	public int update(String userId);
 	public int update(Users user);
+  
 	// 회원 삭제
-	public int delete(String userId);
+	public int delete(int userNo);
 	
 	// 로그인
 	public Users login(Users user);	

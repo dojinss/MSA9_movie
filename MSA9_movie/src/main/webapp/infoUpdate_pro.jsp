@@ -1,45 +1,28 @@
 <%@page import="movie.Service.UserServiceImpl"%>
 <%@page import="movie.Service.UserService"%>
 <%@page import="movie.DTO.Users"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%
-// 인코딩 세팅
 request.setCharacterEncoding("UTF-8");
 
-// 요청 파라미터 처리
-String action = request.getParameter("action");
+String userId = request.getParameter("id");
+String userPwd = request.getParameter("userpwd");
+String email = request.getParameter("email");
+String profileUrl = request.getParameter("profile");
 
-if ("checkId".equals(action)) {
-    // 아이디 중복 확인 로직
-    String userId = request.getParameter("userid");
-    UserService userService = new UserServiceImpl();
-    Users user = userService.select(userId);
-    
-    if (user == null) {
-        out.println("1"); // 아이디 없음
-    } else {
-        out.println("0"); // 아이디 있음
+UserService userService = new UserServiceImpl();
+Users user = userService.select(userId);
+
+if (user != null) {
+    user.setUserPwd(userPwd);
+    user.setEmail(email);
+    if (profileUrl != null && !profileUrl.isEmpty()) {
+        user.setProfileUrl(profileUrl);
     }
-} else {
-    // 회원가입 처리
-    String userId = request.getParameter("id");
-    String userPwd = request.getParameter("userpwd");
-    String email = request.getParameter("email");
-    String profileUrl = request.getParameter("profile");
-
-    Users user = Users.builder()
-        .userId(userId)
-        .userPwd(userPwd)
-        .email(email)
-        .profileUrl(profileUrl)
-        .enabled(true)
-        .build();
-
-    UserService userService = new UserServiceImpl();
-    int result = userService.signup(user);
-
+    
+    int result = userService.update(user);
+    
     if (result > 0) {
         String script = "<script>"
                 + "alert('수정 완료되었습니다.');"
@@ -48,10 +31,16 @@ if ("checkId".equals(action)) {
         out.println(script);
     } else {
         String script = "<script>"
-                + "alert('다시 시도해주세요');"
-                + "window.location.href='user.jsp';"
+                + "alert('수정에 실패했습니다. 다시 시도해주세요.');"
+                + "window.location.href='infoUpdate.jsp';"
                 + "</script>";
         out.println(script);
     }
+} else {
+    String script = "<script>"
+            + "alert('회원 정보를 찾을 수 없습니다.');"
+            + "window.location.href='infoUpdate.jsp';"
+            + "</script>";
+    out.println(script);
 }
 %>

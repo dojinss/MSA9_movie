@@ -42,15 +42,10 @@
         
         <div class="group">
           <label for="userpwd" class="label">비밀번호</label>
-          <input id="userpwd" type="password" class="input">
+          <input id="userpwd" type="password" class="input" name="userpwd">
           <div id="pwdError"></div>
         </div>
         
-        <div class="group">
-          <label for="name" class="label">이름</label>
-          <input id="name" type="text" class="input" >
-          <div id="nameError"></div>
-        </div>
         
         <div class="group">
           <label for="mail"  class="label">이메일</label>
