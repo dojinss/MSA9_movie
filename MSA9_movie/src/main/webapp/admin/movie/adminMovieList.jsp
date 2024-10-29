@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.alohaclass.jdbc.dto.Page"%>
 <%@page import="com.alohaclass.jdbc.dto.PageInfo"%>
 <%@page import="movie.Service.MovieServiceImpl"%>
@@ -21,7 +22,12 @@
 </head>
 <body>
 	<%
+		request.setCharacterEncoding("UTF-8");
 	    // 페이지 번호
+	    String searchCode = request.getParameter("searchCode");
+		String keyword = request.getParameter("keyword");
+		List<String> searchCodes = new ArrayList<>();
+		searchCodes.add(searchCode);
 	    String pageStr = request.getParameter("page");
 	    int pageNo = 1;
 	    if( pageStr != null )
@@ -29,7 +35,13 @@
 	    MovieService movieService = new MovieServiceImpl();
 	    Page newPage = new Page();
 	    newPage.setPage(pageNo);
-	    PageInfo<Movies> pageInfo = movieService.page(newPage);
+	    PageInfo<Movies> pageInfo = null;
+		if(searchCode!=null && !searchCode.equals("null") && keyword!=null && !keyword.equals("null")){
+			pageInfo = movieService.page(newPage,keyword,searchCodes);
+		}
+		else{
+		    pageInfo = movieService.page(newPage);			
+		}
 	    List<Movies> movieList = pageInfo.getList();
 	    int no = (pageNo-1)*10+1;
 	%>
@@ -42,6 +54,14 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
+					<form class="searchForm" action="adminMovieList.jsp" method="post">
+						<select class="searchCode" name="searchCode">
+							<option value="title" selected>제목</option>
+							<option value="cate">장르</option>
+						</select> 
+						<input class="searchInput" type="text" name="keyword">
+						<input type="submit" value="검색">
+					</form>
 					<div class="content">
 						<table class="list">
 							<colgroup>
@@ -63,7 +83,7 @@
 								<c:forEach var="movie" items="${movieList}">
 									<tr>
 										<td><%=no++%></td>
-										<td style="text-align: left;" ><a href="adminMovieUpdate.jsp?movieNo=${movie.movieNo}"><c:out value="${movie.title}" /></a></td>
+										<td><a href="adminMovieUpdate.jsp?movieNo=${movie.movieNo}"><c:out value="${movie.title}" /></a></td>
 										<td><fmt:formatDate value="${movie.regDate}"
 												pattern="yyyy-MM-dd" /></td>
 										<td><a class="keyword-info" href="<%=root%>/admin/keyword/adminKeywordList.jsp?movieNo=${movie.movieNo}">소개목록</a></td>
@@ -73,11 +93,11 @@
 						</table>
 				        <!-- 페이지네이션 -->
 				        <div class="pagenation">
-				            <a href="?page=${pageInfo.page.prev}">&lt;이전</a>
+				            <a href="?page=${pageInfo.page.prev}&keyword=<%=keyword%>&searchCode=<%=searchCode%>">&lt;이전</a>
 				            <c:forEach var="page" begin="${pageInfo.page.start}" end="${pageInfo.page.end}">
-				                <a href="?page=${page}" class="page-link">${page}</a>
+				                <a href="?page=${page}&keyword=<%=keyword%>&searchCode=<%=searchCode%>" class="page-link">${page}</a>
 				            </c:forEach>
-				            <a href="?page=${pageInfo.page.next}">이후&gt;</a>
+				            <a href="?page=${pageInfo.page.next}&keyword=<%=keyword%>&searchCode=<%=searchCode%>">이후&gt;</a>
 				        </div>
 					</div>
 					<a href="adminMovieInsert.jsp" class="insertbtn">추가</a>

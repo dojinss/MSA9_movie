@@ -9,6 +9,7 @@ import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.PrimeDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Movies;
 import movie.DTO.Primes;
 import movie.DTO.Users;
 
@@ -104,6 +105,17 @@ public class PrimeServiceImpl implements PrimeService {
 			e.printStackTrace();
 		}
 		return primeList;
+	}
+
+	@Override
+	public PageInfo<Primes> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Primes> selectedPageInfo = null;
+		try {
+			selectedPageInfo = primeDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
 	}
 	
 }

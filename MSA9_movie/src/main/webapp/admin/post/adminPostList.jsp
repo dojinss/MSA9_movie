@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="movie.DTO.Posts"%>
 <%@page import="movie.Service.PostServiceImpl"%>
 <%@page import="movie.Service.PostService"%>
@@ -23,19 +24,35 @@
 </head>
 <body>
 	<%
+		request.setCharacterEncoding("UTF-8");
 	    // 페이지 번호
+	    String searchCode = request.getParameter("searchCode");
+		String keyword = request.getParameter("keyword");
+		List<String> searchCodes = new ArrayList<>();
 	    String pageStr = request.getParameter("page");
 	    int pageNo = 1;
 	    if( pageStr != null )
 	        pageNo = Integer.parseInt( pageStr );
-		PostService postService = new PostServiceImpl();
-	    Page newPage = new Page();
-	    newPage.setPage(pageNo);
-	    PageInfo<Posts> pageInfo = postService.page(newPage);
-	    List<Posts> postList = pageInfo.getList();
-	    int no = (pageNo-1)*10+1;
+	    PostService postService = new PostServiceImpl();
 	    Users user = null;
 	    UserService userService = new UserServiceImpl();
+	    Page newPage = new Page();
+	    newPage.setPage(pageNo);
+	    PageInfo<Posts> pageInfo = null;
+		if(searchCode!=null && !searchCode.equals("null") && keyword!=null && !keyword.equals("null")){
+			if(searchCode.equals("user_id")){
+				searchCode="user_no";
+				user = userService.select(keyword);
+				keyword= Integer.toString(user.getUserNo());
+			}
+			searchCodes.add(searchCode);
+			pageInfo = postService.page(newPage,keyword,searchCodes);
+		}
+		else{
+		    pageInfo = postService.page(newPage);			
+		}
+	    List<Posts> postList = pageInfo.getList();
+	    int no = (pageNo-1)*10+1;
 	%>
 	<c:set var="pageInfo" value="<%= pageInfo %>" />
 	<div class="container">
@@ -46,6 +63,14 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
+					<form class="searchForm" action="adminPostList.jsp" method="post">
+						<select class="searchCode" name="searchCode">
+							<option value="user_id" selected>작성자</option>
+							<option value="content">내용</option>
+						</select> 
+						<input class="searchInput" type="text" name="keyword">
+						<input type="submit" value="검색">
+					</form>
 					<div class="content">
 						<table class="list">
 							<colgroup>
@@ -83,11 +108,11 @@
 						</table>
 				        <!-- 페이지네이션 -->
 				        <div class="pagenation">
-				            <a href="?page=${pageInfo.page.prev}">&lt;이전</a>
+				            <a href="?page=${pageInfo.page.prev}&keyword=<%=keyword%>&searchCode=<%=searchCode%>">&lt;이전</a>
 				            <c:forEach var="page" begin="${pageInfo.page.start}" end="${pageInfo.page.end}">
-				                <a href="?page=${page}" class="page-link">${page}</a>
+				                <a href="?page=${page}&keyword=<%=keyword%>&searchCode=<%=searchCode%>" class="page-link">${page}</a>
 				            </c:forEach>
-				            <a href="?page=${pageInfo.page.next}">이후&gt;</a>
+				            <a href="?page=${pageInfo.page.next}&keyword=<%=keyword%>&searchCode=<%=searchCode%>">이후&gt;</a>
 				        </div>
 					</div>
 				</div>

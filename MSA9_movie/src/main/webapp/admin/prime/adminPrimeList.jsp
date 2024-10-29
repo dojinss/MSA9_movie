@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="movie.DTO.Primes"%>
 <%@page import="movie.Service.PrimeServiceImpl"%>
 <%@page import="movie.Service.PrimeService"%>
@@ -23,15 +24,26 @@
 </head>
 <body>
 	<%
+		request.setCharacterEncoding("UTF-8");
 	    // 페이지 번호
+	    String searchCode = request.getParameter("searchCode");
+		String keyword = request.getParameter("keyword");
+		List<String> searchCodes = new ArrayList<>();
+		searchCodes.add(searchCode);
 	    String pageStr = request.getParameter("page");
 	    int pageNo = 1;
 	    if( pageStr != null )
 	        pageNo = Integer.parseInt( pageStr );
-		PrimeService primeService = new PrimeServiceImpl();
+	    PrimeService primeService = new PrimeServiceImpl();
 	    Page newPage = new Page();
 	    newPage.setPage(pageNo);
-	    PageInfo<Primes> pageInfo = primeService.page(newPage);
+	    PageInfo<Primes> pageInfo = null;
+		if(searchCode!=null && !searchCode.equals("null") && keyword!=null && !keyword.equals("null")){
+			pageInfo = primeService.page(newPage,keyword,searchCodes);
+		}
+		else{
+		    pageInfo = primeService.page(newPage);			
+		}
 	    List<Primes> primeList = pageInfo.getList();
 	    int no = (pageNo-1)*10+1;
 	%>
@@ -44,6 +56,13 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
+					<form class="searchForm" action="adminPrimeList.jsp" method="post">
+						<select class="searchCode" name="searchCode" >
+							<option value="name" selected>작성자</option>
+						</select> 
+						<input class="searchInput" type="text" name="keyword">
+						<input type="submit" value="검색">
+					</form>
 					<div class="content">
 						<table class="list">
 							<colgroup>
@@ -75,11 +94,11 @@
 						</table>
 				        <!-- 페이지네이션 -->
 				        <div class="pagenation">
-				            <a href="?page=${pageInfo.page.prev}">&lt;이전</a>
+				            <a href="?page=${pageInfo.page.prev}&keyword=<%=keyword%>&searchCode=<%=searchCode%>">&lt;이전</a>
 				            <c:forEach var="page" begin="${pageInfo.page.start}" end="${pageInfo.page.end}">
-				                <a href="?page=${page}" class="page-link">${page}</a>
+				                <a href="?page=${page}&keyword=<%=keyword%>&searchCode=<%=searchCode%>" class="page-link">${page}</a>
 				            </c:forEach>
-				            <a href="?page=${pageInfo.page.next}">이후&gt;</a>
+				            <a href="?page=${pageInfo.page.next}&keyword=<%=keyword%>&searchCode=<%=searchCode%>">이후&gt;</a>
 				        </div>
 					</div>
 				</div>

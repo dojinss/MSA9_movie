@@ -10,6 +10,7 @@ import com.alohaclass.jdbc.dto.PageInfo;
 import movie.DAO.PostDAO;
 import movie.DAO.ReplyDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Movies;
 import movie.DTO.Posts;
 import movie.DTO.Users;
 
@@ -118,6 +119,16 @@ public class PostServiceImpl implements PostService {
 		PageInfo<Posts> selectedPageInfo = null;
 		try {
 			selectedPageInfo = postDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Posts> selectedPageInfo = null;
+		try {
+			selectedPageInfo = postDAO.page(page, keyword, searchOptions);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
