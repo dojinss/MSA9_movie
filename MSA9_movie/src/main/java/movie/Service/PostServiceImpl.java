@@ -1,13 +1,18 @@
 package movie.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.PostDAO;
 import movie.DAO.ReplyDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Movies;
 import movie.DTO.Posts;
+import movie.DTO.Users;
 
 public class PostServiceImpl implements PostService {
 
@@ -93,7 +98,7 @@ public class PostServiceImpl implements PostService {
         }};
 		int result = 0;
 		try {
-			result = postDAO.delete(map);
+			result = postDAO.delete(postNo);
 			replyDAO.deleteBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,6 +113,26 @@ public class PostServiceImpl implements PostService {
         if( post.getUserNo() == userNo)
         	result = true;
 		return result;
+	}
+	@Override
+	public PageInfo<Posts> page(Page page) {
+		PageInfo<Posts> selectedPageInfo = null;
+		try {
+			selectedPageInfo = postDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Posts> selectedPageInfo = null;
+		try {
+			selectedPageInfo = postDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
 	}
 	
 }

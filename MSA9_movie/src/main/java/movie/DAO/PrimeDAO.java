@@ -14,6 +14,8 @@ public class PrimeDAO extends BaseDAOImpl<Primes>{
 		prime.setPrimeNo(rs.getInt("prime_no"));
 		prime.setUserNo(rs.getInt("user_no"));
 		prime.setAdInfoNo(rs.getInt("ad_info_no"));
+		prime.setName(rs.getString("name"));
+		prime.setImageUrl(rs.getString("image_url"));
 		prime.setNumber(rs.getString("number"));
 		prime.setAddr(rs.getString("addr"));
 		prime.setStartTime(rs.getDate("start_time"));

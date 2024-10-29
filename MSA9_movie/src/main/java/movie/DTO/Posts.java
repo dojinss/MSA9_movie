@@ -17,7 +17,7 @@ public class Posts {
 	private int keywordNo;
 	private int userNo;
 	private String content;
-	private int like;
+	private int likes;
 	private Date regDate;
 	private Date updDate;
 	

@@ -1,5 +1,7 @@
 package movie.Service;
 
+import java.util.List;
+
 import movie.DTO.Keywords;
 
 public interface KeywordService {
@@ -12,4 +14,8 @@ public interface KeywordService {
 	public int update(Keywords keyword);
 	// 키워드 삭제
 	public int delete(int keywordNo);
+	// 영화에 종속된 테이블 삭제
+	public int allDelete(int movieNo);
+	// 영화 당 키워드 전체 조회
+	public List<Keywords> list(int movieNo);
 }
