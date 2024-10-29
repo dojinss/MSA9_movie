@@ -74,7 +74,7 @@
 								%>
 										<tr>
 											<td><%=no++%></td>
-											<td style="text-align: left;">
+											<td>
 												<a href="adminAdUpdate.jsp?adNo=<%=ad.getAdNo()%>"><c:out value="<%=imageName%>"/></a>
 											</td>
 											<td><c:out value="<%=prime.getName()%>"/></td>

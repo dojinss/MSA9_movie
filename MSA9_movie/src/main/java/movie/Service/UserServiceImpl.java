@@ -1,6 +1,7 @@
 package movie.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.alohaclass.jdbc.dto.Page;
@@ -114,6 +115,17 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Users> selectedPageInfo = null;
+		try {
+			selectedPageInfo = userDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
 	}
 
 }

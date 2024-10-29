@@ -43,6 +43,30 @@
 	border-radius: 20px;
 }
 
+.searchForm{
+	display:flex;
+	position: relative;
+	top: 30px;
+	float:right;
+}
+
+.searchCode{
+	padding-left: 10px;
+	width:100px;
+	height:50px;
+}
+
+.searchInput{
+	padding-left: 10px;
+	border-width:1px 0 1px;
+	width:200px;
+	height:50px;
+}
+.searchForm input[type=submit]{
+	width:50px;
+	height:50px;
+}
+
 .list {
 	width: 1200px;
 	border-collapse: collapse;

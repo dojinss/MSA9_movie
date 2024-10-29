@@ -1,8 +1,11 @@
 package movie.Service;
 
+import java.util.List;
+
 import com.alohaclass.jdbc.dto.Page;
 import com.alohaclass.jdbc.dto.PageInfo;
 
+import movie.DTO.Movies;
 import movie.DTO.Posts;
 import movie.DTO.Users;
 
@@ -22,4 +25,6 @@ public interface PostService {
 	// 아이디 체크
 	public boolean idCheck(int postNo, int userNo);
 	public PageInfo<Posts> page(Page page); 
+	
+	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions); 
 }
