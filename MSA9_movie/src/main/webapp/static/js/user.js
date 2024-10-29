@@ -14,7 +14,7 @@ $("#userid-check").click(function() {
             if ($.trim(result) == "1") {
 				//일치한 아이디 없음(성공)
 				console.log("성공!!!")
-                $("#idSuccess").text("아이디 사용 가능");
+                $("#idSuccess").text("아이디 사용 가능");U
                 $("#idFalse").text(""); // 초기화
             } else {
 				console.log("실패 ㅠㅠ")
@@ -22,12 +22,8 @@ $("#userid-check").click(function() {
                 $("#idSuccess").text(""); // 초기화
             }
         },
-        error: function(xhr, status, error) {
-            console.error("AJAX 요청 오류: " + error);
-        }
     });
 });
-
 
 
 // 요소 선택
@@ -117,19 +113,37 @@ function isMatch(password1, password2) {
   return password1 === password2;
 }
 
-//
-//<b><%=id %>: </b>
-//<%
-//if(b){   //true일 경우 (중복된 아이디가 있을 경우)
-//%>   
-//   이미 사용 중인 id 입니다.<br>
-//   <a href="#" onclick="opener.document.regForm.id.focus(); window.close();">닫기</a>
-//   <%-- opener.document & 두개 한꺼번에 호출 실행 가능 --%>
-//<%
-//}else{
-//%>
-//   사용 가능한 id 입니다.<br>
-//   <a href="#" onclick="opener.document.regForm.passwd.focus(); window.close();">닫기</a>
-//<%
-//}
-//%>
+
+// 탈퇴
+
+function confirmLeave() {
+    const confirmed = confirm("탈퇴하시겠습니까?");
+    if (confirmed) {
+        const userId = document.getElementById("userid").value;
+        const userPwd = document.getElementById("userpwd").value;
+
+        // AJAX 요청
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "leave_pro.jsp", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = xhr.responseText;
+                if (response === "success") {
+                    alert("탈퇴가 완료되었습니다.");
+                    window.location.href = "main.jsp"; // 성공 후 페이지 이동
+                } else {
+                    alert("아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+                }
+            }
+        };
+
+        // 아이디와 비밀번호를 전송
+        xhr.send("id=" + encodeURIComponent(userId) + "&userpwd=" + encodeURIComponent(userPwd));
+        return false; //  제출 방지
+    } else {
+        alert("탈퇴가 취소되었습니다.");
+        return false; //  제출 방지
+    }
+}

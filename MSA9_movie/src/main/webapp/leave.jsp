@@ -25,7 +25,7 @@
 		
 		 
 		
-	<form class="user-leave" onsubmit="return checkId()">
+	<form class="user-leave" onsubmit="return confirmLeave()">
  		<div class="info-leave">
  		 <label for="leave" id="leave">회원 탈퇴</label>
 		
@@ -36,6 +36,8 @@
           <input id="userid"  type="text" class="input" name="id" autofocus >
           <!-- 입력창 오류 경고문 -->      
            <div id="wrongId"></div>
+           <div id="idSuccess"></div>
+           <div id="idFalse"></div>
         </div>
         
         <div class="group">
@@ -71,6 +73,18 @@
 	<%-- JS 링크 파일 --%>
 	<script src="static/js/user.js"></script>
 	<script>
+	
+// 	function confirmLeave() {
+// 	    const confirmed = confirm("탈퇴하시겠습니까?");
+// 	    if (confirmed) {
+// 	      alert("탈퇴가 완료되었습니다.");
+// 	      return true;
+// 	    } else {
+// 	      alert("탈퇴가 취소되었습니다.");
+// 	      return false; 
+// 	    }
+// 	  } 
+
 	
 	/* 마우스 올렸을때 이벤트 */
 		 $('.leave-btn').on('mouseover', function() {
