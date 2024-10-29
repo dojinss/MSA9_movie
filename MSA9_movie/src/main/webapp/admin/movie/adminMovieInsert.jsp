@@ -51,7 +51,7 @@
 							</div>
 							<div class="content-foot">
 								<p>이미지</p>
-								<input type="text" id="imageName" readonly> 
+								<input type="text" id="imagename" readonly>
 								<label class="btn-upload" for="file">
 									첨부
 								</label> 
@@ -82,7 +82,7 @@
 		    	alert("값을 입력해주세요");
 		          return false;
 		      }
-		    if($('#imageName').val() == ''){
+		    if($('#imagename').val() == ''){
 		    	alert("값을 입력해주세요");
 		          return false;
 		      }

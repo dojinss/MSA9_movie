@@ -74,7 +74,7 @@
 		    	alert("값을 입력해주세요");
 		          return false;
 		      }
-		    if($('#imageName').val() == ''){
+		    if($('#imagename').val() == ''){
 		    	alert("값을 입력해주세요");
 		          return false;
 		      }
