@@ -69,13 +69,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int delete(String userId) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public Users login(Users user) {
-		String userid = user.getUserId();				// 입력 받은 아이디d
+		String userid = user.getUserId();		// 입력 받은 아이디d
 		Users selectedUser = select(userid);	// 아이디 조회
 		
 		// 회원 가입이 안된 아이디

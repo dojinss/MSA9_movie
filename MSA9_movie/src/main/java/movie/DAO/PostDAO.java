@@ -45,6 +45,7 @@ public class PostDAO extends BaseDAOImpl<Posts>{
 		}
 		String sql 	= " SELECT * FROM " + table()
 					+ " WHERE keyword_no in ( SELECT keyword_no FROM keywords WHERE movie_no = ? ) "
+					+ " OR movie_no = ? "
 					+ " ORDER BY post_no desc "
 					+ " LIMIT ? , ? "
 					;
@@ -55,8 +56,9 @@ public class PostDAO extends BaseDAOImpl<Posts>{
 			psmt = con.prepareStatement(sql);
 			log(sql);
 			psmt.setInt(1, movieNo);
-			psmt.setInt(2, nowPage);
-			psmt.setInt(3, size);
+			psmt.setInt(2, movieNo);
+			psmt.setInt(3, nowPage);
+			psmt.setInt(4, size);
 			rs = psmt.executeQuery();
 			while( rs.next() ) {
 				Posts entity = map(rs);

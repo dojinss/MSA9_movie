@@ -35,7 +35,6 @@ public class FileServiceImpl implements FileService {
         }};
         Files file = null;
         try {
-        	fileDAO.select(1);
         	file = fileDAO.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,7 +48,6 @@ public class FileServiceImpl implements FileService {
         }};
         Files file = null;
         try {
-        	fileDAO.select(1);
         	file = fileDAO.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,5 +140,15 @@ public class FileServiceImpl implements FileService {
 			e.printStackTrace();
 		}
 		return selectedPageInfo;
+	}
+	@Override
+	public List<Files> list(int postNo) {
+		List<Files> fileList = null;
+		try {
+			fileList = fileDAO.list(postNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fileList;
 	}
 }

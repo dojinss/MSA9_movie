@@ -7,6 +7,7 @@
 */
 let movieIndex = 1;
 let keywordIndex = 1;
+// 게시글 목록 불러오기
 function getPostList(no,type){
 	console.log("getPostList 함수 호출...")
 	let data;
@@ -60,27 +61,14 @@ function postFunctions(){
 		tabViewer.eq($("input:radio[name='post-tab']").index(this)).show();
 		$("#success-modal").hide();
 	})
-	$("#success-post").click(function(){
-		$(".tab-btn-box > .btn").removeClass("active")
-		$(".tab-btn-box > .btn").eq(0).addClass("active")
-		let tabViewer = $(".post-container")
-		tabViewer.hide();
-		tabViewer.eq(0).show();
-		$("#success-modal").hide();
-	})
-	// 이미지 드래그앤드롭
 	
-	// 게시글 작성하기
-//	$("#image").on("change", function() {
-//	    if ($("#image")[0].files.length > 2) {
-//	        alert("You can select only 2 images");
-//	    } else {
-//	        $("#imageUploadForm").submit();
-//	    }
-//	});
+	// 등록완료 버튼 클릭 - 페이지 새로고침
+	$("#success-post").click(function(){
+		postList();
+	})
 	
 }
-
+// 이미지 드래그앤드롭
 function imgDragDrop(){
 	console.log("imgDragDrop 함수 호출...")
 	let uploadFiles = [];
@@ -109,6 +97,7 @@ function imgDragDrop(){
 		
 	});
 	
+	// 썸네일 삭제
 	$("#thumbnails").on("click", ".close", function(e) {  
 		let $target = $(e.target);  
 		let idx = $target.attr('data-idx');  
@@ -122,6 +111,7 @@ function imgDragDrop(){
 		if(ableCount == 0)  
 			$("#drop > .comment").show();
 	});
+	
 	// 게시글 작성하기
 	$("#post-form-submit").on("click", function() {  
 		let formData = new FormData($("#post-form")[0]);
@@ -148,7 +138,47 @@ function imgDragDrop(){
 			}  
 		});
 	});
+	
+	// 게시글 조회
+	$(".post-item").on("click", function() {  
+		let postNo = $(this).attr("data")
+		console.log("게시글 조회...")
+		postView(postNo)
+	});
+	
 }
+// 게시글 페이지 새로고침 (비동기)
+function postList(){
+	let type = $("#postType").val()
+	let no
+	if(type == "movie")
+		no = $("#movieNo").val()
+	else if(type == "keyword")
+		no = $("#keywordNo").val()
+	getPostList(no,type);
+}
+// 게시글 조회 (비동기)
+function postView(postNo){
+	$.ajax({    
+		url: 'pro/postView_pro.jsp',    
+		data : {
+			postNo : postNo
+		},    
+		type : 'post',
+		success : function(result) {
+			console.log("전송완료.")
+			$("#post-view-tab").empty().append(result)
+			$(".tab-btn-box > .btn").removeClass("active")
+			$(".tab-btn-box > .btn").eq(0).addClass("active")
+			let tabViewer = $(".post-container")
+			tabViewer.hide();
+			tabViewer.eq(2).show();
+			$("#success-modal").hide();
+		}  
+	});
+}
+
+// 썸네일 미리보기
 function preview(file, idx) {  
 	let reader = new FileReader();  
 	reader.onload = (function(f, idx) {    

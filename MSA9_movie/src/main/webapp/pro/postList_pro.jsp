@@ -41,7 +41,8 @@
 	int movieNo 		= Integer.parseInt( request.getParameter("movieNo") );
 	String keywordNo	= request.getParameter("keywordNo");
 	String type		 	= request.getParameter("type");
-	int index 			= Integer.parseInt( request.getParameter("nowPage") );
+	String nowPage		= request.getParameter("nowPage") ;
+	int index 			= ( nowPage != "" && !nowPage.isEmpty() )? Integer.parseInt(nowPage) - 1 : 0;
 	
 	// 검색 키워드 설정
 	String keyword = "";
@@ -104,12 +105,17 @@
 	adOption.add("keywordNO");
 	PageInfo<Ads> adsPageInfo = adService.page(adPage, keyword, adOption);
 	List<Ads> adList = adsPageInfo.getList();
+	int indexOfadImg = imgURL.lastIndexOf("/");
+	String adFileName = imgURL.substring(indexOfadImg + 1);
 	
 	// 게시판 정보 출력
 	%>
 		<div class="post-info-wrap">
+			<input type="hidden" id="movieNo" value="<%= movieNo%>"/>
+			<input type="hidden" id="keywordNo" value="<%= keywordNo%>"/>
+			<input type="hidden" id="postType" value="<%= type%>"/>
 			<div class="img-box">
-				<img src="<%= imgURL %>"/>
+				<img src="<%=root%>/images?fileName=<%=adFileName %>" />
 			</div>
 			<div class="info-box">
 				<p class="title"><%= title %></p>
@@ -172,13 +178,16 @@
 					
 					// 파일 정보 불러오기
 					Files fileInfo = fileService.selectByPostNo(post.getPostNo());
-					if(fileInfo != null)
-						pageContext.setAttribute("imgURL", fileInfo.getFileUrl());
-					pageContext.setAttribute("root", root);
-					%>
+					if(fileInfo != null){
+						int indexOfimg = fileInfo.getFileUrl().lastIndexOf("/");
+						String fileName = fileInfo.getFileUrl().substring(indexOfimg + 1);
+						pageContext.setAttribute("fileName", fileName);
+					}
+					pageContext.setAttribute("postNo", post.getPostNo());
+				%>
 					
-					<li class="post-item">
-						<img src="${ imgURL != null ? root + imgURL : '' }"/>
+					<li class="post-item" data="${postNo}">
+						<img src="<%=root%>/images?fileName=${ fileName != null ? fileName : '' }"/>						
 					</li>
 				<% 
 				} 
@@ -226,4 +235,7 @@
 	<div id="success-modal">
 		<div id="success-post">등록 완료</div>
 	</div>
+	</div>
+	<div class="post-container" id="post-view-tab">
+		
 	</div>
