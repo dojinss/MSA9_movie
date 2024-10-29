@@ -19,5 +19,5 @@ if(user == null)
 else
 	out.println("0");
 
-
+ 
 %>

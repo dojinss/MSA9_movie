@@ -7,7 +7,7 @@ $("#userid-check").click(function() {
         url: "user_pro.jsp?action=checkId", // action 파라미터 추가
         data: {
             "userid": userid
-        },
+        }, 
         type: 'get',
         dataType: "text",
         success: function(result) {

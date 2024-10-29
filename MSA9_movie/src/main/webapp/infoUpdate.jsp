@@ -114,7 +114,7 @@
             } else {
                 document.getElementById('preview').src = "";
             }
-        });
+        }); 
 		
 		/* 마우스 올렸을때 이벤트 */
 		 $('button').on('mouseover', function() {
