@@ -1,5 +1,5 @@
 
-
+// 아이디 중복 조회
 $("#userid-check").click(function() {
     let userid = $("#userid").val();
 	console.log("아이디 중복 클릭!")
@@ -121,29 +121,44 @@ function confirmLeave() {
     if (confirmed) {
         const userId = document.getElementById("userid").value;
         const userPwd = document.getElementById("userpwd").value;
-
+		
+		alert(userId)
+		alert(userPwd)
+		// jQuery AJAX 사용
+		$.ajax({
+			url : "leave_pro.jsp",
+			type : "post",
+			data : {
+				"id" : userId,
+				"userpwd" : userPwd
+			},
+			dataType : "text",
+			success : function(result){
+				console.log(result)
+			}
+		})
         // AJAX 요청
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "leave_pro.jsp", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                const response = xhr.responseText;
-                if (response === "success") {
-                    alert("탈퇴가 완료되었습니다.");
-                    window.location.href = "main.jsp"; // 성공 후 페이지 이동
-                } else {
-                    alert("아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
-                }
-            }
-        };
-
-        // 아이디와 비밀번호를 전송
-        xhr.send("id=" + encodeURIComponent(userId) + "&userpwd=" + encodeURIComponent(userPwd));
-        return false; //  제출 방지
+//        const xhr = new XMLHttpRequest();
+//        xhr.open("POST", "leave_pro.jsp", true);
+//        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//
+//        xhr.onreadystatechange = function () {
+//            if (xhr.readyState === 4 && xhr.status === 200) {
+//                const response = xhr.responseText;
+//				console.log(response)
+////                if (response === "success") {
+////                    alert("탈퇴가 완료되었습니다.");
+////                    window.location.href = "main.jsp"; // 성공 후 페이지 이동
+////                } else {
+////                    alert("아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+////                }
+//            }
+//        };
+//
+//        // 아이디와 비밀번호를 전송
+//        xhr.send("id=" + encodeURIComponent(userId) + "&userpwd=" + encodeURIComponent(userPwd));
     } else {
         alert("탈퇴가 취소되었습니다.");
-        return false; //  제출 방지
     }
+	return false; //  제출 방지
 }
