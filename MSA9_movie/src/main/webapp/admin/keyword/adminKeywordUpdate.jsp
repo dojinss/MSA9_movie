@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>소개글 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
-<jsp:include page="/admin/layout/movie.jsp"/>
+<jsp:include page="/admin/layout/script.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminKeywordForm.css">
 
 </head>

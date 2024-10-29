@@ -14,7 +14,7 @@
 <title>영화 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminMovieForm.css">
-<jsp:include page="/admin/layout/movie.jsp"/>
+<jsp:include page="/admin/layout/script.jsp"/>
 <%
 	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 	MovieService movieService = new MovieServiceImpl();

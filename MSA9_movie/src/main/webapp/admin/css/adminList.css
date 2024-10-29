@@ -100,6 +100,14 @@
 	padding-top: 30px;
 }
 
+.footer {
+	width: 1200px;
+	height: 100px;
+	padding: 15px;
+	background-color: var(--sub-color);
+	padding-top: 30px;
+}
+
 .page-link {
 	margin: 0 40px;
 	box-sizing: border-box;
@@ -109,7 +117,18 @@
 .pagenation a:hover{
 	text-decoration: underline;
 }
-
+.keywordbtn{
+	position: relative;
+	width: 120px;
+	height: 50px;
+	padding-top: 12px;
+	background-color: var(--insert-color);
+	float: right;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 10px;
+}
 .insertbtn {
 	position: relative;
 	width: 120px;
@@ -125,5 +144,8 @@
 }
 
 .insertbtn:hover {
+	filter: brightness(90%);
+}
+.keywordbtn:hover {
 	filter: brightness(90%);
 }

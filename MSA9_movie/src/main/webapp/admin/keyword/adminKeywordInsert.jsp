@@ -14,6 +14,7 @@
 <title>소개글 추가 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminKeywordForm.css">
+<jsp:include page="/admin/layout/script.jsp"/>
 </head>
 <%
 	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
@@ -32,7 +33,7 @@
 							<div class="content-head">
 								<input type="hidden" name="movieNo" value=<%=movieNo%>>
 								<p>제목</p>
-								<input class="normal-input" type="text" name="title" maxlength="30"/>
+								<input class="normal-input" id="title" type="text" name="title" maxlength="30"/>
 							</div>
 							<div class="content-body">
 								<div class="bodyform">
@@ -45,7 +46,7 @@
 								</div>
 								<div class="bodyform">
 									<p>줄거리</p>
-									<textarea class="large-input" name="content" maxlength="255"></textarea>
+									<textarea class="large-input" id="content" name="content" maxlength="255"></textarea>
 								</div>
 							</div>
 							<div class="content-foot">
@@ -64,17 +65,21 @@
 		</div>
 	</div>
 	<script>
-		window.onload=function(){
-			target=document.getElementById('file'); // file 아이디 선언
-			target.addEventListener('change',function(){ // change 함수
-		
-				if(target.value.length){ // 파일 첨부인 상태일경우 파일명 출력
-					document.getElementById("imagename").value = target.files[0].name;
-				}else{ //버튼 클릭후 취소(파일 첨부 없을 경우)할때 파일명값 안보이게
-					document.getElementById("imagename").value = "";
-				}
-			});
-		}
+		$('#submit').click(function(){
+		    if($('#title').val() == ''){
+		    	alert("값을 입력해주세요");	
+		          return false;
+		      }
+		    if($('#content').val() == ''){
+		    	alert("값을 입력해주세요");
+		          return false;
+		      }
+		    if($('#imageName').val() == ''){
+		    	alert("값을 입력해주세요");
+		          return false;
+		      }
+		    return true;
+		});
 	</script>
 </body>
 </html>

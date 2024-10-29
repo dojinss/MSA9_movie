@@ -60,10 +60,10 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<div class="pagenation">
+						<div class="footer">
+							<a href="<%=root%>/admin/keyword/adminKeywordInsert.jsp?movieNo=<%=movieNo%>" class="keywordbtn">추가</a>
 						</div>
 					</div>
-					<a href="<%=root%>/admin/keyword/adminKeywordInsert.jsp?movieNo=<%=movieNo%>" class="insertbtn">추가</a>
 				</div>
 			</div>
 		</div>

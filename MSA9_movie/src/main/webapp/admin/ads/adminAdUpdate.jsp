@@ -20,7 +20,7 @@
 <title>광고게시글 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminAdForm.css">
-<jsp:include page="/admin/layout/movie.jsp"/>
+<jsp:include page="/admin/layout/script.jsp"/>
 <%
 	int adNo = Integer.parseInt(request.getParameter("adNo"));
 	AdService adService = new AdServiceImpl();
