@@ -41,9 +41,17 @@ if ("checkId".equals(action)) {
     int result = userService.signup(user);
 
     if (result > 0) {
-        response.sendRedirect("signup.jsp"); // 회원가입 성공 시 이동
+        String script = "<script>"
+                + "alert('반갑습니다 " + userId + "님');"
+                + "window.location.href='main.jsp';"
+                + "</script>";
+        out.println(script);
     } else {
-        out.println("회원가입 실패");
+        String script = "<script>"
+                + "alert('다시 시도해주세요');"
+                + "window.location.href='user.jsp';"
+                + "</script>";
+        out.println(script);
     }
 }
 %>
