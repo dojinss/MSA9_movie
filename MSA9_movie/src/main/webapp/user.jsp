@@ -16,7 +16,9 @@
 	<jsp:include page="/layout/header.jsp" />
 	<%-- [Contents] ######################################################### --%>
 		
-<form class="user-login" onsubmit="return checkId()">
+		
+							<!--★★submitForm 보이면 삭제/검색해도안나와 ㅜㅡ★★  -->
+<form class="user-login" method="post" action="user_pro.jsp" onsubmit="return checkId()">
   <div class="login-box">
   <label for="tab" id="tab">회원 가입</label>
   
@@ -77,6 +79,7 @@
         <div id="preview-box">
         	<img id="preview" src="" width="100" height="100" />
         </div>
+        <input id="profile" type="file" class="input" >
       </div>
       </div>
         <div id="edit">
@@ -85,13 +88,26 @@
       </div> 
     </div>
   </form>
-    
+     
 	<%-- [Contents] ######################################################### --%>
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
 	<%-- JS 링크 파일 --%>
 	<script src="<%=root %>/static/js/user.js"></script>
 	<script>
+	document.getElementById('profile').addEventListener('change', function(event) {
+		            const input = event.target;
+		            if (input.files && input.files[0]) {
+		                const reader = new FileReader();
+		                reader.onload = function(e) {
+		                    document.getElementById('preview').src = e.target.result;
+		                };
+		                reader.readAsDataURL(input.files[0]);
+		            } else {
+		                document.getElementById('preview').src = "";
+		            }
+		        });
+	
 	/* 마우스 올렸을때 이벤트 */
 	 $('button').on('mouseover', function() {
        $(this).css('color', 'white')

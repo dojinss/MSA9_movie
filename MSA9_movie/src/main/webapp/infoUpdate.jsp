@@ -38,6 +38,8 @@
           <button type="button" id="userid-check">중복확인</button>
           <!-- 유효성 검사 후 잘,잘못되었을때 경고문 -->      
            <div id="wrongId"></div>
+           <div id="idSuccess"></div>
+           <div id="idFalse"></div>
           
         </div>
         
@@ -112,7 +114,7 @@
             } else {
                 document.getElementById('preview').src = "";
             }
-        });
+        }); 
 		
 		/* 마우스 올렸을때 이벤트 */
 		 $('button').on('mouseover', function() {

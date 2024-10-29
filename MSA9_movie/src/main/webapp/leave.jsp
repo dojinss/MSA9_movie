@@ -23,7 +23,7 @@
   		<label for="tab-2" class="tab">회원 탈퇴</label>
 		</div>
 		
-		
+		 
 		
 	<form class="user-leave" onsubmit="return checkId()">
  		<div class="info-leave">
