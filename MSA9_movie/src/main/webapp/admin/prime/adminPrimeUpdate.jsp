@@ -17,7 +17,7 @@
 <title>광고주 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminPrimeForm.css">
-<jsp:include page="/admin/layout/movie.jsp"/>
+<jsp:include page="/admin/layout/script.jsp"/>
 <%
 	int primeNo = Integer.parseInt(request.getParameter("primeNo"));
 	PrimeService primeService = new PrimeServiceImpl();

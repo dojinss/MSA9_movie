@@ -19,7 +19,7 @@
 <title>게시글 수정 화면</title>
 <jsp:include page="/admin/layout/link.jsp"/>
 <link rel="stylesheet" href="<%= root %>/admin/css/adminPostForm.css">
-<jsp:include page="/admin/layout/movie.jsp"/>
+<jsp:include page="/admin/layout/script.jsp"/>
 <%
 	int postNo = Integer.parseInt(request.getParameter("postNo"));
 	PostService postService = new PostServiceImpl();
