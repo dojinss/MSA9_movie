@@ -107,7 +107,7 @@ function confirmLeave() {
     if (confirmed) {
         const userId = document.getElementById("userid").value;
         const userPwd = document.getElementById("userpwd").value;
-
+ 
         $.ajax({
             url : "leave_pro.jsp",
             type : "post",
