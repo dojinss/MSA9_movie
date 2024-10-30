@@ -15,6 +15,7 @@ public class Posts {
 
 	private int postNo;
 	private int keywordNo;
+	private int movieNo;
 	private int userNo;
 	private String content;
 	private int likes;

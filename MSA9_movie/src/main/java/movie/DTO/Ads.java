@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +16,7 @@ public class Ads {
 
 	private int adNo;
 	private int primeNo;
+	private int keywordNo;
 	private String content;
 	private Date regDate;
 	private Date updDate;

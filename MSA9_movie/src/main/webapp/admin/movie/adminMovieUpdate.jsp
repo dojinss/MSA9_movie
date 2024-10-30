@@ -19,8 +19,10 @@
 	int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 	MovieService movieService = new MovieServiceImpl();
 	Movies movie = movieService.select(movieNo);
+
 	int index = movie.getImageUrl().indexOf("_",10);
 	String imageName = movie.getImageUrl().substring(index+1);
+
 %>
 <c:set var="movie" value="<%=movie%>" />
 <c:set var="imageName" value="<%=imageName%>" />

@@ -1,12 +1,17 @@
  package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.PostDAO;
 import movie.DAO.ReplyDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Replies;
 import movie.DTO.Replies;
 
 public class ReplyServiceImpl implements ReplyService {
@@ -132,5 +137,65 @@ public class ReplyServiceImpl implements ReplyService {
         	result = true;
 		return result;
 	}
-	
+	@Override
+	public PageInfo<Replies> page(PageInfo<Replies> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("userId");
+				break;
+			case 2:	
+				searchOptions.add("content");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
+		PageInfo<Replies> selectedPageInfo = null;
+		try {
+			selectedPageInfo = replyDAO.page(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Replies> page() {
+		PageInfo<Replies> selectedPageInfo = null;
+		try {
+			selectedPageInfo = replyDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Replies> page(Page page) {
+		PageInfo<Replies> selectedPageInfo = null;
+		try {
+			selectedPageInfo = replyDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Replies> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Replies> selectedPageInfo = null;
+		try {
+			selectedPageInfo = replyDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Replies> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Replies> selectedPageInfo = null;
+		try {
+			selectedPageInfo = replyDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
 }
