@@ -147,8 +147,8 @@ public class UserServiceImpl implements UserService {
 		}
 		return selectedPageInfo;
 	}
-	@Override
 
+	@Override
 	public PageInfo<Users> page(Page page) {
 		PageInfo<Users> selectedPageInfo = null;
 		try {
@@ -158,6 +158,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return selectedPageInfo;
 	}
+
 
 	@Override
 	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions) {
