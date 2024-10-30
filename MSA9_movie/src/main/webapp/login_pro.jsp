@@ -1,7 +1,7 @@
 <%@page import="java.net.URLEncoder"%>
-<%@page import="movie.Service.PersistenceLoginsServiceImpl"%>
-<%@page import="movie.Service.PersistenceLoginsService"%>
-<%@page import="movie.DTO.PersistenceLogins"%>
+<%@page import="movie.Service.TokenServiceImpl"%>
+<%@page import="movie.Service.TokenService"%>
+<%@page import="movie.DTO.Tokens"%>
 <%@page import="javax.servlet.http.Cookie"%>
 <%@page import="movie.Service.UserServiceImpl"%>
 <%@page import="movie.Service.UserService"%>
@@ -11,7 +11,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	// 인코딩 세팅
+// 인코딩 세팅
 	request.setCharacterEncoding("UTF-8");
 	// 아이디 비밀번호 가져오기
 	String userID = request.getParameter("userid");
@@ -19,10 +19,10 @@
 	
 	// 로그인 요청
 	Users user = Users.builder()
-					  .userId(userID)
-					  .userPwd(userPWD)
-					  .build()
-					  ;
+	  .userId(userID)
+	  .userPwd(userPWD)
+	  .build()
+	  ;
 	UserService userService = new UserServiceImpl();
 	Users loginUser = userService.login(user);
 	
@@ -61,11 +61,11 @@
 	if( rememberMe != null && rememberMe.equals("on") ) {
 		// 자동 로그인 체크 시
 		// - 토큰 발행
-		PersistenceLoginsService loginsService = new PersistenceLoginsServiceImpl(); 
-		PersistenceLogins plogin = loginsService.refresh(loginUser.getUserNo());
+		TokenService loginsService = new TokenServiceImpl(); 
+		Tokens plogin = loginsService.refresh(loginUser.getUserNo());
 		String token = null;
 		if( plogin != null )
-			token = plogin.getToken();
+	token = plogin.getToken();
 		// - 쿠키 생성
 		cookieRememberMe.setValue( URLEncoder.encode( rememberMe, "UTF-8" ) );
 		cookieToken.setValue( URLEncoder.encode( token, "UTF-8" ) );
@@ -86,5 +86,4 @@
 		// 메인 화면으로 리다이렉트
 		response.sendRedirect( root + "/");
 	}
-	
 %>

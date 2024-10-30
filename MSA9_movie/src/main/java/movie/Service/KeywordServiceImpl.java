@@ -1,10 +1,15 @@
 package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DAO.KeywordDAO;
+import movie.DTO.Keywords;
 import movie.DTO.Keywords;
 
 public class KeywordServiceImpl implements KeywordService {
@@ -30,7 +35,18 @@ public class KeywordServiceImpl implements KeywordService {
         }};
         Keywords keyword = null;
         try {
-        	keywordDAO.select(1);
+        	keyword = keywordDAO.selectBy(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return keyword;
+	}
+	public Keywords selectByMovieNo(int movieNo) {
+		Map<Object, Object> map = new HashMap<Object, Object>() {{
+            put("movie_no", movieNo);
+        }};
+        Keywords keyword = null;
+        try {
         	keyword = keywordDAO.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +75,72 @@ public class KeywordServiceImpl implements KeywordService {
 		}
 		return result;
 	}
+
+	public PageInfo<Keywords> page(PageInfo<Keywords> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("title");
+				searchOptions.add("type");
+				break;
+			case 2:	
+				searchOptions.add("title");
+				break;
+			case 3:	
+				searchOptions.add("type");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
+		PageInfo<Keywords> selectedPageInfo = null;
+		try {
+			selectedPageInfo = keywordDAO.page(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
 	@Override
+	public PageInfo<Keywords> page() {
+		PageInfo<Keywords> selectedPageInfo = null;
+		try {
+			selectedPageInfo = keywordDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Keywords> page(Page page) {
+		PageInfo<Keywords> selectedPageInfo = null;
+		try {
+			selectedPageInfo = keywordDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Keywords> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Keywords> selectedPageInfo = null;
+		try {
+			selectedPageInfo = keywordDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Keywords> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Keywords> selectedPageInfo = null;
+		try {
+			selectedPageInfo = keywordDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+
 	public List<Keywords> list(int movieNo) {
 		List<Keywords> keywordList = keywordDAO.list(movieNo);
 		return keywordList;
@@ -76,5 +157,5 @@ public class KeywordServiceImpl implements KeywordService {
 		}
 		return 0;
 	}
-	
+
 }

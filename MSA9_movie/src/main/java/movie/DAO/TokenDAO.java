@@ -9,12 +9,12 @@ import java.util.UUID;
 import com.alohaclass.jdbc.dao.BaseDAOImpl;
 
 import movie.DTO.Keywords;
-import movie.DTO.PersistenceLogins;
+import movie.DTO.Tokens;
 
-public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
+public class TokenDAO extends BaseDAOImpl<Tokens> {
 	
 	@Override
-	public PersistenceLogins map(ResultSet arg0) throws Exception {
+	public Tokens map(ResultSet arg0) throws Exception {
 		return null;
 	}
 
@@ -35,7 +35,7 @@ public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
 	 * @param no
 	 * @return
 	 */
-	public PersistenceLogins insert(int no) {
+	public Tokens insert(int no) {
 		int result = 0;
 		String SQL = " INSERT INTO tokens (user_no, token, expiry_date) "
 				   + " VALUES ( ? , ? , ? ) "
@@ -62,7 +62,7 @@ public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
 		}
 		System.out.println("자동 로그인 정보(토큰) 등록 성공");
 		
-		PersistenceLogins logins = PersistenceLogins.builder()
+		Tokens logins = Tokens.builder()
 													.userNo(no)
 													.token(token)
 													.expiryDate(expiryTime)
@@ -78,20 +78,20 @@ public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
 	 * @param no
 	 * @return
 	 */
-	public PersistenceLogins select(int no) {
+	public Tokens select(int no) {
 		
 		
 		String SQL = " SELECT * "
 				   + " FROM tokens "
 				   + " WHERE user_no = ? "
 				   ;
-		PersistenceLogins logins = null;
+		Tokens logins = null;
 		try {
 			psmt = con.prepareStatement(SQL);
 			psmt.setInt(1, no);
 			rs = psmt.executeQuery();
 			if( rs.next() ) {
-				logins = PersistenceLogins.builder()
+				logins = Tokens.builder()
 										  .userNo(no)
 										  .token(rs.getString("token"))
 										  .expiryDate(rs.getTimestamp("expiry_date"))
@@ -115,20 +115,20 @@ public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
 	 * @param token
 	 * @return
 	 */
-	public PersistenceLogins selectByToken(String token) {
+	public Tokens selectByToken(String token) {
 		
 		
 		String SQL = " SELECT * "
 				+ " FROM tokens "
 				+ " WHERE token = ? "
 				;
-		PersistenceLogins logins = null;
+		Tokens logins = null;
 		try {
 			psmt = con.prepareStatement(SQL);
 			psmt.setString(1, token);
 			rs = psmt.executeQuery();
 			if( rs.next() ) {
-				logins = PersistenceLogins.builder()
+				logins = Tokens.builder()
 						.userNo(rs.getInt("user_no"))
 						.token(rs.getString("token"))
 						.expiryDate(rs.getTimestamp("expiry_date"))
@@ -152,7 +152,7 @@ public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
 	 * @param userid
 	 * @return
 	 */
-	public PersistenceLogins update(int no) {
+	public Tokens update(int no) {
 		
 		String SQL = " UPDATE tokens "
 				   + " SET token = ? "
@@ -172,7 +172,7 @@ public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
 		// 수정 시간
 		Timestamp updDate = new Timestamp( new Date().getTime() );
 		
-		PersistenceLogins logins = null;
+		Tokens logins = null;
 		try {
 			
 			psmt = con.prepareStatement(SQL);
@@ -182,7 +182,7 @@ public class PersistenceLoginsDAO extends BaseDAOImpl<PersistenceLogins> {
 			psmt.setInt(4, no);
 			int result = psmt.executeUpdate();
 			if( result > 0) {
-				logins = PersistenceLogins.builder()
+				logins = Tokens.builder()
 						.userNo(no)
 						.expiryDate(expiryDate)
 						.token(token)

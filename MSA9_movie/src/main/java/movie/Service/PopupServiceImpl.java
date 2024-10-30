@@ -1,9 +1,15 @@
 package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.alohaclass.jdbc.dto.Page;
+import com.alohaclass.jdbc.dto.PageInfo;
+
 import movie.DAO.PopupDAO;
+import movie.DTO.Popups;
 import movie.DTO.Popups;
 
 public class PopupServiceImpl implements PopupService {
@@ -58,5 +64,74 @@ public class PopupServiceImpl implements PopupService {
 		}
 		return result;
 	}
-	
+	@Override
+	public PageInfo<Popups> page(PageInfo<Popups> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		//TODO : 서치 옵션 테이블 컬럼명 수정
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("title");
+				searchOptions.add("cast");
+				searchOptions.add("cate");
+				break;
+			case 2:	
+				searchOptions.add("title");
+				break;
+			case 3:	
+				searchOptions.add("cate");
+				break;
+			case 4:	
+				searchOptions.add("cast");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
+		PageInfo<Popups> selectedPageInfo = null;
+		try {
+			selectedPageInfo = popupDAO.page(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Popups> page() {
+		PageInfo<Popups> selectedPageInfo = null;
+		try {
+			selectedPageInfo = popupDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Popups> page(Page page) {
+		PageInfo<Popups> selectedPageInfo = null;
+		try {
+			selectedPageInfo = popupDAO.page(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Popups> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Popups> selectedPageInfo = null;
+		try {
+			selectedPageInfo = popupDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Popups> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Popups> selectedPageInfo = null;
+		try {
+			selectedPageInfo = popupDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
 }

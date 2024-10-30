@@ -1,6 +1,6 @@
 <%@page import="movie.DTO.Users"%>
-<%@page import="movie.Service.PersistenceLoginsServiceImpl"%>
-<%@page import="movie.Service.PersistenceLoginsService"%>
+<%@page import="movie.Service.TokenServiceImpl"%>
+<%@page import="movie.Service.TokenService"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	// 자동 로그인
+// 자동 로그인
 	// - 인증 토큰 삭제
 	Cookie cookieRememberMe = new Cookie("rememberMe","");
 	Cookie cookieToken = new Cookie("token","");
@@ -19,7 +19,7 @@
 	response.addCookie(cookieRememberMe);
 	response.addCookie(cookieToken);
 	
-	PersistenceLoginsService loginsService = new PersistenceLoginsServiceImpl();
+	TokenService loginsService = new TokenServiceImpl();
 	// 아이디 가져오기
 	Users loginUser = (Users) session.getAttribute("loginUser");
 	String loginID = loginUser.getUserId();

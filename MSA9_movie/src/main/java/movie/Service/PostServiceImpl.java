@@ -1,5 +1,6 @@
 package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,10 @@ import movie.DAO.ReplyDAO;
 import movie.DAO.UserDAO;
 import movie.DTO.Movies;
 import movie.DTO.Posts;
+
+import movie.DTO.Posts;
 import movie.DTO.Users;
+
 
 public class PostServiceImpl implements PostService {
 
@@ -31,6 +35,18 @@ public class PostServiceImpl implements PostService {
 		if(result > 0) 	System.out.println("게시글 작성 성공.");
 		else			System.out.println("게시글 작성 실패.");
 		return result;
+	}
+	@Override
+	public int insertKey(Posts post) {
+		int result = 0;
+		try {
+			result = postDAO.insert(post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result > 0) 	System.out.println("게시글 작성 성공.");
+		else			System.out.println("게시글 작성 실패.");
+		return postDAO.lastPK();
 	}
 	@Override
 	public Posts selectByUserNo(int userNo) {
@@ -98,7 +114,7 @@ public class PostServiceImpl implements PostService {
         }};
 		int result = 0;
 		try {
-			result = postDAO.delete(postNo);
+			result = postDAO.deleteBy(map);
 			replyDAO.deleteBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,6 +129,33 @@ public class PostServiceImpl implements PostService {
         if( post.getUserNo() == userNo)
         	result = true;
 		return result;
+	}
+
+	public PageInfo<Posts> page(PageInfo<Posts> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("content");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
+		PageInfo<Posts> selectedPageInfo = null;
+		try {
+			selectedPageInfo = postDAO.page(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Posts> page() {
+		PageInfo<Posts> selectedPageInfo = null;
+		try {
+			selectedPageInfo = postDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
 	}
 	@Override
 	public PageInfo<Posts> page(Page page) {
@@ -134,5 +177,27 @@ public class PostServiceImpl implements PostService {
 		}
 		return selectedPageInfo;
 	}
-	
+
+	@Override
+	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Posts> selectedPageInfo = null;
+		try {
+			selectedPageInfo = postDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public List<Posts> infiniteList(int nowPage, int size, int movieNo) {
+		List<Posts> postList = null;
+		try {
+			postList = postDAO.infiniteList(nowPage, size, movieNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return postList;
+	}
+
 }
