@@ -14,7 +14,7 @@ $("#userid-check").click(function() {
             if ($.trim(result) == "1") {
 				//일치한 아이디 없음(성공)
 				console.log("성공!!!")
-                $("#idSuccess").text("아이디 사용 가능");U
+                $("#idSuccess").text("아이디 사용 가능");
                 $("#idFalse").text(""); // 초기화
             } else {
 				console.log("실패 ㅠㅠ")
@@ -39,17 +39,14 @@ function strongPassword(str) {
 
 function checkId() {
   let regExpId = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+$/ // 아이디 패턴
-  let regExpName = /^[가-힣]{2,}$/ 			// 이름 패턴
   let regExpEmail = /^[0-9a-zA-Z](-_\.)?[0-9a-zA-Z]*@[0-9a-zA-Z](-_\.)?[0-9a-zA-Z]*\.[a-zA-Z]{2,3}$/; // 이메일 패턴
 
   
   let id = document.getElementById("userid").value;
   let pwd = document.getElementById("userpwd").value;
   let pwd2 = document.getElementById("userpwd2").value;
-  let name = document.getElementById("name").value;
   let email = document.getElementById("mail").value;
-  
-  
+
 
   // 아이디 유효성 검사
   if (!regExpId.test(id)) {
@@ -74,16 +71,6 @@ function checkId() {
     return false;
   } else {
     document.getElementById("pwdError2").innerHTML = "";
-  }
-
-  
-  // 이름 유효성 검사
-  if (!regExpName.test(name)) {
-    document.getElementById("nameError").innerHTML = "이름을 입력하세요.";
-    return false;
-  } 
-  else {
-    document.getElementById("nameError").innerHTML = "";
   }
   
   
@@ -115,16 +102,13 @@ function isMatch(password1, password2) {
 
 
 // 탈퇴
-
 function confirmLeave() {
     const confirmed = confirm("탈퇴하시겠습니까?");
     if (confirmed) {
         const userId = document.getElementById("userid").value;
         const userPwd = document.getElementById("userpwd").value;
 		
-		alert(userId)
-		alert(userPwd)
-		// jQuery AJAX 사용
+		
 		$.ajax({
 			url : "leave_pro.jsp",
 			type : "post",
@@ -132,12 +116,46 @@ function confirmLeave() {
 				"id" : userId,
 				"userpwd" : userPwd
 			},
-			dataType : "text",
-			success : function(result){
-				console.log(result)
-			}
-		})
-        // AJAX 요청
+			dataType: "text",
+			   success: function(result) {
+			   	   console.log(result);
+			       if (result.trim() === "탈퇴가 완료되었습니다.") {
+			           alert("탈퇴가 완료되었습니다.");
+			           window.location.href = "index.jsp"; // 성공
+			       } else if (result.trim() === "탈퇴 실패하였습니다.") {
+			           alert("탈퇴 실패하였습니다. 다시 시도해주세요.");
+					   window.location.href = "leave.jsp";
+			       } else {
+			           alert("아이디 또는 비밀번호가 일치하지 않습니다."); // 로그인 실패
+					   window.location.href = "leave.jsp";
+			       }
+			  },
+			  //xhr,포함?
+			  error: function( status, error) {
+			    console.error("AJAX 호출 실패:", status, error); // AJAX 호출 실패 처리
+			    alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+			 }
+		});
+	} else {
+		alert("탈퇴가 취소되었습니다.");
+	}
+	return false; //제출끝
+}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//			dataType : "text",
+//			success : function(result){
+//				console.log(result)
+//			}
+//		})
+//         //AJAX 요청
 //        const xhr = new XMLHttpRequest();
 //        xhr.open("POST", "leave_pro.jsp", true);
 //        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -146,19 +164,19 @@ function confirmLeave() {
 //            if (xhr.readyState === 4 && xhr.status === 200) {
 //                const response = xhr.responseText;
 //				console.log(response)
-////                if (response === "success") {
-////                    alert("탈퇴가 완료되었습니다.");
-////                    window.location.href = "main.jsp"; // 성공 후 페이지 이동
-////                } else {
-////                    alert("아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
-////                }
+//                if (response === "success") {
+//                    alert("탈퇴가 완료되었습니다.");
+//                    window.location.href = "index.jsp"; // 성공 후 페이지 이동
+//                } else {
+//                    alert("아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+//                }
 //            }
 //        };
 //
 //        // 아이디와 비밀번호를 전송
 //        xhr.send("id=" + encodeURIComponent(userId) + "&userpwd=" + encodeURIComponent(userPwd));
-    } else {
-        alert("탈퇴가 취소되었습니다.");
-    }
-	return false; //  제출 방지
-}
+//    } else {
+//        alert("탈퇴가 취소되었습니다.");
+//    }
+//	return false; //  제출 방지
+//}

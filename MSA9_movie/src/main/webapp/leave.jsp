@@ -25,7 +25,7 @@
 		
 		 
 		
-	<form class="user-leave" onsubmit="return confirmLeave()">
+	<form class="user-leave" onsubmit="return confirmLeave();">
  		<div class="info-leave">
  		 <label for="leave" id="leave">회원 탈퇴</label>
 		
@@ -53,6 +53,7 @@
           <div id="emailError"></div>
         </div>
       </div>
+
               
         <div id="leave-btn">
           <button type="submit" class="leave-btn" >탈퇴하기</button>
