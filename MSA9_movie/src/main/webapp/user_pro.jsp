@@ -43,7 +43,7 @@ if ("checkId".equals(action)) {
     if (result > 0) {
         String script = "<script>"
                 + "alert('반갑습니다 " + userId + "님');"
-                + "window.location.href='main.jsp';"
+                + "window.location.href='index.jsp';"
                 + "</script>";
         out.println(script);
     } else {

@@ -98,7 +98,7 @@
 				$("#profile").find(".comment").hide()
             } else {
 				$("#profile").find(".comment").show()
-				$("#preview").hide();
+				$("#preview").hide("");
                 document.getElementById('preview').src = "";
             }
         });
