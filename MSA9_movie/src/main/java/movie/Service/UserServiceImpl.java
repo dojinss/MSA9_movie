@@ -12,6 +12,7 @@ import movie.DAO.UserDAO;
 import movie.DTO.Movies;
 import movie.DTO.Users;
 import movie.DTO.Users;
+import movie.DTO.Users;
 import movie.utils.PasswordUtils;
 
 public class UserServiceImpl implements UserService {
@@ -176,17 +177,13 @@ public class UserServiceImpl implements UserService {
 		PageInfo<Users> selectedPageInfo = null;
 		try {
 			selectedPageInfo = userDAO.page(page, keyword, searchOptions,filterOptions);
-
-
-	@Override
-	public int update(Users user) {
-		int result = 0;
-		try {
-			result = userDAO.update(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return selectedPageInfo;
 	}
+}
+
+	
 
 	

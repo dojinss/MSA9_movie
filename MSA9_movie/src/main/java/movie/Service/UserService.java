@@ -19,7 +19,6 @@ public interface UserService {
 	public Users select(String userId);
 	public Users select(int userNo);
 	// 회원 정보 수정
-//	public int update(String userId);
 	public int update(Users user);
   
 	// 회원 삭제
@@ -27,9 +26,6 @@ public interface UserService {
 	
 	// 로그인
 	public Users login(Users user);	
-	public PageInfo<Users> page(Page page); 
-	
-
 	
 	public PageInfo<Users> page(PageInfo<Users> pageInfo, int searchCode); 
 	public PageInfo<Users> page(); 

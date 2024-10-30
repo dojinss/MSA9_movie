@@ -39,5 +39,5 @@ public interface PostService {
 	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions, Map<String, String> filterOptions);
 	
 	// 인피니티 스크롤 목록
-	public List<Posts> infiniteList(int nowPage,int size,int movieNo);
+	public List<Posts> infiniteList(int nowPage, int size, int movieNo);
 

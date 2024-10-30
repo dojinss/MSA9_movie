@@ -10,6 +10,7 @@ import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.AdDAO;
 import movie.DTO.Ads;
+import movie.DTO.Files;
 import movie.DTO.Ads;
 
 public class AdServiceImpl implements AdService {
@@ -120,6 +121,16 @@ public class AdServiceImpl implements AdService {
 		PageInfo<Ads> selectedPageInfo = null;
 		try {
 			selectedPageInfo = adDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Ads> page(Page page) {
+		PageInfo<Ads> selectedPageInfo = null;
+		try {
+			selectedPageInfo = adDAO.page();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
