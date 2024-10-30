@@ -1,7 +1,13 @@
+<%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp" %>
 <%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	Users user = (Users) session.getAttribute("loginUser");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +16,7 @@
 	<jsp:include page="/layout/link.jsp" />
 	<%-- CSS 링크 파일 --%>
 	<link rel="stylesheet" href="static/css/user.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 </head>
 <body>
@@ -24,7 +31,9 @@
 		</div>
 
 
-<form class="user-info" onsubmit="return checkId()">
+<form class="user-info" method="post" action="infoUpdate_pro.jsp?action=confirminfoup" onsubmit="return confirminfoup();">
+
+
   <div class="info-update">
   <label for="tab" id="tab">회원 정보 수정</label>
   
@@ -33,9 +42,8 @@
 
       <div class="sign-edit">
         <div class="group">
-          <label for="userid" class="label">변경할 아이디</label>
-          <input id="userid"  type="text" class="input" name="id" autofocus >
-          <button type="button" id="userid-check">중복확인</button>
+          <label for="userid" class="label">아이디</label>
+          <input id="userid"  type="text" class="input" name="id" value="<%= user.getUserId() %>" readonly >
           <!-- 유효성 검사 후 잘,잘못되었을때 경고문 -->      
            <div id="wrongId"></div>
            <div id="idSuccess"></div>
@@ -94,18 +102,27 @@
 	<%-- JS 링크 파일 --%>
 	<script src="static/js/user.js"></script>
 	<script>
-		document.getElementById('profile').addEventListener('change', function(event) {
-            const input = event.target;
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                document.getElementById('preview').src = "";
-            }
-        }); 
+	
+	// 프로필 사진 등록 시 텍스트 숨기기 이벤트
+	document.getElementById('profile').addEventListener('change', function(event) {
+	    const input = event.target;
+	    if (input.files && input.files[0]) {
+	        const reader = new FileReader();
+	        reader.onload = function(e) {
+	            document.getElementById('preview').src = e.target.result;
+	        };
+	        reader.readAsDataURL(input.files[0]);
+	        
+	        // 파일이 있을때 텍스트 보이기
+	        document.getElementById('preview').style.display = 'block';
+	        document.querySelector('.comment').style.display = 'none';
+	    } else {
+	        //파일이 없을때 이미지 보이기
+	        document.querySelector('.comment').style.display = 'block';
+	        document.getElementById('preview').style.display = 'none';
+	        document.getElementById('preview').src = "";
+	    }
+	});
 		
 		/* 마우스 올렸을때 이벤트 */
 		 $('button').on('mouseover', function() {

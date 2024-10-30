@@ -44,11 +44,12 @@
         </div>
         
         <div class="group">
-          <!-- HTML 수정 -->
+          <!--  수정 -->
 			<label for="userpwd2" class="label">비밀번호 확인</label>
-			<input id="userpwd2" type="password" class="input" >
+			<input id="userpwd2" type="password" class="input" name="userpwd2" >
 			<!-- 오류 메세지 -->
 			<div id="pwdError2"></div>
+			 <!-- 유효성 검사 후 잘못되었을때 경고문 -->
 			<div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
 
         </div>
@@ -86,22 +87,28 @@
 	<%-- JS 링크 파일 --%>
 	<script src="<%=root %>/static/js/user.js"></script>
 	<script>
+	
+	// 프로필 사진 등록 시 텍스트 숨기기 이벤트
 	document.getElementById('profile').addEventListener('change', function(event) {
-			const input = event.target;
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-				$("#preview").show();
-				$("#profile").find(".comment").hide()
-            } else {
-				$("#profile").find(".comment").show()
-				$("#preview").hide("");
-                document.getElementById('preview').src = "";
-            }
-        });
+	    const input = event.target;
+	    if (input.files && input.files[0]) {
+	        const reader = new FileReader();
+	        reader.onload = function(e) {
+	            document.getElementById('preview').src = e.target.result;
+	        };
+	        reader.readAsDataURL(input.files[0]);
+	        
+	        // 파일이 있을때 텍스트 보이기
+	        document.getElementById('preview').style.display = 'block';
+	        document.querySelector('.comment').style.display = 'none';
+	    } else {
+	        //파일이 없을때 이미지 보이기
+	        document.querySelector('.comment').style.display = 'block';
+	        document.getElementById('preview').style.display = 'none';
+	        document.getElementById('preview').src = "";
+	    }
+	});
+
 	
 	/* 마우스 올렸을때 이벤트 */
 	 $('button').on('mouseover', function() {

@@ -62,6 +62,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int update(Users user) {
 		int result = 0;
+		user.setUserPwd( PasswordUtils.encoded(user.getUserPwd()) );
 		try {
 			result = userDAO.update(user);
 		} catch (Exception e) {
@@ -83,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Users login(Users user) {
-		String userid = user.getUserId();				// 입력 받은 아이디d
+		String userid = user.getUserId();		// 입력 받은 아이디d
 		Users selectedUser = select(userid);	// 아이디 조회
 		
 		System.out.println("selectedUser : " + selectedUser);
@@ -92,8 +93,8 @@ public class UserServiceImpl implements UserService {
 			return null;
 		
 		// 비밀번호 일치 여부 확인
-		String password  = selectedUser.getUserPwd();	// 입력받은 패스워드
-		String loginPwd  = user.getUserPwd();			// 조회된 아이디의 패스워드
+		String password  = selectedUser.getUserPwd();	// 조회된 아이디의 패스워드
+		String loginPwd  = user.getUserPwd();			// 입력받은 아이디의 패스워드
 		
 		System.out.println("password : "+  password);
 		System.out.println("loginPwd : "+  loginPwd);
@@ -120,16 +121,7 @@ public class UserServiceImpl implements UserService {
 		return selectedPageInfo;
 	}
 
-	@Override
-	public int update(Users user) {
-		int result = 0;
-		try {
-			result = userDAO.update(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+	
 
 	@Override
 	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions) {

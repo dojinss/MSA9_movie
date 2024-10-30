@@ -24,7 +24,9 @@
 					  .build()
 					  ;
 	UserService userService = new UserServiceImpl();
+	
 	Users loginUser = userService.login(user);
+	
 	
 	// 로그인 실패
 	if( loginUser == null ) {
