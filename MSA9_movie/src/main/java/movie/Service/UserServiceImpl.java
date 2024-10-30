@@ -120,16 +120,16 @@ public class UserServiceImpl implements UserService {
 		return selectedPageInfo;
 	}
 
-	@Override
-	public int update(Users user) {
-		int result = 0;
-		try {
-			result = userDAO.update(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+//	@Override
+//	public int update(Users user) {
+//		int result = 0;
+//		try {
+//			result = userDAO.update(user);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
 
 	@Override
 	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions) {
