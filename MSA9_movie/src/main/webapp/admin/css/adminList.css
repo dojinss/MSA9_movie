@@ -38,19 +38,41 @@
 .content {
 	position: relative;
 	width: 1200px;
-	height: 750px;
 	top: 40px;
 	overflow: hidden;
 	border-radius: 20px;
 }
 
-.movie-list {
+.searchForm{
+	display:flex;
+	position: relative;
+	top: 30px;
+	float:right;
+}
+
+.searchCode{
+	padding-left: 10px;
+	width:100px;
+	height:50px;
+}
+
+.searchInput{
+	padding-left: 10px;
+	border-width:1px 0 1px;
+	width:200px;
+	height:50px;
+}
+.searchForm input[type=submit]{
+	width:50px;
+	height:50px;
+}
+
+.list {
 	width: 1200px;
-	height: 650px;
 	border-collapse: collapse;
 }
 
-.movie-list thead {
+.list thead {
 	width: 1200px;
 	height: 100px;
 	background-color: var(--sub-color);
@@ -59,20 +81,20 @@
 	border-bottom: 1px solid #ddd;
 }
 
-.movie-list tbody {
+.list tbody {
 	width: 1200px;
-	height: 550px;
 	background-color: white;
 	padding: 15px;
 	text-align: center;
 }
 
-.movie-list tbody tr {
+.list tbody tr {
+	height:50px;
 	background-color: white;
 	border-bottom: 1px solid #ddd;
 }
 
-.movie-list tbody tr:hover {
+.list tbody tr:hover {
 	filter: brightness(90%);
 }
 
@@ -84,8 +106,11 @@
 	text-align: center;
 	border-radius: 10px;
 }
+.list td:nth-child(2) a:hover{text-decoration: underline;}
+.list td:nth-child(2){max-width: 140px;}
+.list td:nth-child(2) a{max-width: 140px;}
 
-.movie-list td a:hover{
+.list td a:hover{
 	filter: brightness(90%);
 }
 
@@ -99,13 +124,35 @@
 	padding-top: 30px;
 }
 
+.footer {
+	width: 1200px;
+	height: 100px;
+	padding: 15px;
+	background-color: var(--sub-color);
+	padding-top: 30px;
+}
+
 .page-link {
 	margin: 0 40px;
-	text-decoration: none;
 	box-sizing: border-box;
 	text-align: center;
 }
 
+.pagenation a:hover{
+	text-decoration: underline;
+}
+.keywordbtn{
+	position: relative;
+	width: 120px;
+	height: 50px;
+	padding-top: 12px;
+	background-color: var(--insert-color);
+	float: right;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 10px;
+}
 .insertbtn {
 	position: relative;
 	width: 120px;
@@ -121,5 +168,8 @@
 }
 
 .insertbtn:hover {
+	filter: brightness(90%);
+}
+.keywordbtn:hover {
 	filter: brightness(90%);
 }

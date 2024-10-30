@@ -24,7 +24,7 @@
 		</div>
 
 
-<div class="user-info">
+<form class="user-info" onsubmit="return checkId()">
   <div class="info-update">
   <label for="tab" id="tab">회원 정보 수정</label>
   
@@ -33,56 +33,58 @@
 
       <div class="sign-edit">
         <div class="group">
-          <label for="userid" class="label">아이디</label>
-          <input id="userid" type="text" class="input" >
-          <button id="userid-check" onclick="idcheck()">중복확인</button>
-           <!-- 유효성 검사 후 잘못되었을때 경고문 -->
-           <span id="wrongId" class="wrong-messeage"></span>
+          <label for="userid" class="label">변경할 아이디</label>
+          <input id="userid"  type="text" class="input" name="id" autofocus >
+          <button type="button" id="userid-check">중복확인</button>
+          <!-- 유효성 검사 후 잘,잘못되었을때 경고문 -->      
+           <div id="wrongId"></div>
+           <div id="idSuccess"></div>
+           <div id="idFalse"></div>
+          
         </div>
+        
         <div class="group">
-          <label for="userpwd" class="label">비밀번호</label>
-          <input id="userpwd" type="password" class="input" data-type="password">
+          <label for="userpwd" class="label">변경할비밀번호</label>
+          <input id="userpwd" type="password" class="input" name="userpwd" >
+          <div id="pwdError"></div>
         </div>
+        
         <div class="group">
           <label for="userpwd2" class="label">비밀번호 확인</label>
-          <input id="userpwd2" type="password" class="input" data-type="password">
-          <button id="userpwd2-check" onclick="pwdcheck()">확인</button>
+          <input id="userpwd2" type="password" class="input" name="userpwd2">
+          <!-- <button id="userpwd2-check" onclick="pwdcheck()">확인</button> -->
+          <!--작성 안했을때 경고문  -->
+          <div id="pwdError2"></div>
           <!-- 유효성 검사 후 잘못되었을때 경고문 -->
-           <span id="wrongPw" class="wrong-messeage"></span>
+          <div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
         </div>
-
-      <div class="user-edit">
-        <div class="group">
-          <label for="name" class="label">이름</label>
-          <input id="name" type="text" class="input" >
-        </div>
-
-        <div class="group">
-          <label for="userbirth" class="label">생년월일</label>
-          <input id="userbirth" type="date" class="input" data-type="">
-        </div>
+		
+			<div class="user-edit">        
         <div class="group">
           <label for="mail" class="label">이메일</label>
-          <input id="mail" type="email" class="input">
+          <input id="mail" type="email" class="input" name="email"  placeholder="'@' 포함하여 입력해 주세요">
+          <!-- 오류 메세지 -->
+	      <div id="emailError"></div>
         </div>
 
         <div class="group">
           <label for="profile" class="label">프로필 이미지</label>
         </div>
-        <div id="preview-box">
-        	<img id="preview" src="" width="100" height="100" />
+        <div class="preview">
+	        <div id="preview-box">
+	        	<p class="comment">프로필 이미지를 업로드 해주세요.</p>
+	        	<img id="preview" src="" width="100" height="100" />
+	        </div>
+	        <input id="profile" type="file" class="input" name="profile">
         </div>
-        <input id="profile" type="file" class="input" >
-        
-
-      </div>
+     </div>
       </div>
         <div id="edit">
-          <button class="edit-btn"  onclick="">수정하기</button>
+          <button type="submit" class="edit-btn" >수정하기</button>
         </div>
       </div> 
     </div>
-  </div>
+  </form>
 
 
 	
@@ -90,7 +92,8 @@
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
 	<%-- JS 링크 파일 --%>
-	<script type="text/javascript">
+	<script src="static/js/user.js"></script>
+	<script>
 		document.getElementById('profile').addEventListener('change', function(event) {
             const input = event.target;
             if (input.files && input.files[0]) {
@@ -102,7 +105,7 @@
             } else {
                 document.getElementById('preview').src = "";
             }
-        });
+        }); 
 		
 		/* 마우스 올렸을때 이벤트 */
 		 $('button').on('mouseover', function() {
@@ -121,15 +124,6 @@
 	        $(this).css('color', 'white')
 	        $(this).css('background-color', 'var(--sub-color)')
 	    })
-		
-		/* 중복 확인 알림 */
-		
-		
-		/* 비밀번호 확인 알림 */
-		
-		
-		/* 수정 완 알림 */
-		
 		
 	</script>
 </body>

@@ -10,6 +10,7 @@ import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.PrimeDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Movies;
 import movie.DTO.Primes;
 import movie.DTO.Primes;
 import movie.DTO.Users;
@@ -96,6 +97,7 @@ public class PrimeServiceImpl implements PrimeService {
 		}
 		return result;
 	}
+
 	@Override
 	public PageInfo<Primes> page(PageInfo<Primes> pageInfo, int searchCode) {
 		List<String> searchOptions = new ArrayList<String>();
@@ -145,6 +147,7 @@ public class PrimeServiceImpl implements PrimeService {
 		}
 		return selectedPageInfo;
 	}
+
 	@Override
 	public PageInfo<Primes> page(Page page, String keyword, List<String> searchOptions) {
 		PageInfo<Primes> selectedPageInfo = null;
@@ -155,6 +158,7 @@ public class PrimeServiceImpl implements PrimeService {
 		}
 		return selectedPageInfo;
 	}
+
 	@Override
 	public PageInfo<Primes> page(Page page, String keyword, List<String> searchOptions,
 			Map<String, String> filterOptions) {
@@ -166,4 +170,5 @@ public class PrimeServiceImpl implements PrimeService {
 		}
 		return selectedPageInfo;
 	}
+
 }

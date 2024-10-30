@@ -75,7 +75,7 @@ public class KeywordServiceImpl implements KeywordService {
 		}
 		return result;
 	}
-	@Override
+
 	public PageInfo<Keywords> page(PageInfo<Keywords> pageInfo, int searchCode) {
 		List<String> searchOptions = new ArrayList<String>();
 		switch (searchCode) {
@@ -140,4 +140,22 @@ public class KeywordServiceImpl implements KeywordService {
 		}
 		return selectedPageInfo;
 	}
+
+	public List<Keywords> list(int movieNo) {
+		List<Keywords> keywordList = keywordDAO.list(movieNo);
+		return keywordList;
+	}
+	@Override
+	public int allDelete(int movieNo) {
+		Map<Object, Object> map = new HashMap<Object, Object>() {{
+            put("movie_no", movieNo);
+        }};
+        try {
+			keywordDAO.deleteBy(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 }

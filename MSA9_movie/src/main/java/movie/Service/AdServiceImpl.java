@@ -103,16 +103,7 @@ public class AdServiceImpl implements AdService {
 		}
 		return selectedPageInfo;
 	}
-	@Override
-	public PageInfo<Ads> page(Page page) {
-		PageInfo<Ads> selectedPageInfo = null;
-		try {
-			selectedPageInfo = adDAO.page(page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return selectedPageInfo;
-	}
+
 	@Override
 	public PageInfo<Ads> page(Page page, String keyword, List<String> searchOptions) {
 		PageInfo<Ads> selectedPageInfo = null;
@@ -134,4 +125,5 @@ public class AdServiceImpl implements AdService {
 		}
 		return selectedPageInfo;
 	}
+
 }

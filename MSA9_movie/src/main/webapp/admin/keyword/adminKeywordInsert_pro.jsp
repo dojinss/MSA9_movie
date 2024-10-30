@@ -1,3 +1,6 @@
+<%@page import="movie.DTO.Keywords"%>
+<%@page import="movie.Service.KeywordServiceImpl"%>
+<%@page import="movie.Service.KeywordService"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Enumeration"%>
@@ -17,11 +20,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MovieService movieService = new MovieServiceImpl();
+	KeywordService keywordService = new KeywordServiceImpl();
+	int movieNo = 0;
 	String title = "";
-	boolean notice = false;
-	String cate = "";
-	String cast = "";
+	String type = "";
 	String content = "";
 	String imageUrl = "";
 
@@ -43,19 +45,15 @@
 			String name = item.getFieldName();
 			String value = item.getString("utf-8");
 			switch(name){
+			case "movieNo":
+				System.out.println("결과는 : " +value);
+				movieNo=Integer.parseInt(value);
+				break;
 			case "title":
 				title=value;
 				break;
-			case "notice":
-				if(value.equals("1")){
-					notice=true;
-				}
-				break;
-			case "cate":
-				cate=value;
-				break;
-			case "cast":
-				cast=value;
+			case "type":
+				type=value;
 				break;
 			case "content":
 				content=value;
@@ -75,19 +73,18 @@
 			imageUrl = file.getPath();
 		}
 	}
-	Movies movie = Movies.builder()
+	Keywords keyword = Keywords.builder()
+			  .movieNo(movieNo)
 			  .title(title)
-			  .notice(notice)
-			  .cate(cate)
-			  .cast(cast)
+			  .type(type)
 			  .content(content)
 			  .imageUrl(imageUrl)
 			  .build()
 			  ;
-	int result = movieService.insert(movie);
+	int result = keywordService.insert(keyword);
 	if(result==1){
-		response.sendRedirect(root+"/admin/movie/adminMovieList.jsp");
+		response.sendRedirect(root+"/admin/keyword/adminKeywordList.jsp?movieNo="+movieNo);
 	}else{
-		response.sendRedirect(root+"/admin/movie/adminMovieInsert.jsp");
+		response.sendRedirect(root+"/admin/keyword/adminKeywordInsert.jsp?movieNo="+movieNo);
 	}
 %>

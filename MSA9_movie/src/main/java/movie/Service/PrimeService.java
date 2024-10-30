@@ -1,12 +1,17 @@
 package movie.Service;
 
 import java.util.List;
+
 import java.util.Map;
+
 
 import com.alohaclass.jdbc.dto.Page;
 import com.alohaclass.jdbc.dto.PageInfo;
 
-import movie.DTO.Primes;
+
+import movie.DTO.Movies;
+import movie.DTO.Posts;
+
 import movie.DTO.Primes;
 
 public interface PrimeService {
@@ -21,6 +26,7 @@ public interface PrimeService {
 	public int update(Primes prime);
 	// 광고주 삭제
 	public int delete(int primeNo);
+
 	
 	public PageInfo<Primes> page(PageInfo<Primes> pageInfo, int searchCode); 
 	public PageInfo<Primes> page(); 
@@ -28,4 +34,5 @@ public interface PrimeService {
 	public PageInfo<Primes> page(Page page, String keyword, List<String> searchOptions); 
 	public PageInfo<Primes> page(Page page, String keyword, List<String> searchOptions, Map<String, String> filterOptions);
 	
+
 }

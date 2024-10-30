@@ -9,6 +9,54 @@ button:active {
   margin-top: 3px;
 }
 
+
+/* 경고문 */
+.sign #wrongId ,
+.sign #pwdError,
+.sign #pwdError2,
+.sign #nameError,
+.sign #emailError,
+.sign #idFalse{
+  color: red;
+  font-size: small;
+}
+.sign #idSuccess{
+	color: green;
+	font-size: small;
+}
+
+.sign-edit #idSuccess{
+	color: green;
+	font-size: small;	
+}
+
+.sign-edit #wrongId ,
+.sign-edit #pwdError,
+.sign-edit #pwdError2,
+.sign-edit #nameError,
+.sign-edit #emailError,
+.sign-edit #idFalse{
+  color: red;
+  font-size: small;
+}
+
+/* sign-edit #pwdError {
+	color: red;
+}
+ */
+.mismatch-message{
+	color: red;
+	font-size: small;
+}
+
+/* 경고문 숨기기 */
+.hide{
+	display: none;
+}
+
+
+
+
 body{
   margin:0;
   color:#6a6f8c;
@@ -45,7 +93,7 @@ body{
 .login-box #tab{
   font-size:30px;
   padding-bottom:5px;
-  margin:10px 15px 30px 55px;
+  margin:10px 15px 30px 85px;
   display:inline-block;
  
 }
@@ -77,38 +125,37 @@ body{
 /* 그리드 하고싶은데 */
 .sign #userid-check{
   position: absolute;
-  top: 25px;
+  top: 22px;
 }
 
 .sign #userpwd2-check{
   position: absolute;
-  top: 25px;
+  top: 20px;
   right: 10px;
 }
 
 
-.sign #preview-box{
-    width: 100px;
-    height: 100px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    background-color: #f0f0f0;
-}
+/* 프로필 */
+/* #preview-box{ */
+/*     width: 100px; */
+/*     height: 100px; */
+/*     border: 1px solid #ccc; */
+/*     margin-top: 10px; */
+/*     background-color: #f0f0f0; */
+/*     position: absolute; */
+/*     left: 50px; */
+/*     bottom: 15px; */
+/*     border-radius: 10px; */
+/* } */
 
-/* 경고문 */
-.sign #wrongId {
-  color: red;
-  font-size: small;
-}
-.sign #wrongPw {
-  color: red;
-  font-size: small;
+#profile {
+	
 }
 
 
 .login-info .group{
   position: relative;
-  margin-bottom:15px;
+  margin-bottom:15px; 
 }
 .login-info .group .label,
 .login-info .group .input,
@@ -125,7 +172,7 @@ body{
   background:rgba(255,255,255,.1);
 }
 
-.label
+
 
 
 .login-info .group input[data-type="password"]{
@@ -156,7 +203,7 @@ body{
 
 
 
-/*-------------------------------------infoUpdate-----------------------------------------  */
+/*------------------------------infoUpdate-----------------------------------------  */
  .user-category {
  	background: rgba(255, 255, 255, 0.4);
  }
@@ -167,13 +214,13 @@ body{
     padding-bottom:5px;
     margin:20px 40px 10px 0;
     display:inline-block;
-    color: black;
+    color: #aaa;
     
   }
   .user-category .edit-in:checked  +  .tab ,
   .user-category .user-out:checked  +  .tab {
-    color:#ffffff85;
-    border-color:black;
+    color: black;
+    border-color: #808080;
   }
   .tab-radio {
     display:none;
@@ -211,7 +258,7 @@ body{
   border-color:var(--main-color);
 }
 .user-edit{
-  min-height:345px;
+  min-height:220px;
   position:relative;
   perspective:1000px;
   transform-style:preserve-3d;
@@ -239,33 +286,23 @@ body{
 /* 그리드 하고싶은데 */
 .sign-edit #userid-check{
   position: absolute;
-  top: 23px;
+  top: 21px;
   right: 10px;
 }
 
 .sign-edit #userpwd2-check{
   position: absolute;
-  top: 23px;
+  top: 20px;
   right: 10px;
 }
 
+/* 프로필 수정 */
 
-.sign-edit #preview-box{
-    width: 100px;
-    height: 100px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    background-color: #f0f0f0;
-}
-
-/* 경고문 */
-.sign-edit #wrongId {
-  color: red;
-  font-size: small;
-}
-.sign-edit #wrongPw {
-  color: red;
-  font-size: small;
+.sign-edit #profile {
+	position: absolute;
+	margin:0px 10px;
+	left: 150px;
+	bottom: 10px;
 }
 
 
@@ -300,7 +337,7 @@ body{
 }
 
 /* 중앙맞추고싶음 */
-.user-edit #edit{
+#edit{
 	width:210px;
 	margin:10px auto;
 }
@@ -384,21 +421,32 @@ body{
 	 cursor: pointer;
 }
 
-
-/* 그리드 */
-.sign-edit #userid-check{
-  position: absolute;
-  top: 25px;
+.preview {
+	display:grid;
+	grid-template-columns: 100px 1fr;
+	gap:10px;
+	align-items: end;
 }
 
-
-
-.sign-edit #preview-box{
+#preview-box{
     width: 100px;
     height: 100px;
     border: 1px solid #ccc;
     margin-top: 10px;
     background-color: #f0f0f0;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    border-radius: 10px;
+}
+#preview-box .comment {
+	color:#555;
+	font-size:10px;
+	text-align:center;
+	font-weight:100;
+}
+#preview-box img {
+	display:none;
 }
 
 /* 경고문 */

@@ -11,8 +11,12 @@ import com.alohaclass.jdbc.dto.PageInfo;
 import movie.DAO.PostDAO;
 import movie.DAO.ReplyDAO;
 import movie.DAO.UserDAO;
+import movie.DTO.Movies;
 import movie.DTO.Posts;
+
 import movie.DTO.Posts;
+import movie.DTO.Users;
+
 
 public class PostServiceImpl implements PostService {
 
@@ -126,7 +130,7 @@ public class PostServiceImpl implements PostService {
         	result = true;
 		return result;
 	}
-	@Override
+
 	public PageInfo<Posts> page(PageInfo<Posts> pageInfo, int searchCode) {
 		List<String> searchOptions = new ArrayList<String>();
 		switch (searchCode) {
@@ -173,6 +177,7 @@ public class PostServiceImpl implements PostService {
 		}
 		return selectedPageInfo;
 	}
+
 	@Override
 	public PageInfo<Posts> page(Page page, String keyword, List<String> searchOptions,
 			Map<String, String> filterOptions) {
@@ -194,4 +199,5 @@ public class PostServiceImpl implements PostService {
 		}
 		return postList;
 	}
+
 }

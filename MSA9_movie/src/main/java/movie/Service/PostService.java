@@ -1,13 +1,17 @@
 package movie.Service;
 
 import java.util.List;
+
 import java.util.Map;
+
 
 import com.alohaclass.jdbc.dto.Page;
 import com.alohaclass.jdbc.dto.PageInfo;
 
+
 import movie.DTO.Posts;
-import movie.DTO.Posts;
+import movie.DTO.Movies;
+import movie.DTO.Users;
 
 public interface PostService {
 	
@@ -25,6 +29,7 @@ public interface PostService {
 	public int deleteByUserNo(int userNo);
 	// 아이디 체크
 	public boolean idCheck(int postNo, int userNo);
+
 	
 	// 페이징 처리 목록
 	public PageInfo<Posts> page(PageInfo<Posts> pageInfo, int searchCode); 
@@ -35,4 +40,4 @@ public interface PostService {
 	
 	// 인피니티 스크롤 목록
 	public List<Posts> infiniteList(int nowPage,int size,int movieNo);
-}
+

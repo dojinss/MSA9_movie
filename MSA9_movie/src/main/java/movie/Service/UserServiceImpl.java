@@ -9,6 +9,7 @@ import com.alohaclass.jdbc.dto.Page;
 import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.UserDAO;
+import movie.DTO.Movies;
 import movie.DTO.Users;
 import movie.DTO.Users;
 import movie.utils.PasswordUtils;
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int signup(Users user) {
+		System.out.println( user.getUserPwd() );
 		int result = 0;
 		user.setUserPwd( PasswordUtils.encoded(user.getUserPwd()) );
 		try {
@@ -38,7 +40,6 @@ public class UserServiceImpl implements UserService {
         }};
         Users user = null;
 		try {
-			userDAO.select(1);
 			user = userDAO.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,7 +54,6 @@ public class UserServiceImpl implements UserService {
         }};
         Users user = null;
 		try {
-			userDAO.select(1);
 			user = userDAO.selectBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,15 +62,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int update(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Users user) {
+		int result = 0;
+		try {
+			result = userDAO.update(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
-	public int delete(String userId) {
-		
-		return 0;
+
+	public int delete(int userNo) {
+        int result = 0;
+		try {
+			result = userDAO.delete(userNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+
 	}
 
 	@Override
@@ -78,6 +90,7 @@ public class UserServiceImpl implements UserService {
 		String userid = user.getUserId();		// 입력 받은 아이디d
 		Users selectedUser = select(userid);	// 아이디 조회
 		
+		System.out.println("selectedUser : " + selectedUser);
 		// 회원 가입이 안된 아이디
 		if( selectedUser == null )
 			return null;
@@ -86,7 +99,11 @@ public class UserServiceImpl implements UserService {
 		String password  = selectedUser.getUserPwd();	// 입력받은 패스워드
 		String loginPwd  = user.getUserPwd();			// 조회된 아이디의 패스워드
 		
+		System.out.println("password : "+  password);
+		System.out.println("loginPwd : "+  loginPwd);
+		
 		boolean checkPwd = PasswordUtils.check(loginPwd,password); // 일치여부 확인
+		System.out.println("checkPwd : " + checkPwd);
 		// 비밀번호 불일치
 		if( !checkPwd )
 			return null;
@@ -96,7 +113,7 @@ public class UserServiceImpl implements UserService {
 		return selectedUser;
 	}
 
-	@Override
+	
 	public PageInfo<Users> page(PageInfo<Users> pageInfo, int searchCode) {
 		List<String> searchOptions = new ArrayList<String>();
 		switch (searchCode) {
@@ -131,6 +148,7 @@ public class UserServiceImpl implements UserService {
 		return selectedPageInfo;
 	}
 	@Override
+
 	public PageInfo<Users> page(Page page) {
 		PageInfo<Users> selectedPageInfo = null;
 		try {
@@ -140,6 +158,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return selectedPageInfo;
 	}
+
 	@Override
 	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions) {
 		PageInfo<Users> selectedPageInfo = null;
@@ -156,10 +175,17 @@ public class UserServiceImpl implements UserService {
 		PageInfo<Users> selectedPageInfo = null;
 		try {
 			selectedPageInfo = userDAO.page(page, keyword, searchOptions,filterOptions);
+
+
+	@Override
+	public int update(Users user) {
+		int result = 0;
+		try {
+			result = userDAO.update(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return selectedPageInfo;
+		return result;
 	}
 
-}
+	
