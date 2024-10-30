@@ -2,37 +2,37 @@ package movie.Service;
 
 import java.util.Date;
 
-import movie.DAO.PersistenceLoginsDAO;
-import movie.DTO.PersistenceLogins;
+import movie.DAO.TokenDAO;
+import movie.DTO.Tokens;
 
-public class PersistenceLoginsServiceImpl implements PersistenceLoginsService{
+public class TokenServiceImpl implements TokenService{
 	
-	private PersistenceLoginsDAO pDAO = new PersistenceLoginsDAO();
+	private TokenDAO pDAO = new TokenDAO();
 	
 	@Override
-	public PersistenceLogins insert(int no) {
+	public Tokens insert(int no) {
 		return pDAO.insert(no);
 	}
 
 	@Override
-	public PersistenceLogins select(int no) {
+	public Tokens select(int no) {
 		return pDAO.select(no);
 	}
 
 	@Override
-	public PersistenceLogins selectByToken(String token) {
+	public Tokens selectByToken(String token) {
 		return pDAO.selectByToken(token);
 	}
 
 	@Override
-	public PersistenceLogins update(int no) {
+	public Tokens update(int no) {
 		return pDAO.update(no);
 	}
 
 	@Override
-	public PersistenceLogins refresh(int no) {
+	public Tokens refresh(int no) {
 		// 토큰 조회
-		PersistenceLogins plogin = pDAO.select(no);
+		Tokens plogin = pDAO.select(no);
 		
 		// 토큰이 없는 경우, 토큰 생성
 		if( plogin == null ) {
@@ -49,7 +49,7 @@ public class PersistenceLoginsServiceImpl implements PersistenceLoginsService{
 	@Override
 	public boolean isValid(String token) {
 		// 토큰 조회
-		PersistenceLogins plogin = pDAO.selectByToken(token);
+		Tokens plogin = pDAO.selectByToken(token);
 		
 		// 토큰 없음
 		if( plogin == null )

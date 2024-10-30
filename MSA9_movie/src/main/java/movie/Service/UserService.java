@@ -2,10 +2,12 @@ package movie.Service;
 
 import java.util.List;
 
+import java.util.Map;
+
+
 import com.alohaclass.jdbc.dto.Page;
 import com.alohaclass.jdbc.dto.PageInfo;
 
-import movie.DTO.Movies;
 import movie.DTO.Users;
 
 public interface UserService {
@@ -24,7 +26,11 @@ public interface UserService {
 	
 	// 로그인
 	public Users login(Users user);	
-	public PageInfo<Users> page(Page page); 
 	
+	public PageInfo<Users> page(PageInfo<Users> pageInfo, int searchCode); 
+	public PageInfo<Users> page(); 
+	public PageInfo<Users> page(Page page); 
 	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions); 
+	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions, Map<String, String> filterOptions);
+
 }

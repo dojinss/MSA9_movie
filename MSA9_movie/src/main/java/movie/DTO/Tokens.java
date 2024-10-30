@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PersistenceLogins {
-	private int no;
+public class Tokens {
+	private int tokenNo;
 	private int userNo;
 	private String token;
 	private Date expiryDate;

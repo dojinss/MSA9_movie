@@ -2,7 +2,8 @@
 
 CREATE TABLE `posts` (
 	`post_no`		int	NOT NULL 	primary key auto_increment				COMMENT '게시글 번호',
-	`keyword_no`	int	NOT NULL											COMMENT '키워드 번호',
+	`keyword_no`	int	NULL												COMMENT '키워드 번호',
+	`movie_no`		int	NULL												COMMENT '영화 번호',
 	`user_no`		int	NOT NULL											COMMENT '회원번호',
 	`content`		varchar(200)	NOT NULL								COMMENT '내용',
 	`like`			int	NOT NULL	DEFAULT 0								COMMENT '좋아요',
@@ -14,7 +15,7 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
 	`user_no`		int				NOT NULL 	primary key auto_increment	COMMENT '회원번호',
-	`rule_no`		int				NOT NULL								COMMENT '권한번호',
+	`rule_no`		int				NOT NULL	DEFAULT	1					COMMENT '권한번호',
 	`user_id`		varchar(100)	NOT NULL								COMMENT '아이디',
 	`user_pwd`		varchar(255)	NOT NULL								COMMENT '비밀번호',
 	`email`			varchar(100)	NOT NULL								COMMENT '이메일',
@@ -64,11 +65,12 @@ CREATE TABLE `movies` (
 DROP TABLE IF EXISTS `ads`;
 
 CREATE TABLE `ads` (
-	`ad_no`		int			NOT NULL	primary key auto_increment		COMMENT '광고번호',
-	`prime_no`	int			NOT NULL									COMMENT '광고주번호',
-	`content`	text		NOT NULL									COMMENT '내용',
-	`reg_date`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP		COMMENT '등록일자',
-	`upd_date`	TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP		COMMENT '수정일자'
+	`ad_no`			int			NOT NULL	primary key auto_increment		COMMENT '광고번호',
+    `keyword_no`	int			NOT NULL									COMMENT '키워드번호',
+	`prime_no`		int			NOT NULL									COMMENT '광고주번호',
+	`content`		text		NOT NULL									COMMENT '내용',
+	`reg_date`		TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP		COMMENT '등록일자',
+	`upd_date`		TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP		COMMENT '수정일자'
 );
 
 DROP TABLE IF EXISTS `keywords`;
@@ -100,7 +102,8 @@ CREATE TABLE `primes` (
 	`prime_no`		int				NOT NULL	primary key auto_increment	COMMENT '광고주번호',
 	`ad_info_no`	int				NOT NULL								COMMENT '광고정보번호',
 	`user_no`		int				NOT NULL								COMMENT '회원번호',
-	`image_url`		varchar(255)	NOT NULL								COMMENT '이미지경로',
+	`name`			varchar(100)	NOT NULL								COMMENT '사업자명',
+    `image_url`		varchar(255)	NOT NULL								COMMENT '이미지경로',
 	`number`		varchar(255)	NOT NULL								COMMENT '사업자등록번호',
 	`addr`			VARCHAR(255)	NOT NULL								COMMENT '주소',
 	`start_time`	TIMESTAMP		NOT NULL								COMMENT '시작일자',
