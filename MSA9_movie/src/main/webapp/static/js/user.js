@@ -26,6 +26,7 @@ $("#userid-check").click(function() {
     });
 });
 
+//---------------------------------------아이디 유효성 검사----------------------------------------------------
 
 // 요소 선택
 const password = document.querySelector("#userpwd"); 
@@ -100,6 +101,46 @@ function isMatch(password1, password2) {
   return password1 === password2;
 }
 
+//---------------------------------------------회원 정보 수정--------------------------------------------------
+
+function confirminfoup() {
+    const confirmed = confirm("수정하시겠습니까?");
+    if (confirmed) {
+        const userId = document.getElementById("userid");
+        const userPwd = document.getElementById("userpwd");
+        const email = document.getElementById("mail");
+        const profileUrl = document.getElementById("profile");
+
+        $.ajax({
+            url: "infoUpdate_pro.jsp",
+            type: "post",
+            data: {
+                "id": userId.value,
+                "userpwd": userPwd.value,
+                "email": email.value,
+                "profileUrl": profileUrl.value
+            },
+            dataType: "text",
+            success: function(result) {
+                console.log("서버 응답:", result.trim());
+                if (result.trim() > 0) {
+                    alert("수정이 완료되었습니다.");
+                    window.location.href = "index.jsp";
+                } else {
+                    alert(result.trim()); // 서버의 응답 메시지를 표시
+                }
+            },
+            error: function() {
+                alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+            }
+        });
+    } else {
+        alert("수정이 취소되었습니다.");
+    }
+    return false; // 폼 제출 방지
+}
+
+//----------------------------------------------회원 탈퇴----------------------------------------------------
 
 // 탈퇴
 function confirmLeave() {
@@ -135,42 +176,5 @@ function confirmLeave() {
         alert("탈퇴가 취소되었습니다.");
     }
     return false; // 제출 방지
-}
-
+}	
 			
-			
-			
-			
-			
-			
-			
-//			dataType : "text",
-//			success : function(result){
-//				console.log(result)
-//			}
-//		})
-//         //AJAX 요청
-//        const xhr = new XMLHttpRequest();
-//        xhr.open("POST", "leave_pro.jsp", true);
-//        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-//
-//        xhr.onreadystatechange = function () {
-//            if (xhr.readyState === 4 && xhr.status === 200) {
-//                const response = xhr.responseText;
-//				console.log(response)
-//                if (response === "success") {
-//                    alert("탈퇴가 완료되었습니다.");
-//                    window.location.href = "index.jsp"; // 성공 후 페이지 이동
-//                } else {
-//                    alert("아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
-//                }
-//            }
-//        };
-//
-//        // 아이디와 비밀번호를 전송
-//        xhr.send("id=" + encodeURIComponent(userId) + "&userpwd=" + encodeURIComponent(userPwd));
-//    } else {
-//        alert("탈퇴가 취소되었습니다.");
-//    }
-//	return false; //  제출 방지
-//}
