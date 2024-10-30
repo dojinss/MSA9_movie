@@ -10,7 +10,7 @@
 		pageContext.setAttribute("user", user);
 		pageContext.setAttribute("userid", user.getUserId());
 	}
-%>
+%> 
 <header>
 		<img src="<%= root %>/static/img/logo.png" />
 		<div></div>

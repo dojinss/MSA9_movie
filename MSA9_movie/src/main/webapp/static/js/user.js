@@ -47,7 +47,7 @@ function checkId() {
   let pwd = document.getElementById("userpwd").value;
   let pwd2 = document.getElementById("userpwd2").value;
   let email = document.getElementById("mail").value;
-
+ 
 
   // 아이디 유효성 검사
   if (!regExpId.test(id)) {
