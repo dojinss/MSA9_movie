@@ -80,7 +80,7 @@
 // 	      return false; 
 // 	    }
 // 	  } 
-
+ 
 	
 	/* 마우스 올렸을때 이벤트 */
 		 $('.leave-btn').on('mouseover', function() {

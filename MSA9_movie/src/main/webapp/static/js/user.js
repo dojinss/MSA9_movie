@@ -3,6 +3,7 @@
 $("#userid-check").click(function() {
     let userid = $("#userid").val();
 	console.log("아이디 중복 클릭!")
+	
     $.ajax({
         url: "user_pro.jsp?action=checkId", // action 파라미터 추가
         data: {
@@ -35,7 +36,6 @@ const mismatchMessage = document.querySelector(".mismatch-message");
 function strongPassword(str) {
     return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(str);
   }
-
 
 function checkId() {
   let regExpId = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+$/ // 아이디 패턴
@@ -107,42 +107,36 @@ function confirmLeave() {
     if (confirmed) {
         const userId = document.getElementById("userid").value;
         const userPwd = document.getElementById("userpwd").value;
-		
-		
-		$.ajax({
-			url : "leave_pro.jsp",
-			type : "post",
-			data : {
-				"id" : userId,
-				"userpwd" : userPwd
-			},
-			dataType: "text",
-			   success: function(result) {
-			   	   console.log(result);
-			       if (result.trim() === "탈퇴가 완료되었습니다.") {
-			           alert("탈퇴가 완료되었습니다.");
-			           window.location.href = "index.jsp"; // 성공
-			       } else if (result.trim() === "탈퇴 실패하였습니다.") {
-			           alert("탈퇴 실패하였습니다. 다시 시도해주세요.");
-					   window.location.href = "leave.jsp";
-			       } else {
-			           alert("아이디 또는 비밀번호가 일치하지 않습니다."); // 로그인 실패
-					   window.location.href = "leave.jsp";
-			       }
-			  },
-			  //xhr,포함?
-			  error: function( status, error) {
-			    console.error("AJAX 호출 실패:", status, error); // AJAX 호출 실패 처리
-			    alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
-			 }
-		});
-	} else {
-		alert("탈퇴가 취소되었습니다.");
-	}
-	return false; //제출끝
+ 
+        $.ajax({
+            url : "leave_pro.jsp",
+            type : "post",
+            data : {
+                "id" : userId,
+                "userpwd" : userPwd
+            },
+            dataType : "text",
+            success : function(result) {
+                console.log("서버 응답:", result.trim()); // 응답을 로그에 출력
+                if (result.trim() === "탈퇴가 완료되었습니다.") {
+                    alert("탈퇴가 완료되었습니다.");
+                    window.location.href = "index.jsp";
+                } else if (result.trim() === "아이디 또는 비밀번호가 일치하지 않습니다.") {
+                    alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                } else {
+                    alert("탈퇴 실패. 다시 시도해주세요.");
+                }
+            },
+            error: function() {
+                alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+            }
+        });
+    } else {
+        alert("탈퇴가 취소되었습니다.");
+    }
+    return false; // 제출 방지
 }
-			
-			
+
 			
 			
 			

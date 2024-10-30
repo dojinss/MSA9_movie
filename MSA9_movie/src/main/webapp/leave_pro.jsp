@@ -12,7 +12,7 @@ request.setCharacterEncoding("UTF-8");
 // 요청 파라미터 처리
 String userId = request.getParameter("id");
 String userPwd = request.getParameter("userpwd");
-
+ 
 // UserService 인스턴스 생성
 UserService userService = new UserServiceImpl();
 Users user = Users.builder()
@@ -21,17 +21,18 @@ Users user = Users.builder()
                    .build();
 
 // 로그인 시도
-Users selectedUser = userService.login(user);
+Users selectedUser = userService.login(user); // 조회
 
+response.setContentType("text/plain; charset=UTF-8"); // 응답 타입 설정
 if (selectedUser != null) {
-	//일치하지 않으면~
-    int result = userService.delete(selectedUser.getUserNo());
+    int result = userService.delete(selectedUser.getUserNo()); // 사용자 삭제
     if (result > 0) {
-        out.print("탈퇴가 완료되었습니다.");  // 탈퇴 성공 메시지
+        out.print("탈퇴가 완료되었습니다."); // 성공 응답
     } else {
-        out.print("탈퇴 실패");  // 탈퇴 실패 메시지
+        out.print("탈퇴 실패하였습니다."); // 실패 응답
     }
 } else {
-    out.print("아이디 또는 비밀번호가 일치하지 않습니다.");  // 인증 실패 메시지
+    out.print("아이디 또는 비밀번호가 일치하지 않습니다."); // 로그인 실패 응답
 }
 %>
+
