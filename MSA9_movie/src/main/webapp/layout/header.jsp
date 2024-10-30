@@ -21,7 +21,7 @@
 					<li><a href="<%= root %>/signup.jsp">회원가입</a></li>
 				</c:if>
 				<c:if test="${ userid != null }">
-					<li><span class="text-bold">${ user.userId }</span><span>님 환영합니다.</span></li>
+					<li><a href="<%= root %>/infoUpdate.jsp"><span class="text-bold">${ user.userId }</span></a><span>님 환영합니다.</span></li>
 					<li><a href="<%= root %>/logout.jsp">로그아웃</a></li>
 				</c:if>
 			</ul>
