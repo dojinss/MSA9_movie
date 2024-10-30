@@ -1,36 +1,16 @@
-<%@page import="movie.DTO.Users"%>
-<%@page import="java.io.File"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="org.apache.commons.fileupload.FileItem"%>
-<%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
-<%@page import="movie.Service.UserServiceImpl"%>
-<%@page import="movie.Service.UserService"%>
-<%@page import="movie.DTO.Primes"%>
-<%@page import="movie.Service.PrimeServiceImpl"%>
-<%@page import="com.fasterxml.jackson.databind.util.internal.PrivateMaxEntriesMap"%>
-<%@page import="movie.Service.PrimeService"%>
-<%@page import="movie.Service.AdServiceImpl"%>
-<%@page import="movie.Service.AdService"%>
-<%@page import="movie.DTO.Ads"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
-<%@page import="movie.DTO.Movies"%>
 <%@page import="movie.DTO.Files"%>
+<%@page import="java.io.File"%>
+<%@page import="org.apache.commons.fileupload.FileItem"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
 <%@page import="movie.Service.FileServiceImpl"%>
 <%@page import="movie.Service.FileService"%>
-<%@page import="movie.DTO.Posts"%>
 <%@page import="movie.Service.PostServiceImpl"%>
 <%@page import="movie.Service.PostService"%>
-<%@page import="movie.DTO.Keywords"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="movie.DTO.Keywords"%>
-<%@page import="com.alohaclass.jdbc.dto.PageInfo"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
-<%@page import="com.alohaclass.jdbc.dto.Page"%>
-<%@page import="movie.Service.KeywordServiceImpl"%>
-<%@page import="movie.Service.KeywordService"%>
+<%@page import="movie.DTO.Posts"%>
+<%@page import="movie.DTO.Users"%>
 <%@ include file="/layout/jstl.jsp" %>
 <%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -42,6 +22,8 @@
 	response.setHeader("Content-Type","text/html;charset=UTF-8");
 	
 	int fileResult = 0;
+	String mode = "insert";
+	int postNo = 0;
 	
 	// 로그인한 유저 정보 가져오기
 	Users user = (Users) session.getAttribute("loginUser");
@@ -83,7 +65,12 @@
 			if(name.equals("keywordNo") && !value.isEmpty())
 				post.setKeywordNo(Integer.parseInt(value));		// keywordNo 키워드번호 post객체에 세팅
 			if(name.equals("movieNo") && !value.isEmpty())
-				post.setMovieNo(Integer.parseInt(value));		// keywordNo 키워드번호 post객체에 세팅
+				post.setMovieNo(Integer.parseInt(value));		// movieNo 키워드번호 post객체에 세팅
+			if(name.equals("postNo") && !value.isEmpty())
+				postNo = (Integer.parseInt(value));				// update 모드일경우 postNo 담겨옴 
+			if(name.equals("mode") && !value.isEmpty())
+				mode = value;									// update 인지 insert 인지 체크
+				
 		}
 		// 파일 데이터
 		else {
@@ -96,7 +83,6 @@
 // 			out.println(path+ "/" + fileName);
 			File file = new File(path+ "/" + fileName);
 			item.write(file);
-			
 			filePaths.add(path+ "/" + fileName);
 			
 // 			out.println("--------------------------------------------------");
@@ -106,9 +92,32 @@
 // 			out.println("파일 크기 : " + fileSize + "<br>");
 		}
 	}
-	int postNo = postService.insertKey(post);
-	out.println(postNo);
-	if(postNo > 0){
+	if(mode == "insert"){
+		int laskPK = postService.insertKey(post);
+		if(laskPK > 0){
+			for(String str : filePaths){
+				Files file = new Files();
+				file.setFileUrl(str);
+				file.setPostNo(laskPK);
+				fileResult = fileResult + fileService.insert(file);
+			}
+		}
+	}
+	else {
+		post.setPostNo(postNo);
+		postService.update(post);
+		// 기존 파일 정보 불러오기
+		List<Files> oldList = fileService.list(postNo);
+		// 기존 파일들 삭제
+		for(Files file : oldList ) {
+			File oldFile = new File(file.getFileUrl());
+			if(oldFile.exists()) {
+				oldFile.delete();
+			}
+		}
+		// 기존 파일 DB 정보 삭제
+		fileService.deleteByPostNo(postNo);
+		// 파일 정보 DB에 입력
 		for(String str : filePaths){
 			Files file = new Files();
 			file.setFileUrl(str);

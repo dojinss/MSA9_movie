@@ -77,6 +77,19 @@ public class FileServiceImpl implements FileService {
 		return result;
 	}
 	@Override
+	public int deleteByPostNo(int postNo) {
+		Map<Object, Object> map = new HashMap<Object, Object>() {{
+            put("post_no", postNo);
+        }};
+		int result = 0;
+		try {
+			result = fileDAO.deleteBy(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	@Override
 	public PageInfo<Files> page(PageInfo<Files> pageInfo, int searchCode) {
 		List<String> searchOptions = new ArrayList<String>();
 		switch (searchCode) {

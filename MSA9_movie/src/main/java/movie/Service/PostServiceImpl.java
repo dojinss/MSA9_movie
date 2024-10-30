@@ -110,7 +110,7 @@ public class PostServiceImpl implements PostService {
         }};
 		int result = 0;
 		try {
-			result = postDAO.delete(map);
+			result = postDAO.deleteBy(map);
 			replyDAO.deleteBy(map);
 		} catch (Exception e) {
 			e.printStackTrace();

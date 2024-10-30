@@ -219,18 +219,9 @@
 			<button type="submit" id="post-form-submit">등록하기</button>
 		</div>
 	</div>
-	<%
-	switch(type){
-		case "movie" 	:
-	%>
-		<input type="hidden" name="movieNo" value="<%= movieNo%>"/>
-		<%break;
-		case "keyword"	:
-		%>
-		<input type="hidden" name="keywordNo" value="<%= keywordNo%>"/>
-	<%	break;
-	}
-	%>
+	<input type="hidden" name="movieNo" value="<%= movieNo%>"/>
+	<input type="hidden" name="keywordNo" value="<%= keywordNo%>"/>
+	<input type="hidden" name="postNo" value=""/>
 	</form>
 	<div id="success-modal">
 		<div id="success-post">등록 완료</div>

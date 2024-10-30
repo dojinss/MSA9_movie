@@ -23,6 +23,7 @@ public interface FileService {
 	
 	// 파일정보 DB 삭제
 	public int delete(int fileNo);
+	public int deleteByPostNo(int postNo);
 	
 	// 페이징처리
 	public PageInfo<Files> page(PageInfo<Files> pageInfo, int searchCode); 

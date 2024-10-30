@@ -33,9 +33,19 @@
 	// 게시글 이미지 목록 불러오기
 	List<Files> fileList = fileService.list(postNo);
 	
+	// 게시글 작성자 정보 가져오기
 	Users user = userService.select(post.getUserNo());
+	
+	// 로그인 유저 정보 가져오기
+	Users loginUser = (Users) session.getAttribute("loginUser");
+	
+	// 로그인 유저와 작성자가 일치하는지 판별
+	boolean userCheck = (user.getUserNo() == loginUser.getUserNo());
+	
+	// JSTL 변수 지정
 	pageContext.setAttribute("user", user);
 	pageContext.setAttribute("content", post.getContent());
+	pageContext.setAttribute("postNo", post.getPostNo());
 %>
 
 <div class="post-view-container">
@@ -56,6 +66,13 @@
 	</div>
 	<div class="post-icon-box">
 		<!-- icons : font Awsome -->
+		<div class="left-icon-box"></div>
+		<%if(userCheck){ %>
+		<div class="right-user-box">
+			<button id="update-post-btn" data="${postNo}">수정하기</button>
+			<button id="delete-post-btn" data="${postNo}">삭제하기</button>
+		</div>
+		<%} %>
 	</div>
 	<p class="user-id">${user.getUserId()}</p>
 	<div class="post-content">${content}</div>

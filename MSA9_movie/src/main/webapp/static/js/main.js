@@ -66,8 +66,55 @@ function postFunctions(){
 	$("#success-post").click(function(){
 		postList();
 	})
-	
 }
+// 뷰페이지 함수들
+function viewFunctions(){
+	// 삭제하기
+	$("#delete-post-btn").click(function(){
+		let deleteConfirm = confirm("삭제 하시겠습니까?")
+		let postNo = $(this).attr("data")
+		if(deleteConfirm){
+			console.log("삭제 요청...")
+			$.ajax({
+				url : "pro/postDelete_pro.jsp",
+				data : {
+					postNo : postNo
+				},
+				type : "post",
+				dataType : "text",
+				success : function(result){
+					let check = $.trim(result)
+					if(check){
+						console.log("삭제완료.")
+						postList();
+					}
+					else{
+						console.log("삭제실패.")
+					}
+				}
+			})
+		}
+	})
+	// 수정하기
+	$("#update-post-btn").click(function(){
+		console.log("수정 요청...")
+		
+		let postNo = $(this).attr("data")
+		let content = 
+		
+		// 수정탭으로 변경
+		$(".tab-btn-box > .btn").removeClass("active")
+		$(".tab-btn-box > .btn").eq(1).addClass("active")
+		let tabViewer = $(".post-container")
+		tabViewer.hide();
+		tabViewer.eq(1).show();
+		$("#success-modal").hide();
+		$("#write-mode").val("update")
+		$("#post-form").find("input[name=postNo]").val(postNo)
+		$("#post-form").find("textarea[name=content]").val(postNo)
+	})
+}
+
 // 이미지 드래그앤드롭
 function imgDragDrop(){
 	console.log("imgDragDrop 함수 호출...")
@@ -115,28 +162,13 @@ function imgDragDrop(){
 	// 게시글 작성하기
 	$("#post-form-submit").on("click", function() {  
 		let formData = new FormData($("#post-form")[0]);
+		let mode = $("#write-mode").val()
 		console.log("폼 전송중...")
 		$.each(uploadFiles, function(i,file) {    
 			if(file.upload != 'disable')  //삭제하지 않은 이미지만 업로드 항목으로 추가      
 				formData.append('upload-file', file, file.name);  
 		});
-		$.ajax({    
-			url: 'pro/postWrite_pro.jsp',    
-			data : formData,    
-			type : 'post',
-			contentType: false,
-			processData: false,
-			success : function(result) {
-				console.log("전송완료.")
-				console.log("전송결과 : " + result)
-				if(parseInt( $.trim( result ) ) > 0){
-					$("#success-modal").show();
-					console.log("완료");
-				}else{
-					console.log("실패");
-				} 
-			}  
-		});
+		writePost(formData, mode)
 	});
 	
 	// 게시글 조회
@@ -147,6 +179,28 @@ function imgDragDrop(){
 	});
 	
 }
+// 게시글 작성 함수
+function writePost(formData, mode){
+	formData.append("mode",mode)
+	$.ajax({    
+		url: 'pro/postWrite_pro.jsp',    
+		data : formData,    
+		type : 'post',
+		contentType: false,
+		processData: false,
+		success : function(result) {
+			console.log("전송완료.")
+			console.log("전송결과 : " + result)
+			if(parseInt( $.trim( result ) ) > 0){
+				$("#success-modal").show();
+				console.log("완료");
+			}else{
+				console.log("실패");
+			} 
+		}  
+	});
+}
+
 // 게시글 페이지 새로고침 (비동기)
 function postList(){
 	let type = $("#postType").val()
@@ -174,6 +228,7 @@ function postView(postNo){
 			tabViewer.hide();
 			tabViewer.eq(2).show();
 			$("#success-modal").hide();
+			viewFunctions()
 		}  
 	});
 }

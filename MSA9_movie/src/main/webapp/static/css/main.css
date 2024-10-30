@@ -569,6 +569,38 @@ section.movie {
 	height: 600px;
 	object-fit: cover;
 }
+
+.post-icon-box {width: 900px;}
+.post-icon-box ,
+.post-icon-box .left-icon-box,
+.post-icon-box .right-user-box{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 40px;
+	overflow: hidden;
+}
+.post-icon-box .left-icon-box,
+.post-icon-box .right-user-box{
+	width: 230px;
+	gap: 15px;
+}
+.post-icon-box .right-user-box {
+	justify-content: end;
+	padding-right: 15px;
+}
+.post-icon-box .right-user-box button {
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	width: 110px;
+	height: 35px;
+	cursor: pointer;
+}
+#update-post-btn { background-color: var(--main-color); }
+#delete-post-btn { background-color: rgb(206, 20, 20); }
+
 #post-view-tab .post-view-container .user-id {
 	padding: 0 13px;
 	font-size: 18px;
@@ -579,3 +611,5 @@ section.movie {
 	font-size: 18px;
 	min-height: 200px;
 }
+
+/* 뷰페이지 [END] */
