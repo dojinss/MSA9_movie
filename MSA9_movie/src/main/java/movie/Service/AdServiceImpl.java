@@ -10,6 +10,7 @@ import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.AdDAO;
 import movie.DTO.Ads;
+import movie.DTO.Files;
 import movie.DTO.Ads;
 
 public class AdServiceImpl implements AdService {
@@ -130,6 +131,7 @@ public class AdServiceImpl implements AdService {
 		PageInfo<Ads> selectedPageInfo = null;
 		try {
 			selectedPageInfo = adDAO.page(page);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
