@@ -199,5 +199,15 @@ public class PostServiceImpl implements PostService {
 		}
 		return postList;
 	}
+	@Override
+	public List<Posts> infiniteListByKeywordNo(int nowPage, int size, int keywordNo) {
+		List<Posts> postList = null;
+		try {
+			postList = postDAO.infiniteListByKeywordNo(nowPage, size, keywordNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return postList;
+	}
 
 }

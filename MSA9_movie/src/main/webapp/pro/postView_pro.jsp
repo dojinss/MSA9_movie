@@ -14,10 +14,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%	
-	// UTF-8 인코딩설정
-	request.setCharacterEncoding("UTF-8");
-	response.setCharacterEncoding("UTF-8");
-	response.setHeader("text/html", "charset=UTF-8");
 	
 	// 넘어온 파라미터값 변수에 저장
 	int postNo	= Integer.parseInt( request.getParameter("postNo") );

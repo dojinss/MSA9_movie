@@ -130,7 +130,8 @@ public class AdServiceImpl implements AdService {
 	public PageInfo<Ads> page(Page page) {
 		PageInfo<Ads> selectedPageInfo = null;
 		try {
-			selectedPageInfo = adDAO.page();
+			selectedPageInfo = adDAO.page(page);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

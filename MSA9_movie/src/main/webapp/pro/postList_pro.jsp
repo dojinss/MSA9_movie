@@ -1,49 +1,40 @@
-<%@page import="movie.Service.UserServiceImpl"%>
-<%@page import="movie.Service.UserService"%>
-<%@page import="movie.DTO.Primes"%>
-<%@page import="movie.Service.PrimeServiceImpl"%>
-<%@page import="com.fasterxml.jackson.databind.util.internal.PrivateMaxEntriesMap"%>
-<%@page import="movie.Service.PrimeService"%>
-<%@page import="movie.Service.AdServiceImpl"%>
-<%@page import="movie.Service.AdService"%>
-<%@page import="movie.DTO.Ads"%>
-<%@page import="movie.Service.MovieServiceImpl"%>
-<%@page import="movie.Service.MovieService"%>
-<%@page import="movie.DTO.Movies"%>
 <%@page import="movie.DTO.Files"%>
-<%@page import="movie.Service.FileServiceImpl"%>
-<%@page import="movie.Service.FileService"%>
 <%@page import="movie.DTO.Posts"%>
-<%@page import="movie.Service.PostServiceImpl"%>
-<%@page import="movie.Service.PostService"%>
+<%@page import="movie.DTO.Primes"%>
+<%@page import="movie.DTO.Ads"%>
+<%@page import="com.alohaclass.jdbc.dto.PageInfo"%>
+<%@page import="movie.DTO.Movies"%>
 <%@page import="movie.DTO.Keywords"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="movie.DTO.Keywords"%>
-<%@page import="com.alohaclass.jdbc.dto.PageInfo"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.alohaclass.jdbc.dto.Page"%>
+<%@page import="movie.Service.FileServiceImpl"%>
+<%@page import="movie.Service.FileService"%>
 <%@page import="movie.Service.KeywordServiceImpl"%>
 <%@page import="movie.Service.KeywordService"%>
+<%@page import="movie.Service.PrimeServiceImpl"%>
+<%@page import="movie.Service.PrimeService"%>
+<%@page import="movie.Service.AdServiceImpl"%>
+<%@page import="movie.Service.AdService"%>
+<%@page import="movie.Service.MovieServiceImpl"%>
+<%@page import="movie.Service.MovieService"%>
+<%@page import="movie.Service.PostServiceImpl"%>
+<%@page import="movie.Service.PostService"%>
 <%@ include file="/layout/jstl.jsp" %>
 <%@ include file="/layout/common.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%	
-	// UTF-8 인코딩설정
-	request.setCharacterEncoding("UTF-8");
-	response.setCharacterEncoding("UTF-8");
-	response.setHeader("Content-Type","text/html;charset=UTF-8");
-	
 	
 	// 넘어온 파라미터값 변수에 저장
-	int movieNo 		= Integer.parseInt( request.getParameter("movieNo") );
+	String movieNo 		= request.getParameter("movieNo");
 	String keywordNo	= request.getParameter("keywordNo");
 	String type		 	= request.getParameter("type");
 	String nowPage		= request.getParameter("nowPage") ;
 	int index 			= ( nowPage != "" && !nowPage.isEmpty() )? Integer.parseInt(nowPage) - 1 : 0;
-	
+	int movieNoInt		= 0;
 	// 검색 키워드 설정
 	String keyword = "";
 	
@@ -79,25 +70,32 @@
 	String subTitle = "";
 	String content = "";
 	String imgURL = "";
+	List<Posts> postList = null;
+	
 	
 	switch(type){
 		case "movie" 	:
-			keywordInfo = keywordService.selectByMovieNo(movieNo);
-			movie = movieService.select(movieNo);
-			keyword = Integer.toString( movieNo );
+			movieNoInt = Integer.parseInt(movieNo);
+			keywordInfo = keywordService.selectByMovieNo(movieNoInt);
+			movie = movieService.select(movieNoInt);
+			keyword = movieNo;
 			title = movie.getTitle();
 			subTitle = movie.getCast();
 			content = movie.getContent();
 			imgURL = movie.getImageUrl();
+			postList 	= postService.infiniteList( index, 9 , movieNoInt );
 			break;
 		case "keyword" 	: 
 			keyword = keywordNo;
-			keywordInfo = keywordService.selectByMovieNo(Integer.parseInt(keywordNo));
+			int keyNo = Integer.parseInt(keywordNo);
+			keywordInfo = keywordService.select(Integer.parseInt(keywordNo));
 			movie = movieService.select( keywordInfo.getMovieNo() );
+			movieNoInt = movie.getMovieNo();
 			title = movie.getTitle();
 			subTitle = keywordInfo.getTitle();
 			content = keywordInfo.getContent();
 			imgURL = keywordInfo.getImageUrl();
+			postList 	= postService.infiniteListByKeywordNo( index, 9 , keyNo);
 			break;
 	}
 	Page adPage = new Page();
@@ -149,7 +147,7 @@
 	
 	
 	
-	List<Posts> postList 	= postService.infiniteList( index, 9 , movieNo );
+	
 	%>
 	<div class="tab-btn-box">
 		<div class="btn active" id="view-list">
