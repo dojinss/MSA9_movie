@@ -16,10 +16,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%	
-	// UTF-8 인코딩설정
-	request.setCharacterEncoding("UTF-8");
-	response.setCharacterEncoding("UTF-8");
-	response.setHeader("Content-Type","text/html;charset=UTF-8");
 	
 	int fileResult = 0;
 	String mode = "insert";
@@ -62,13 +58,13 @@
 // 			out.println(name + " : " + value + "<br>");
 			if(name.equals("content"))
 				post.setContent(value);							// content 내용 post객체에 세팅
-			if(name.equals("keywordNo") && !value.isEmpty())
+			if(name.equals("keywordNo") && !value.isEmpty() && !value.equals("null"))
 				post.setKeywordNo(Integer.parseInt(value));		// keywordNo 키워드번호 post객체에 세팅
-			if(name.equals("movieNo") && !value.isEmpty())
+			if(name.equals("movieNo") && !value.isEmpty() && !value.equals("null"))
 				post.setMovieNo(Integer.parseInt(value));		// movieNo 키워드번호 post객체에 세팅
-			if(name.equals("postNo") && !value.isEmpty())
+			if(name.equals("postNo") && !value.isEmpty() && !value.equals("null"))
 				postNo = (Integer.parseInt(value));				// update 모드일경우 postNo 담겨옴 
-			if(name.equals("mode") && !value.isEmpty())
+			if(name.equals("mode") && !value.isEmpty() && !value.equals("null"))
 				mode = value;									// update 인지 insert 인지 체크
 				
 		}
@@ -92,7 +88,7 @@
 // 			out.println("파일 크기 : " + fileSize + "<br>");
 		}
 	}
-	if(mode == "insert"){
+	if( postNo == 0){
 		int laskPK = postService.insertKey(post);
 		if(laskPK > 0){
 			for(String str : filePaths){

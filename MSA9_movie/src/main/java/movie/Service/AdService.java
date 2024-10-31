@@ -22,7 +22,7 @@ public interface AdService {
 	// 광고 삭제
 	public int delete(int adNo);
 
-  public PageInfo<Ads> page(PageInfo<Ads> pageInfo, int searchCode); 
+	public PageInfo<Ads> page(PageInfo<Ads> pageInfo, int searchCode); 
 	public PageInfo<Ads> page(); 
 	public PageInfo<Ads> page(Page page); 
 	public PageInfo<Ads> page(Page page, String keyword, List<String> searchOptions); 

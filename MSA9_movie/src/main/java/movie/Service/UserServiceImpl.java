@@ -9,8 +9,6 @@ import com.alohaclass.jdbc.dto.Page;
 import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.UserDAO;
-import movie.DTO.Movies;
-import movie.DTO.Users;
 import movie.DTO.Users;
 import movie.utils.PasswordUtils;
 
@@ -169,23 +167,13 @@ public class UserServiceImpl implements UserService {
 		}
 		return selectedPageInfo;
 	}
+
 	@Override
 	public PageInfo<Users> page(Page page, String keyword, List<String> searchOptions,
 			Map<String, String> filterOptions) {
-		PageInfo<Users> selectedPageInfo = null;
-		try {
-			selectedPageInfo = userDAO.page(page, keyword, searchOptions,filterOptions);
-
-
-	@Override
-	public int update(Users user) {
-		int result = 0;
-		try {
-			result = userDAO.update(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+}
 	
