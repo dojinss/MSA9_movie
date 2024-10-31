@@ -215,7 +215,7 @@ function imgDragDrop(){
 function writePost(formData, mode){
 	formData.append("mode",mode)
 	$.ajax({    
-		url: 'pro/postWrite_pro.jsp',    
+		url: '/postWrite_pro.jsp',    
 		data : formData,    
 		type : 'post',
 		contentType: false,

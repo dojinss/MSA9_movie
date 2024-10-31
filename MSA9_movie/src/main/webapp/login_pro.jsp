@@ -2,7 +2,6 @@
 <%@page import="movie.Service.TokenServiceImpl"%>
 <%@page import="movie.Service.TokenService"%>
 <%@page import="movie.DTO.Tokens"%>
-<%@page import="javax.servlet.http.Cookie"%>
 <%@page import="movie.Service.UserServiceImpl"%>
 <%@page import="movie.Service.UserService"%>
 <%@page import="movie.DTO.Users"%>

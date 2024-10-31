@@ -1,17 +1,16 @@
 package movie.filter;
 
 import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.http.HttpFilter;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.annotation.WebInitParam;
+import jakarta.servlet.http.HttpFilter;
 
-import org.apache.catalina.valves.rewrite.RewriteCond.ResourceCondition;
 
 /**
  * Servlet Filter implementation class EncodingFilter
@@ -23,8 +22,14 @@ import org.apache.catalina.valves.rewrite.RewriteCond.ResourceCondition;
 		})
 public class EncodingFilter extends HttpFilter implements Filter {
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private FilterConfig filterConfig = null;
 	private String encoding;
+	
     public EncodingFilter() {
         super();
     }

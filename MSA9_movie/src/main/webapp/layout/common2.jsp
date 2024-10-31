@@ -4,5 +4,6 @@
 	String root = request.getContextPath();
 	// 로그인 아이디 (세션)
 	String loginId = (String) session.getAttribute("loginId");	
-	String moviePath = "C:/upload";
+// 	String moviePath = "C:/upload";
+	String moviePath = "/dojinss/upload";
 %>

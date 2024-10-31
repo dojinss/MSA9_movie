@@ -2,18 +2,17 @@ package movie.filter;
 
 import java.io.IOException;
 import java.net.URLDecoder;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import movie.DTO.Tokens;
 import movie.DTO.Users;
@@ -25,6 +24,11 @@ import movie.Service.UserServiceImpl;
 @WebFilter(description = "자동 로그인 등, 인증 처리 필터", urlPatterns = { "/*" })
 public class LoginFilter extends HttpFilter implements Filter {
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	TokenService loginService;
 	UserService userService;
 	public void init(FilterConfig fConfig) throws ServletException {
