@@ -39,7 +39,7 @@ if ("checkId".equals(action)) {
 
     UserService userService = new UserServiceImpl();
     int result = userService.signup(user);
-
+ 
     if (result > 0) {
         String script = "<script>"
                 + "alert('반갑습니다 " + userId + "님');"

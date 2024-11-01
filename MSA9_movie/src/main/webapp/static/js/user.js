@@ -32,14 +32,14 @@ $("#userid-check").click(function() {
 const password = document.querySelector("#userpwd"); 
 const passwordRetype = document.querySelector("#userpwd2");
 const mismatchMessage = document.querySelector(".mismatch-message");
-// const idChk = document.querySelector("#userid-check");
+
 
 function strongPassword(str) {
     return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(str);
   }
 
 function checkId() {
-  let regExpId = /^[a-zA-Z0-9]{6,}$/ // 아이디 패턴
+  let regExpId = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+$/ // 아이디 패턴
   let regExpEmail = /^[0-9a-zA-Z](-_\.)?[0-9a-zA-Z]*@[0-9a-zA-Z](-_\.)?[0-9a-zA-Z]*\.[a-zA-Z]{2,3}$/; // 이메일 패턴
 
   
@@ -47,7 +47,7 @@ function checkId() {
   let pwd = document.getElementById("userpwd").value;
   let pwd2 = document.getElementById("userpwd2").value;
   let email = document.getElementById("mail").value;
-
+  
 
   // 아이디 유효성 검사
   if (!regExpId.test(id)) {

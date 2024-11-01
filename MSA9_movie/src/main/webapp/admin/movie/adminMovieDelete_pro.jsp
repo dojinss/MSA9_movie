@@ -1,4 +1,3 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="movie.DTO.Keywords"%>
 <%@page import="java.util.List"%>
 <%@page import="movie.Service.KeywordServiceImpl"%>

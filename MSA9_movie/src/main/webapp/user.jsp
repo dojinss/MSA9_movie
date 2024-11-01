@@ -53,7 +53,7 @@
 			<div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
 
         </div>
-
+ 
       <div class="user-edit">
         <div class="group">
           <label for="mail" class="label">이메일</label>
