@@ -12,7 +12,7 @@
 	}
 %>  
 <header>
-		<img src="<%= root %>/static/img/logo.png" />
+		<a href="/"><img src="<%= root %>/static/img/logo.png" /></a>
 		<div></div>
 		<nav>
 			<ul>
