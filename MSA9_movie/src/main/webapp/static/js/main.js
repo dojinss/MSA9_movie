@@ -132,7 +132,7 @@ function viewFunctions(){
 		console.log("수정 요청...")
 		
 		let postNo = $(this).attr("data")
-		let content = 
+		let content = $("#post-view-text").text()
 		
 		// 수정탭으로 변경
 		$(".tab-btn-box > .btn").removeClass("active")
@@ -143,7 +143,7 @@ function viewFunctions(){
 		$("#success-modal").hide();
 		$("#write-mode").val("update")
 		$("#post-form").find("input[name=postNo]").val(postNo)
-		$("#post-form").find("textarea[name=content]").val(postNo)
+		$("#post-form").find("textarea[name=content]").val(content)
 	})
 }
 
@@ -215,7 +215,7 @@ function imgDragDrop(){
 function writePost(formData, mode){
 	formData.append("mode",mode)
 	$.ajax({    
-		url: 'pro/postWrite_pro.jsp',    
+		url: '/postWrite_pro.jsp',    
 		data : formData,    
 		type : 'post',
 		contentType: false,
