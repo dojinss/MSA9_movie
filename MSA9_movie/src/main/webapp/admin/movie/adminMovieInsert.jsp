@@ -25,7 +25,7 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
-					<form action="adminMovieInsert_pro.jsp" method="post" enctype="multipart/form-data" onsubmit="return validate()">
+					<form action="/movie" method="post" enctype="multipart/form-data" onsubmit="return validate()">
 						<div class="content">
 							<div class="content-head">
 								<p>제목</p>

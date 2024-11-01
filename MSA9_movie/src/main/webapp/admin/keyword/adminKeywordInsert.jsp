@@ -28,7 +28,7 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
-					<form action="adminKeywordInsert_pro.jsp" method="post" enctype="multipart/form-data">
+					<form action="/keyword" method="post" enctype="multipart/form-data">
 						<div class="content">
 							<div class="content-head">
 								<input type="hidden" name="movieNo" value=<%=movieNo%>>

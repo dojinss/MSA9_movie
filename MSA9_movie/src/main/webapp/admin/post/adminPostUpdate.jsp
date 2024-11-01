@@ -45,7 +45,7 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
-					<form action="adminPostUpdate_pro.jsp" method="post" enctype="multipart/form-data">
+					<form id="post-update" action="adminPostUpdate_pro.jsp" method="post" enctype="multipart/form-data" onsubmit="return false;">
 						<div class="content">
 							<div class="content-head">
 								<input type="hidden" name="postNo" value="<%=post.getPostNo() %>">
@@ -67,12 +67,13 @@
 								<input class="file" type="file" name="imgae" id="file" onchange="fileChange()">
 							</div>
 						</div>
-						<input class="updatebtn" type="submit" value="수정">
+						<button class="updatebtn" onClick="update()">수정</button>
 					</form>
 					<button class="deletebtn" id="delconfirm" data="<%=post.getPostNo()%>" path="adminPostDelete_pro.jsp?postNo=">삭제</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script src="<%= root %>/admin/js/post.js"></script>
 </body>
 </html>
