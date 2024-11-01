@@ -101,26 +101,32 @@
 			movieList = pageInfo.getList();
 			for( Movies movie : movieList ){ 
 				// 출연진
-				String[] cast = movie.getCast().split("/");
+				String[] cast = movie.getCast().split("/");	//  '/' 로 구분
 				String director = cast[0];
 				String mainActor = cast[1];
-				pageContext.setAttribute("director", director);
-				pageContext.setAttribute("mainActor", mainActor);
+				
+				pageContext.setAttribute("backURL", root + movie.getImageUrl());	// 영화 배경 이미지
+				pageContext.setAttribute("movieNo", movie.getMovieNo());			// 영화 번호
+				pageContext.setAttribute("content", movie.getContent());			// 영화 줄거리
+				pageContext.setAttribute("cate", movie.getCate());					// 영화 장르
+				pageContext.setAttribute("director", director);						// 출연진 - 감독
+				pageContext.setAttribute("mainActor", mainActor);					// 출연진 - 주연
+				
 				%>
-				<section class="movie" style="background-image:url(<%= root + movie.getImageUrl() %>);">
+				<section class="movie" style="background-image:url(${ backURL });">
 					<div class="left-box">
 						<div class="nav-box">
 						<div class="title-box">
 							<p class="title"><%=movie.getTitle() %></p>
 						</div>
 						<div class="icon-box">
-							<div class="keyword-view-btn btn" data="<%=movie.getMovieNo()%>">
+							<div class="keyword-view-btn btn" data="${ movieNo }">
 								<span class="material-symbols-outlined chat">chat</span>
 							</div>
-							<div class="post-view-btn btn" data="<%=movie.getMovieNo()%>">
+							<div class="post-view-btn btn" data="${ movieNo }">
 								<span class="material-symbols-outlined dashboard">dashboard</span>
 							</div>
-							<div class="info-view-btn btn" data="<%=movie.getMovieNo()%>">
+							<div class="info-view-btn btn" data="${ movieNo }">
 								<span class="material-symbols-outlined info">info</span>
 							</div>
 						</div>
@@ -130,33 +136,27 @@
 						<div class="info-box">
 							<div class="item-box">
 								<p class="title">줄거리</p>
-								<p class="content"><%=movie.getContent() %></p>
+								<p class="content">${ content }</p>
 							</div>
 							<div class="item-box">
 								<p class="title">장르</p>
-								<p class="content"><%=movie.getCate()%></p>
+								<p class="content">${ cate }
 							</div>
 							<div class="item-box">
 								<p class="title">출연진</p>
-								<c:choose>
-									<c:when test="${ director != null }">
-										<p class="content">감독 : ${ director }</p>
-									</c:when>								
-									<c:when test="${ mainActor != null }">
-										<p class="content">주연 :${ actor }</p>
-									</c:when>								
-								</c:choose>
+								<p class="content">감독 : ${ director }</p>
+								<p class="content">주연 : ${ mainActor }</p>
 							</div>
 						</div>
 					</div>					
 				</section>
-			<%
+			<% 
 			} 
 		%>
 		<div id="modal-wrap">
 			<div class="modal-container">
 				<button id="close-modal">닫기</button>
-				<div class="container-box">
+				<div id="modal-contents">
 				
 				</div>			
 			</div>

@@ -17,8 +17,8 @@
 		<nav>
 			<ul>
 				<c:if test="${ userid == null }">
-					<li><a href="<%= root %>/login.jsp">로그인</a></li>
-					<li><a href="<%= root %>/signup.jsp">회원가입</a></li>
+					<li><a href="<%= root %>/index.jsp">로그인</a></li>
+					<li><a href="<%= root %>/user.jsp">회원가입</a></li>
 				</c:if>
 				<c:if test="${ userid != null }">
 					<li><a href="<%= root %>/infoUpdate.jsp"><span class="text-bold">${ user.userId }</span></a><span>님 환영합니다.</span></li>

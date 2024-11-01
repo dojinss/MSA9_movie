@@ -1,12 +1,16 @@
 package movie.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.alohaclass.jdbc.dto.Page;
 import com.alohaclass.jdbc.dto.PageInfo;
 
 import movie.DAO.AdDAO;
+import movie.DTO.Ads;
+import movie.DTO.Files;
 import movie.DTO.Ads;
 
 public class AdServiceImpl implements AdService {
@@ -62,14 +66,75 @@ public class AdServiceImpl implements AdService {
 		return result;
 	}
 	@Override
-	public PageInfo<Ads> page(Page page) {
+	public PageInfo<Ads> page(PageInfo<Ads> pageInfo, int searchCode) {
+		List<String> searchOptions = new ArrayList<String>();
+		//TODO : 서치 옵션 테이블 컬럼명 수정
+		switch (searchCode) {
+			case 1:	
+				searchOptions.add("title");
+				searchOptions.add("cast");
+				searchOptions.add("cate");
+				break;
+			case 2:	
+				searchOptions.add("title");
+				break;
+			case 3:	
+				searchOptions.add("cate");
+				break;
+			case 4:	
+				searchOptions.add("cast");
+				break;
+		}
+		pageInfo.setSearchOptions(searchOptions);
 		PageInfo<Ads> selectedPageInfo = null;
 		try {
-			selectedPageInfo = adDAO.page(page);
+			selectedPageInfo = adDAO.page(pageInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return selectedPageInfo;
 	}
-	
+	@Override
+	public PageInfo<Ads> page() {
+		PageInfo<Ads> selectedPageInfo = null;
+		try {
+			selectedPageInfo = adDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+
+	@Override
+	public PageInfo<Ads> page(Page page, String keyword, List<String> searchOptions) {
+		PageInfo<Ads> selectedPageInfo = null;
+		try {
+			selectedPageInfo = adDAO.page(page, keyword, searchOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Ads> page(Page page, String keyword, List<String> searchOptions,
+			Map<String, String> filterOptions) {
+		PageInfo<Ads> selectedPageInfo = null;
+		try {
+			selectedPageInfo = adDAO.page(page, keyword, searchOptions,filterOptions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+	@Override
+	public PageInfo<Ads> page(Page page) {
+		PageInfo<Ads> selectedPageInfo = null;
+		try {
+			selectedPageInfo = adDAO.page();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedPageInfo;
+	}
+
 }

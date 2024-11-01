@@ -26,14 +26,4 @@
 			<a href="<%= root %>/admin/post/adminPostList.jsp">회원 게시글</a>
 		</h3>
 	</div>
-	<div class="item">
-		<h3>
-			<a href="<%= root %>/admin/prime/adminPrimeList.jsp">광고주 관리</a>
-		</h3>
-	</div>
-	<div class="item">
-		<h3>
-			<a href="<%= root %>/admin/ads/adminAdList.jsp">광고글 관리</a>
-		</h3>
-	</div>
 </div>

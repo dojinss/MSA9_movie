@@ -15,20 +15,20 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import movie.DTO.PersistenceLogins;
+import movie.DTO.Tokens;
 import movie.DTO.Users;
-import movie.Service.PersistenceLoginsService;
-import movie.Service.PersistenceLoginsServiceImpl;
+import movie.Service.TokenService;
+import movie.Service.TokenServiceImpl;
 import movie.Service.UserService;
 import movie.Service.UserServiceImpl;
 
 @WebFilter(description = "자동 로그인 등, 인증 처리 필터", urlPatterns = { "/*" })
 public class LoginFilter extends HttpFilter implements Filter {
     
-	PersistenceLoginsService loginService;
+	TokenService loginService;
 	UserService userService;
 	public void init(FilterConfig fConfig) throws ServletException {
-		loginService = new PersistenceLoginsServiceImpl();
+		loginService = new TokenServiceImpl();
 		userService = new UserServiceImpl();
 	}
 	
@@ -72,7 +72,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 		}
 		// 자동 로그인 & 토큰 ok
 		if( rememberMe != null && token != null ) {
-			PersistenceLogins plogin = loginService.selectByToken(token);
+			Tokens plogin = loginService.selectByToken(token);
 			
 			// 토큰이 존재하고 유효(만료시간)한지 확인
 			if( plogin != null && loginService.isValid(token) ) {
