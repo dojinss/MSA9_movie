@@ -29,6 +29,7 @@ public class EncodingFilter extends HttpFilter implements Filter {
 	
 	private FilterConfig filterConfig = null;
 	private String encoding;
+	
     public EncodingFilter() {
         super();
     }
