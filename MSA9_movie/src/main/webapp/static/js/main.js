@@ -42,12 +42,44 @@ function getPostList(no,type){
 			$("#modal-contents").empty().append(result)
 			postFunctions()
 			imgDragDrop()
+			let tabViewer = $(".post-container")
+			tabViewer.hide();
+			tabViewer.eq(0).show();
 	    },
 	    error : function(request, status, error) { // 결과 에러 콜백함수
 	        console.log("에러 : " +error)
 	    }
 	})
 }
+// 키워드 목록 불러오기
+function getKeywordList(movieNo){
+	console.log("getKeywordList 함수 호출...")
+	let data = 	{  
+		"movieNo" 	: movieNo,
+		"nowPage"	: keywordIndex
+    }
+	$.ajax({
+	    type : 'get',
+	    url : 'pro/keywordList_pro.jsp',
+	    dataType : 'text',
+	    data : data,
+	    success : function(result) {
+			console.log("키워드 목록 조회 성공.")
+			$("#modal-contents").empty().append(result)
+			keywordFunctions()
+	    }
+	})
+	
+}
+// 키워드 목록페이지 함수들
+function keywordFunctions(){
+	$(".keyword-item").click(function(){
+		let keywordNo = $(this).attr("data")
+		let type = "keyword"
+		getPostList(keywordNo,type)
+	})
+}
+
 
 // 게시글 페이지 함수들
 function postFunctions(){
@@ -100,7 +132,7 @@ function viewFunctions(){
 		console.log("수정 요청...")
 		
 		let postNo = $(this).attr("data")
-		let content = 
+		let content = $("#post-view-text").text()
 		
 		// 수정탭으로 변경
 		$(".tab-btn-box > .btn").removeClass("active")
@@ -111,7 +143,7 @@ function viewFunctions(){
 		$("#success-modal").hide();
 		$("#write-mode").val("update")
 		$("#post-form").find("input[name=postNo]").val(postNo)
-		$("#post-form").find("textarea[name=content]").val(postNo)
+		$("#post-form").find("textarea[name=content]").val(content)
 	})
 }
 
@@ -183,7 +215,7 @@ function imgDragDrop(){
 function writePost(formData, mode){
 	formData.append("mode",mode)
 	$.ajax({    
-		url: 'pro/postWrite_pro.jsp',    
+		url: '/postWrite_pro.jsp',    
 		data : formData,    
 		type : 'post',
 		contentType: false,
@@ -275,6 +307,8 @@ $(function(){
 	
 	// 키워드 목록 열기
 	$(".keyword-view-btn").click(function(){
+		let movieNo = $(this).attr("data")
+		getKeywordList(movieNo)
 		$("#modal-wrap").fadeIn()
 		$(".modal-container").animate({top:"0px"},function(){
 			console.log("modal Show!")

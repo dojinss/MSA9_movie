@@ -35,8 +35,8 @@
 			</div>
 			<div class="mainbody">
 				<div class="contentbox">
-					<form action="adminKeywordUpdate_pro.jsp" method="post"
-						enctype="multipart/form-data">
+					<form id="keyword-update" action="adminKeywordUpdate_pro.jsp" method="post"
+						enctype="multipart/form-data" onsubmit="return false;">
 						<div class="content">
 							<input type="hidden" name="keywordNo" value="<%=keywordNo%>">
 							<input type="hidden" name="movieNo" value="<%=keyword.getMovieNo()%>">
@@ -66,13 +66,14 @@
 								<input class="file" type="file" name="imgae" id="file">
 							</div>
 						</div>
-						<input class="updatebtn" type="submit" value="수정">
+						<button class="updatebtn" onClick="update()">수정</button>
 					</form>
 					<button class="deletebtn" id="delconfirm" data="<%=keyword.getKeywordNo()%>" path="adminKeywordDelete_pro.jsp?keywordNo=">삭제</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script src="<%= root %>/admin/js/keyword.js"></script>
 	<script>
 		window.onload=function(){
 			target=document.getElementById('file'); // file 아이디 선언

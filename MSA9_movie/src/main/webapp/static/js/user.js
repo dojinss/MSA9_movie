@@ -5,7 +5,7 @@ $("#userid-check").click(function() {
 	console.log("아이디 중복 클릭!")
 	
     $.ajax({
-        url: "user_pro.jsp?action=checkId", // action 파라미터 추가
+        url: "/user_pro.jsp?action=checkId", // action 파라미터 추가
         data: {
             "userid": userid
         }, 
@@ -51,7 +51,7 @@ function checkId() {
 
   // 아이디 유효성 검사
   if (!regExpId.test(id)) {
-    document.getElementById("wrongId").innerHTML = "아이디를 입력하세요.";
+    document.getElementById("wrongId").innerHTML = "아이디가 올바르지 않습니다.";
     return false;
   } else {
     document.getElementById("wrongId").innerHTML = "";
@@ -112,7 +112,7 @@ function confirminfoup() {
         const profileUrl = document.getElementById("profile");
 
         $.ajax({
-            url: "infoUpdate_pro.jsp",
+            url: "/infoUpdate_pro.jsp",
             type: "post",
             data: {
                 "id": userId.value,
@@ -150,7 +150,7 @@ function confirmLeave() {
         const userPwd = document.getElementById("userpwd").value;
  
         $.ajax({
-            url : "leave_pro.jsp",
+            url : "/leave_pro.jsp",
             type : "post",
             data : {
                 "id" : userId,

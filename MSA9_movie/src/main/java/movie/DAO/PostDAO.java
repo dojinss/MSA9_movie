@@ -85,4 +85,38 @@ public class PostDAO extends BaseDAOImpl<Posts>{
 		}
 		return result;
 	}
+	public List<Posts> infiniteListByKeywordNo(int nowPage,int size,int keywordNo){
+		int count = 0;
+		try {
+			count = count();
+		} catch (Exception e) {
+			System.err.println("게시판 총 개수 구하는중에 에러 발생...");
+			e.printStackTrace();
+		}
+		String sql 	= " SELECT * FROM " + table()
+		+ " WHERE keyword_no = ? "
+		+ " ORDER BY post_no desc "
+		+ " LIMIT ? , ? "
+		;
+		if( nowPage > count )
+			return null;
+		List<Posts> list = new ArrayList<Posts>();
+		try {
+			psmt = con.prepareStatement(sql);
+			log(sql);
+			psmt.setInt(1, keywordNo);
+			psmt.setInt(2, nowPage);
+			psmt.setInt(3, size);
+			rs = psmt.executeQuery();
+			while( rs.next() ) {
+				Posts entity = map(rs);
+				list.add(entity);
+			}
+		} catch (Exception e) {
+			System.err.println(table() + " - list() 조회 중 에러");
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 }
