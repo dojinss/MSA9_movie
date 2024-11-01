@@ -5,98 +5,75 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.io.File"%>
-<%@page import="java.util.Enumeration"%>
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@page import="java.io.InputStreamReader"%>
-<%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.InputStream"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="org.apache.commons.fileupload.FileItem"%>
-<%@page import="java.util.List"%>
-<%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
+<%@page import="java.nio.file.Files"%>
+<%@page import="java.nio.file.Paths"%>
+<%@page import="jakarta.servlet.http.Part"%>
 <%@ include file="/admin/layout/login.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%
-	KeywordService keywordService = new KeywordServiceImpl();
+    KeywordService keywordService = new KeywordServiceImpl();
 
-	String path = uploadPath;
+    String path = uploadPath; // 파일 업로드 경로 설정
+    File uploadDir = new File(path);
+    if (!uploadDir.exists()) {
+        uploadDir.mkdir();
+    }
 
-	DiskFileUpload upload = new DiskFileUpload();
-	
-	upload.setSizeMax(10*1000*1000*1000); 		// 100MB - 파일 최대 크기
-	upload.setSizeThreshold( 4 * 1024 );	// 4MB	- 메모리상의 최대 크기
-	upload.setRepositoryPath(path);			// 임시 저장 경로
-	Keywords keyword = new Keywords();
-	int movieNo=0;
-	int keywordNo=0;
-	String title ="";
-	String type="";
-	String content="";
-	String imgUrl="";
-	List<FileItem> items = upload.parseRequest(request);
-	Iterator params = items.iterator();
-	while( params.hasNext() ) {
-		FileItem item = (FileItem) params.next();
-		
-		// 일반 데이터
-		if( item.isFormField() ) {
-			String name = item.getFieldName();
-			String value = item.getString("utf-8");
-			switch(name){
-			case "keywordNo":
-				keywordNo = Integer.parseInt(value);
-				break;
-			case "movieNo":
-				movieNo = Integer.parseInt(value);
-				break;
-			case "title":
-				title = value;
-				break;
-			case "type":
-				type = value;
-				break;
-			case "content":
-				content = value;
-				break;
-			case "imgUrl":
-				imgUrl = value;
-				break;
-			}
-		}
-		// 파일 데이터
-		else {
-			if(item.getName().length()>0){
-				String fileName = UUID.randomUUID() + "_" + item.getName();
-				String contentType = item.getContentType();
-				fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
-				long fileSize = item.getSize();
-				File file = new File(path+ "/" + fileName);
-				item.write(file);
-				keyword.setImageUrl(file.getPath());
-			}
-		}
-	}
-	
-	if(keyword.getImageUrl()==null){
-		keyword.setImageUrl(imgUrl);
-	}else{
-		File file = new File(imgUrl);
-		file.delete();
-	}
-	
-	keyword.setKeywordNo(keywordNo);
-	keyword.setMovieNo(movieNo);
-	keyword.setTitle(title);
-	keyword.setType(type);
-	keyword.setContent(content);
-	keyword.setUpdDate(new Date());
-	
-	int result = keywordService.update(keyword);
-	if(result > 0){
-		response.sendRedirect(root+"/admin/keyword/adminKeywordList.jsp?movieNo="+keyword.getMovieNo());
-	}else{
-		response.sendRedirect(root+"/admin/keyword/adminKeywordUpdate.jsp?keywordNo="+keyword.getKeywordNo());
-	}
+    Keywords keyword = new Keywords();
+    int movieNo = 0;
+    int keywordNo = 0;
+    String title = "";
+    String type = "";
+    String content = "";
+    String imgUrl = "";
+    String imageUrl = null;
+
+    // 텍스트 파라미터 처리
+    movieNo = Integer.parseInt(request.getParameter("movieNo"));
+    keywordNo = Integer.parseInt(request.getParameter("keywordNo"));
+    title = request.getParameter("title");
+    type = request.getParameter("type");
+    content = request.getParameter("content");
+    imgUrl = request.getParameter("imgUrl");
+
+    // 파일 업로드 처리
+    Part filePart = request.getPart("file"); // "file"은 HTML form의 파일 입력 필드 name 속성
+    if (filePart != null && filePart.getSize() > 0) {
+        String fileName = UUID.randomUUID() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        File file = new File(path, fileName);
+        try (InputStream input = filePart.getInputStream()) {
+            Files.copy(input, file.toPath());
+        }
+        imageUrl = file.getPath();
+    }
+
+    // 새로운 파일이 업로드되지 않았다면 기존 URL 사용
+    if (imageUrl == null) {
+        imageUrl = imgUrl;
+    } else {
+        // 기존 파일 삭제
+        File oldFile = new File(imgUrl);
+        if (oldFile.exists()) {
+            oldFile.delete();
+        }
+    }
+
+    // DTO 객체에 값 설정
+    keyword.setKeywordNo(keywordNo);
+    keyword.setMovieNo(movieNo);
+    keyword.setTitle(title);
+    keyword.setType(type);
+    keyword.setContent(content);
+    keyword.setImageUrl(imageUrl);
+    keyword.setUpdDate(new Date());
+
+    // 데이터베이스 업데이트
+    int result = keywordService.update(keyword);
+    if (result > 0) {
+        response.sendRedirect(root + "/admin/keyword/adminKeywordList.jsp?movieNo=" + keyword.getMovieNo());
+    } else {
+        response.sendRedirect(root + "/admin/keyword/adminKeywordUpdate.jsp?keywordNo=" + keyword.getKeywordNo());
+    }
 %>

@@ -60,7 +60,7 @@
 			  <p>또는</p>
 			</div>
 			<div class="login-inputbox">
-			    <a href="#" class="join-btn"> 회원가입</a>
+			    <a href="<%= root %>/user.jsp" class="join-btn"> 회원가입</a>
 			</div>
 			<!-- 아이디 저장/ 로그인  -->
 			<div class="remember-box">

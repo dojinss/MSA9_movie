@@ -71,7 +71,7 @@
 		<%} %>
 	</div>
 	<p class="user-id">${user.getUserId()}</p>
-	<div class="post-content">${content}</div>
+	<div class="post-content" id="post-view-text">${content}</div>
 </div>
 
 
